@@ -11,19 +11,18 @@ j1FileSystem::j1FileSystem() : j1Module()
 {
 	name = "file_system";
 
-	// need to be created before Awake so other modules can use it
+	// Needs to be created before Awake so other modules can use it
 	base_path = SDL_GetBasePath();
 	PHYSFS_init(base_path);
 
+	// Adding base path
 	// By default we include executable's own directory
 	// without this we won't be able to find config.xml :-(
 	AddPath(".");
 }
 
-// Destructor
 j1FileSystem::~j1FileSystem()
 {
-	PHYSFS_deinit();
 }
 
 // Called before render is available
@@ -56,8 +55,13 @@ bool j1FileSystem::Awake(pugi::xml_node& config)
 // Called before quitting
 bool j1FileSystem::CleanUp()
 {
-	//LOG("Freeing File System subsystem");
-	return true;
+	LOG("Freeing File System subsystem");
+	bool ret = true;
+
+	PHYSFS_deinit();
+	SDL_free(base_path);
+
+	return ret;
 }
 
 // Add a new zip file or folder

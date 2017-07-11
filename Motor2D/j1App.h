@@ -33,7 +33,6 @@ class j1XMLLoader;
 class j1App
 {
 public:
-
 	// Constructor
 	j1App(int argc, char* args[]);
 
@@ -65,8 +64,6 @@ public:
 	void CapFps(float fps);
 	void EndSDL();
 	void OpenWebPage(char* url);
-
-	void ExpandEvent(int type, EventThrower* origin, int id);
 
 	void SetGamePause(bool set);
 	bool GetGamePause();

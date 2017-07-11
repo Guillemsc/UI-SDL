@@ -55,6 +55,15 @@
     <ClCompile Include="j1XMLLoader.cpp">
       <Filter>Engine\2. Components ======</Filter>
     </ClCompile>
+    <ClCompile Include="UI_EventSystem.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Main.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Element.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -123,6 +132,15 @@
     <ClInclude Include="j1XMLLoader.h">
       <Filter>Engine\2. Components ======</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Main.h">
+      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_EventSystem.h">
+      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Element.h">
+      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -142,6 +160,9 @@
     </Filter>
     <Filter Include="Engine\6. Tools ===========\PuguiXML">
       <UniqueIdentifier>{7cb78d67-17cc-45eb-af97-e2106becce7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\1. Modules =========\NewGUI">
+      <UniqueIdentifier>{98536d70-0587-4210-96cc-ab1adeb56237}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

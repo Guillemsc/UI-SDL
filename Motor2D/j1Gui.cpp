@@ -67,81 +67,81 @@ bool j1Gui::Update(float dt)
 	// Update
 	// -------------------------------------------------------
 
-	elements_list.clear();
-	ElementsListToVector(elements_list);
+	//elements_list.clear();
+	//ElementsListToVector(elements_list);
 
-	// Update all elements in order
-	for (int i = 0; i < elements_list.size(); i++)
-	{
-		UI_Element* curr = elements_list.at(i);
+	//// Update all elements in order
+	//for (int i = 0; i < elements_list.size(); i++)
+	//{
+	//	UI_Element* curr = elements_list.at(i);
 
-		if (curr != nullptr)
-		{
-			// Reset animation
-			curr->animation_finished = false;
+	//	if (curr != nullptr)
+	//	{
+	//		// Reset animation
+	//		curr->animation_finished = false;
 
-			// Move elements if the camera is moving
-			if (curr->is_ui && (camera_x != App->render->camera.x || camera_y != App->render->camera.y))
-			{
-				curr->rect.x += camera_x - App->render->camera.x;
-				curr->rect.y += camera_y - App->render->camera.y;
-			}
+	//		// Move elements if the camera is moving
+	//		if (curr->is_ui && (camera_x != App->render->camera.x || camera_y != App->render->camera.y))
+	//		{
+	//			curr->rect.x += camera_x - App->render->camera.x;
+	//			curr->rect.y += camera_y - App->render->camera.y;
+	//		}
 
-			if (curr->enabled)
-			{
-				// Add second update
-				curr->update();
+	//		if (curr->enabled)
+	//		{
+	//			// Add second update
+	//			curr->update();
 
-				// Debug ---
-				if (debug)
-				{
-					for (list<UI_Element*>::iterator it = curr->childs.begin(); it != curr->childs.end(); it++)
-					{
-						if ((*it)->enabled)
-						{
-							App->render->DrawLine(curr->rect.x + curr->rect.w * 0.5f,
-								curr->rect.y + curr->rect.h * 0.5f,
-								(*it)->rect.x + (*it)->rect.w * 0.5f,
-								(*it)->rect.y + (*it)->rect.h * 0.5,
-								255, 255, 255);
-						}
-					}
-				}
-				// ---------
-			}
+	//			// Debug ---
+	//			if (debug)
+	//			{
+	//				for (list<UI_Element*>::iterator it = curr->childs.begin(); it != curr->childs.end(); it++)
+	//				{
+	//					if ((*it)->enabled)
+	//					{
+	//						App->render->DrawLine(curr->rect.x + curr->rect.w * 0.5f,
+	//							curr->rect.y + curr->rect.h * 0.5f,
+	//							(*it)->rect.x + (*it)->rect.w * 0.5f,
+	//							(*it)->rect.y + (*it)->rect.h * 0.5,
+	//							255, 255, 255);
+	//					}
+	//				}
+	//			}
+	//			// ---------
+	//		}
 
-			// Take higher layer
-			if (curr->layer > higher_layer)
-				higher_layer = curr->layer;
-		}
-	}
-	
+	//		// Take higher layer
+	//		if (curr->layer > higher_layer)
+	//			higher_layer = curr->layer;
+	//	}
+	//}
+	//
 
-	// Move clicked elements
-	Move_Elements();
+	//// Move clicked elements
+	//Move_Elements();
 
-	// Update intern camera position
-	camera_x = App->render->camera.x;
-	camera_y = App->render->camera.y;
+	//// Update intern camera position
+	//camera_x = App->render->camera.x;
+	//camera_y = App->render->camera.y;
 
-	// Update Animations
-	if (!animations_list.empty())
-	{
-		for (vector<UI_Animation*>::iterator it = animations_list.begin(); it != animations_list.end();)
-		{
-			if ((*it)->Finished())
-			{
-				(*it)->cleanup();
-				RELEASE(*it);
-				it = animations_list.erase(it);
-			}
-			else
-			{
-				(*it)->update();
-				++it;
-			}
-		}
-	}
+	//// Update Animations
+	//if (!animations_list.empty())
+	//{
+	//	for (vector<UI_Animation*>::iterator it = animations_list.begin(); it != animations_list.end();)
+	//	{
+	//		if ((*it)->Finished())
+	//		{
+	//			(*it)->cleanup();
+	//			RELEASE(*it);
+	//			it = animations_list.erase(it);
+	//		}
+	//		else
+	//		{
+	//			(*it)->update();
+	//			++it;
+	//		}
+	//	}
+	//}
 
 	return true;
 }
@@ -165,10 +165,10 @@ bool j1Gui::CleanUp()
 
 	App->tex->UnLoadTexture(atlas);
 
-	while (!elements_list_priority.empty())
-	{
-		App->gui->DeleteElement(elements_list_priority.top());
-	}
+	//while (!elements_list_priority.empty())
+	//{
+	//	App->gui->DeleteElement(elements_list_priority.top());
+	//}
 
 	return true;
 }
@@ -178,6 +178,7 @@ const void j1Gui::GetAtlas() const
 	App->gui->atlas = App->tex->LoadTexture(atlas_file_name.c_str());
 }
 
+/*
 // ---------------------------------------------------------------------
 // Create a new Window
 // ---------------------------------------------------------------------
@@ -1336,9 +1337,9 @@ void UI_Text::SetText(string _text)
 		comp[words_counter] = '\0';
 
 		int width = 0; int height = 0;
-		App->font->CalcSize(comp.c_str(), width, height, font);
-		tex_str ts(comp.c_str(), App->font->Print(comp.c_str(), color, font), {0, 0, width, height});
-		tex_str_list.push_back(ts);
+		//App->font->CalcSize(comp.c_str(), width, height, font);
+		//tex_str ts(comp.c_str(), App->font->Print(comp.c_str(), color, font), {0, 0, width, height});
+		//tex_str_list.push_back(ts);
 	}
 }
 
@@ -1372,7 +1373,7 @@ bool UI_Text::update()
 	{
 		for (list<tex_str>::iterator it = tex_str_list.begin(); it != tex_str_list.end(); it++)
 		{
-			App->font->CalcSize((*it).text.c_str(), rect.w, rect.h, font);
+			//App->font->CalcSize((*it).text.c_str(), rect.w, rect.h, font);
 			h += rect.h;
 			if (rect.w > w)
 				w = rect.w;
@@ -1507,7 +1508,7 @@ void UI_Text_Input::Set(iPoint pos, int w, _TTF_Font* font, uint r, uint g, uint
 	text->Set(iPoint(0, 0), font, 0, r, g, b);
 
 	// Set bar size
-	App->font->CalcSize("@", bar.x, bar.h, font);
+	//App->font->CalcSize("@", bar.x, bar.h, font);
 	bar.w = 1;
 	rect.h = bar.h;
 
@@ -1715,19 +1716,19 @@ bool UI_Text_Input::MoveCursor()
 void UI_Text_Input::SetBarPos(string _text)
 {
 	int width, height;
-	App->font->CalcSize(_text.c_str(), width, height, text->font);
-	bar_x = width + text_offset;
+	//App->font->CalcSize(_text.c_str(), width, height, text->font);
+	//bar_x = width + text_offset;
 
 	DinamicViewport();
 
-	bar_x = width + text_offset;
+	//bar_x = width + text_offset;
 }
 
 int UI_Text_Input::GetTextSize(string _text)
 {
 	int width, height;
-	App->font->CalcSize(_text.c_str(), width, height, text->font);
-
+	//App->font->CalcSize(_text.c_str(), width, height, text->font);
+	width = 1;
 	return width;
 }
 
@@ -2517,3 +2518,4 @@ void UIA_Interpolation::cleanup()
 {
 	RELEASE(bezier);
 }
+*/

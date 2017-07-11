@@ -14,7 +14,6 @@ j1Textures::j1Textures() : j1Module()
 	name = "textures";
 }
 
-// Destructor
 j1Textures::~j1Textures()
 {}
 
@@ -23,7 +22,8 @@ bool j1Textures::Awake(pugi::xml_node& config)
 {
 	LOG("Init Image library");
 	bool ret = true;
-	// load support for the PNG image format
+
+	// Load support for the PNG image format
 	int flags = IMG_INIT_PNG;
 	int init = IMG_Init(flags);
 
@@ -51,16 +51,20 @@ bool j1Textures::Start()
 bool j1Textures::CleanUp()
 {
 	LOG("Freeing textures and Image library");
+	bool ret = true;
+
 	Texture*  item;
 
-	for (std::list<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) {
+	for (std::list<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) 
+	{
 		SDL_DestroyTexture((*it)->tex);
 		RELEASE(*it);
 	}
 
 	textures.clear();
 	IMG_Quit();
-	return true;
+
+	return ret;
 }
 
 // Load new texture from file path
@@ -68,7 +72,7 @@ SDL_Texture* const j1Textures::LoadTexture(const char* path)
 {
 	SDL_Texture* texture = nullptr;
 
-	/// Check if the texture is already loaded
+	// Check if the texture is already loaded
 	for (std::list<Texture*>::iterator it = textures.begin(); it != textures.end(); it++) 
 	{
 		if ((*it)->path == path) 
@@ -78,7 +82,7 @@ SDL_Texture* const j1Textures::LoadTexture(const char* path)
 		}
 	}
 
-	/// If the texture doesn't exist, load it on memory
+	// If the texture doesn't exist, load it on memory
 	if (texture == nullptr) 
 	{
 		Texture* new_tex = new Texture(path);
@@ -95,10 +99,8 @@ SDL_Surface * const j1Textures::LoadSurface(const char * path)
 	surface = IMG_Load_RW(App->fs->Load(path), 1);
 
 	if (surface == NULL)
-	{
 		LOG("Could not load surface with path: %s. IMG_Load: %s", path, IMG_GetError());
-	}
-
+	
 	return surface;
 }
 
@@ -120,7 +122,7 @@ bool j1Textures::UnLoadTexture(SDL_Texture* texture)
 	}
 
 	if(texture != nullptr) 
-		SDL_DestroyTexture(texture); /// if texture not found but exist delete it
+		SDL_DestroyTexture(texture); // if texture not found but exist delete it
 
 	return false;
 }

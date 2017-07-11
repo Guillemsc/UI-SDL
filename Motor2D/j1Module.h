@@ -15,9 +15,6 @@
 using namespace std;
 
 class j1App;
-class PhysBody;
-class b2Fixture;
-class EventThrower;
 
 class j1Module
 {
@@ -70,50 +67,9 @@ public:
 		return true;
 	}
 
-	virtual bool Load(pugi::xml_node&)
-	{
-		return true;
-	}
-
-	virtual bool Save(pugi::xml_node&) const
-	{
-		return true;
-	}
-
-	virtual void OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Fixture* fixtureA, b2Fixture* fixtureB)
-	{
-
-	}
-
-	virtual void OnCollisionEnter(PhysBody* bodyA, PhysBody* bodyB, b2Fixture* fixtureA, b2Fixture* fixtureB)
-	{
-
-	}
-
-	virtual void OnCollisionOut(PhysBody* bodyA, PhysBody* bodyB, b2Fixture* fixtureA, b2Fixture* fixtureB)
-	{
-
-	}
-
-	virtual void OnCommand(std::list<std::string>& tokens) {
-
-	}
-
-	virtual void OnCVar(std::list<std::string>& tokens) {
-
-	}
-
-	virtual void SaveCVar(std::string& cvar_name, pugi::xml_node& node) const {
-
-	}
-
-	virtual void ListenEvent(int type, EventThrower* origin, int id) {};
-
 public:
-
-	string	    name;
-	bool		active;
-
+	string name = "";
+	bool   active = false;
 };
 
 #endif // __j1MODULE_H__

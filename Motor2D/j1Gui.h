@@ -87,17 +87,17 @@ public:
 	// Gets the atlas texture
 	const void GetAtlas() const;
 
-	// Creates and returns a UI_Window
-	UI_Window* UI_CreateWin(iPoint pos, int w, int h, int blit = 0, bool is_gameplay = true, bool dinamic = false, bool is_ui = true);
+	//// Creates and returns a UI_Window
+	//UI_Window* UI_CreateWin(iPoint pos, int w, int h, int blit = 0, bool is_gameplay = true, bool dinamic = false, bool is_ui = true);
 
-	void ElementsListToVector(vector<UI_Element*> &vec);
-	void GetChilds(UI_Element * element, list<UI_Element*>& visited);
-	void GetParentElements(UI_Element * element, list<UI_Element*>& visited);
-	bool Move_Elements();
-	UI_Element* CheckClickMove(int x, int y);
-	void DeleteElement(UI_Element * element);
-	void EraseFromElementsList(UI_Element* element);
-	void TakeVariablesFromWindow(UI_Element* element);
+	//void ElementsListToVector(vector<UI_Element*> &vec);
+	//void GetChilds(UI_Element * element, list<UI_Element*>& visited);
+	//void GetParentElements(UI_Element * element, list<UI_Element*>& visited);
+	//bool Move_Elements();
+	//UI_Element* CheckClickMove(int x, int y);
+	//void DeleteElement(UI_Element * element);
+	//void EraseFromElementsList(UI_Element* element);
+	//void TakeVariablesFromWindow(UI_Element* element);
 	
 private:
 
@@ -145,6 +145,7 @@ protected:
 // -----------------------------------
 // Element ---------------------------
 
+/*
 class UI_Element
 {
 public:
@@ -634,5 +635,5 @@ private:
 	j1Timer		  timer;
 	iPoint        starting_pos = NULLPOINT;
 };
-
+*/
 #endif // !_j1GUI_H__

@@ -18,10 +18,9 @@ j1Input::j1Input() : j1Module()
 	memset(gamepad_connected, -1, sizeof(int)*MAX_GAMECONTROLLERS);
 }
 
-// Destructor
 j1Input::~j1Input()
 {
-	delete[] keyboard;
+
 }
 
 // Called before render is available
@@ -39,13 +38,13 @@ bool j1Input::Awake(pugi::xml_node& config)
 
 	// GUI -------------------------
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		LOG("Error on SDL_Init");
+		LOG("Error on SDL_Init_Video");
 	// -----------------------------
 
 	// GameController --------------
-	/// To use PS3 Controller install this driver https://github.com/nefarius/ScpToolkit/releases/tag/v1.6.238.16010
+	// To use PS3 Controller install this driver https://github.com/nefarius/ScpToolkit/releases/tag/v1.6.238.16010
 	if(SDL_Init(SDL_INIT_GAMECONTROLLER) != 0)
-		LOG("Error on SDL_Init");
+		LOG("Error on SDL_Init_GameController");
 	// -----------------------------
 
 	return ret;
@@ -55,14 +54,18 @@ bool j1Input::Awake(pugi::xml_node& config)
 bool j1Input::Start()
 {
 	LOG("Start module input");
+	bool ret = true;
+
 	SDL_StopTextInput();
 
-	return true;
+	return ret;
 }
 
 // Called each loop iteration
 bool j1Input::PreUpdate()
 {
+	bool ret = true;
+
 	static SDL_Event event;
 	
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
@@ -217,12 +220,15 @@ bool j1Input::PreUpdate()
 	SDL_StopTextInput();
 	// -----------------------------
 
-	return true;
+	return ret;
 }
 
 // Called before quitting
 bool j1Input::CleanUp()
 {
+	LOG("Quitting SDL event subsystem");
+	bool ret = true;
+
 	// Clean GamePads ------
 	for (std::vector<GamePad*>::iterator it = gamepads.begin(); it != gamepads.end(); it++) {
 
@@ -236,9 +242,11 @@ bool j1Input::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 	// --------------------
 
-	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
-	return true;
+
+	delete[] keyboard;
+
+	return ret;
 }
 
 // ---------

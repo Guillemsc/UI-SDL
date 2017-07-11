@@ -17,7 +17,6 @@
 #include "j1Viewports.h"
 #include "j1XMLLoader.h"
 
-
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -96,7 +95,6 @@ bool j1App::Awake()
 	{
 		for (list<j1Module*>::iterator it = modules.begin(); it != modules.end(); it++)
 			ret = (*it)->Awake(config.child((*it)->name.c_str()));
-		
 	}
 
 	return ret;
@@ -272,12 +270,6 @@ void j1App::EndSDL()
 void j1App::OpenWebPage(char * url)
 {
 	ShellExecute(NULL, "open", url, NULL, NULL, SW_SHOWMAXIMIZED);
-}
-
-void j1App::ExpandEvent(int type, EventThrower * origin, int id)
-{
-	for (list<j1Module*>::iterator it = modules.begin(); it != modules.end(); ++it)
-		(*it)->ListenEvent(type, origin, id);
 }
 
 void j1App::SetGamePause(bool set)

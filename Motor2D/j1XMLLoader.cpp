@@ -5,7 +5,7 @@
 
 j1XMLLoader::j1XMLLoader()
 {
-	name = "xml";
+	name = "xml_loader";
 }
 
 j1XMLLoader::~j1XMLLoader()

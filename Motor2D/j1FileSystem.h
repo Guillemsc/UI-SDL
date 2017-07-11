@@ -10,16 +10,12 @@ int close_sdl_rwops(SDL_RWops *rw);
 class j1FileSystem : public j1Module
 {
 public:
-
 	j1FileSystem();
 
-	// Destructor
 	virtual ~j1FileSystem();
 
-	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
-	// Called before quitting
 	bool CleanUp();
 
 	// Utility functions
@@ -38,7 +34,7 @@ public:
 
 	unsigned int Save(const char* file, const char* buffer, unsigned int size) const;
 
-public:
+protected:
 	char* base_path = NULL;
 	char* write_path = NULL;
 

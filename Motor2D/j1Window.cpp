@@ -8,9 +8,10 @@
 
 j1Window::j1Window() : j1Module()
 {
+	name = "window";
+
 	window = NULL;
 	screen_surface = NULL;
-	name = "window";
 }
 
 // Destructor

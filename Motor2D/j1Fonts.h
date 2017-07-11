@@ -17,37 +17,25 @@ class j1Fonts : public j1Module
 public:
 	j1Fonts();
 
-	// Destructor
 	virtual ~j1Fonts();
 
-	// Called before render is available
 	bool Awake(pugi::xml_node&);
 
-	// Called before quitting
 	bool CleanUp();
 
-	// Load Font
 	Font* LoadFont(const char* path, const char* name, int size = 12);
-
-	// Create a surface from text
 	SDL_Texture* Print(const char* text, SDL_Color color = {255, 255, 255, 255}, Font* font = nullptr);
-
-	bool CalcSize(const char* text, int& width, int& height, Font* font) const;
-
+    bool CalcSize(const char* text, int& width, int& height, Font* font);
 	Font* GetFont(const char* name);
 
 protected:
-	std::list<Font*>	    fonts;
-
-public:
-	_TTF_Font*			    default = nullptr;
-
+	std::list<Font*> fonts;
 };
 
 struct Font
 {
 	_TTF_Font* font = nullptr;
-	string name = "";
+	string     name = "";
 };
 
 
