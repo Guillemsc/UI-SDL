@@ -29,6 +29,7 @@ class j1Entity;
 class j1Viewports;
 class j1Spell;
 class j1XMLLoader;
+class UI_Main;
 
 class j1App
 {
@@ -110,6 +111,7 @@ public:
 	j1Viewports*        view = NULL;
 	j1Spell*			spell = NULL;
 	j1XMLLoader*		xml = NULL;
+	UI_Main*		    ui = NULL;
 
 	// Console logs
 	list<string>        logs;

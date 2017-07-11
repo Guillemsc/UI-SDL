@@ -2,6 +2,8 @@
 #include "UI_EventSystem.h"
 #include "UI_Element.h"
 
+#include "p2Log.h"
+
 UI_Main::UI_Main() : j1Module()
 {
 	name = "UI";
@@ -16,7 +18,7 @@ bool UI_Main::Awake(pugi::xml_node &)
 {
 	bool ret = true;
 
-	ui_event_system = new UI_EventSystem();
+	ui_event_system = new UI_EventSystem(this);
 
 	return ret;
 }
@@ -25,7 +27,7 @@ bool UI_Main::Start()
 {
 	bool ret = true;
 
-
+	LOG("Start module ui");
 
 	return ret;
 }
@@ -65,4 +67,22 @@ bool UI_Main::CleanUp()
 	delete ui_event_system;
 
 	return ret;
+}
+
+void UI_Main::OnEvent(UI_Event * ev)
+{
+	for (list<shared_ptr<UI_Element>>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		(*it).get()->OnEvent(ev);
+	}
+}
+
+UI_EventSystem * UI_Main::GetEventSystem()
+{
+	return ui_event_system;
+}
+
+list<shared_ptr<UI_Element>> UI_Main::GetElements()
+{
+	return elements;
 }

@@ -3,14 +3,26 @@
 
 #include "UI_Main.h"
 
+class UI_EventSystem;
+enum ui_event_type;
+
+// --------------------------------------------------
+
 class UI_EventSystem
 {
 public:
-	UI_EventSystem();
+	UI_EventSystem(UI_Main* ui_main);
 	virtual ~UI_EventSystem();
 
 	void CleanUp();
+
+	void SendEvent(UI_Event* ev);
+
+private:
+	UI_Main* ui_main = nullptr;
 };
+
+// --------------------------------------------------
 
 class UI_Event
 {
@@ -30,13 +42,13 @@ private:
 
 enum ui_event_type
 {
-	null,
-	click,
-	double_click,
-	mouse_over,
-	mouse_enter,
-	mouse_out,
-	destroy,
+	event_null,
+	event_click,
+	event_double_click,
+	event_mouse_over,
+	event_mouse_enter,
+	event_mouse_out,
+	event_destroy,
 };
 
 #endif // __UI_EventSystem_H__

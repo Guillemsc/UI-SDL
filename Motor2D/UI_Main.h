@@ -10,9 +10,12 @@
 using namespace std;
 
 class UI_EventSystem;
+class Event;
 class UI_Element;
+class Transform;
 
 enum ui_event_type;
+enum ui_element_type;
 
 class UI_Main : public j1Module
 {
@@ -39,8 +42,14 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void OnEvent(UI_Event* ev);
+
+	UI_EventSystem* GetEventSystem();
+	list<shared_ptr<UI_Element>> GetElements();
+
 private:
 	UI_EventSystem* ui_event_system = nullptr;
+	list<shared_ptr<UI_Element>> elements;
 };
 
 #endif // __UI_Main_H__
