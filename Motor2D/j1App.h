@@ -60,6 +60,7 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 	float GetDT() const;
+	list<j1Module*> GetModules();
 
 	void CapFps(float fps);
 	void EndSDL();
@@ -122,7 +123,6 @@ private:
 	bool				game_paused = false;
 	vector<j1Timer*>    gameplay_timers;
 
-	list<j1Module*>  	modules;
 	int					argc;
 	char**				args;
 
@@ -139,6 +139,9 @@ private:
 	uint32				last_sec_frame_count = 0;
 	uint32				prev_last_sec_frame_count = 0;
 	float				dt = 0.0f;
+
+protected:
+	list<j1Module*>  	modules;
 };
 
 extern j1App* App;

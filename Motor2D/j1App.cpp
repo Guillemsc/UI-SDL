@@ -80,15 +80,13 @@ bool j1App::Awake()
 
 	if(config.empty() == false)
 	{
-		// self-config
+		// Self-config
 		ret = true;
 		app_config = config.child("app");
 		title = app_config.child("title").attribute("name").as_string();
 		organization = app_config.child("organization").child_value();
 
-		int cap = app_config.attribute("framerate_cap").as_int(-1);
-
-		CapFps(cap);
+		CapFps(app_config.attribute("framerate_cap").as_int(-1));
 	}
 
 	if(ret == true)
@@ -108,7 +106,6 @@ bool j1App::Start()
 	for (list<j1Module*>::iterator it = modules.begin(); it != modules.end(); it++)
 		ret = (*it)->Start();
 	
-
 	startup_time.Start();;
 
 	return ret;
@@ -254,6 +251,11 @@ float j1App::GetDT() const
 const char* j1App::GetOrganization() const
 {
 	return organization.c_str();
+}
+
+list<j1Module*> j1App::GetModules()
+{
+	return modules;
 }
 
 void j1App::CapFps(float fps)
