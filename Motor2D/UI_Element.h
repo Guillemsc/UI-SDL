@@ -62,6 +62,7 @@ public:
 
 public:
 	Transform transform;
+	std::function<void(UI_Event*)> OnClick;
 
 private:
 	ui_element_type type = (ui_element_type)0;

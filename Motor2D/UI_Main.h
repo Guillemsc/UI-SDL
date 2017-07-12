@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <memory>
+#include <functional>
 
 #include "SDL/include/SDL.h"
 #include "j1Module.h"
