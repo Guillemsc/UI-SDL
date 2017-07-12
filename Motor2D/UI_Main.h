@@ -52,6 +52,8 @@ public:
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetElements();
 
+	void AddToDelete(UI_Element* element);
+
 	ui_point GetMousePos();
 	bool GetMouseLeftDown();
 	bool GetMouseRightDown();
@@ -60,12 +62,12 @@ public:
 
 private:
 	void CheckOnMouseEnter();
-
 	void DeleteElements();
 
 private:
 	UI_EventSystem* ui_event_system = nullptr;
 	list<UI_Element*> elements;
+	list<UI_Element*> to_delete;
 };
 
 struct ui_point

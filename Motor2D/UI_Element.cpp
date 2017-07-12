@@ -1,7 +1,10 @@
 #include "UI_Element.h"
+#include "UI_EventSystem.h"
 
-UI_Element::UI_Element(ui_element_type _type)
+UI_Element::UI_Element(UI_Main* _ui_main, UI_EventSystem* _event_system, ui_element_type _type)
 {
+	ui_main = _ui_main;
+	event_system = _event_system;
 	type = _type;
 }
 
@@ -11,11 +14,15 @@ UI_Element::~UI_Element()
 
 void UI_Element::Delete()
 {
-	to_delete = true;
+	UI_Event* e = new UI_Event(ui_event_type::event_delete, this);
+	event_system->SendEvent(e);
+
+	ui_main->AddToDelete(this);
 }
 
 void UI_Element::CleanElement()
 {
+
 }
 
 ui_element_type UI_Element::GetType()
@@ -57,9 +64,19 @@ UI_Element* UI_Element::GetParent()
 	return parent;
 }
 
-bool UI_Element::ToDelete()
+void UI_Element::ResetParent()
 {
-	return to_delete;
+	parent = nullptr;
+}
+
+UI_Main* UI_Element::GetUiMain()
+{
+	return ui_main;
+}
+
+UI_EventSystem * UI_Element::GetEventSystem()
+{
+	return event_system;
 }
 
 void Transform::operator=(Transform& trans)

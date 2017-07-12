@@ -54,8 +54,6 @@ bool UI_Main::PostUpdate()
 {
 	bool ret = true;
 
-
-
 	return ret;
 }
 
@@ -121,9 +119,45 @@ void UI_Main::CheckOnMouseEnter()
 
 void UI_Main::DeleteElements()
 {
+	for (list<UI_Element*>::iterator del = to_delete.begin(); del != to_delete.end();)
+	{
+		for (list<UI_Element*>::iterator el = elements.begin(); el != to_delete.end(); el++)
+		{
+			if ((*del) == (*el))
+				continue;
+
+			// Clean from childs
+			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); (*el)->GetChilds().end; )
+			{
+				if ((*ch) == (*del))
+				{
+					(*el)->GetChilds().erase(ch);
+				}
+				else
+					++ch;
+			}
+
+			// Clean from parents
+			if ((*el)->GetParent() == (*del))
+				(*el)->ResetParent();
+		}
+
+		// Clean
+		(*del)->CleanUp();
+		(*del)->CleanElement();
+
+		// Delete
+		delete (*del);
+		to_delete.erase(del);
+	}
 }
 
 list<UI_Element*> UI_Main::GetElements()
 {
 	return elements;
+}
+
+void UI_Main::AddToDelete(UI_Element * element)
+{
+	to_delete.push_back(element);
 }

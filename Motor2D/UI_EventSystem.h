@@ -49,7 +49,7 @@ enum ui_event_type
 	event_mouse_over,
 	event_mouse_enter,
 	event_mouse_out,
-	event_destroy,
+	event_delete,
 };
 
 #endif // __UI_EventSystem_H__

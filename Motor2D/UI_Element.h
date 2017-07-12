@@ -44,7 +44,7 @@ enum ui_element_type
 class UI_Element
 {
 public:
-	UI_Element(ui_element_type type);
+	UI_Element(UI_Main* ui_main, UI_EventSystem* event_system, ui_element_type type);
 	virtual ~UI_Element();
 
 	virtual void Start() {};
@@ -52,17 +52,20 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
-protected:
 	void Delete();
+	UI_Main* GetUiMain();
+	UI_EventSystem* GetEventSystem();
+	list<UI_Element*> GetChilds();
+	UI_Element* GetParent();
+	void ResetParent();
 	void CleanElement();
+
+protected:
 
 	ui_element_type GetType();
 
 	void AddChild(UI_Element* child);
 	void RemoveChild(UI_Element* child);
-	list<UI_Element*> GetChilds();
-	UI_Element* GetParent();
-	bool ToDelete();
 
 public:
 	Transform transform;
@@ -74,7 +77,9 @@ private:
 	ui_element_type type = (ui_element_type)0;
 	list<UI_Element*> childs;
 	UI_Element* parent = nullptr;
-	bool to_delete = false;
+
+	UI_Main* ui_main = nullptr;
+	UI_EventSystem* event_system = nullptr;
 };
 
 #endif // __UI_EventSystem_H__
