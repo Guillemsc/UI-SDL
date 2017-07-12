@@ -5,6 +5,7 @@
 
 class UI_Element;
 class Transform;
+class UI_Event;
 
 enum ui_element_type;
 

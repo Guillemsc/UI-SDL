@@ -10,7 +10,7 @@
 using namespace std;
 
 class UI_EventSystem;
-class Event;
+class UI_Event;
 class UI_Element;
 class Transform;
 
