@@ -64,7 +64,7 @@ public:
 	Transform transform;
 	std::function<void(UI_Event*)> OnClick;
 
-private:
+private: 
 	ui_element_type type = (ui_element_type)0;
 	list<weak_ptr<UI_Element>> childs;
 };

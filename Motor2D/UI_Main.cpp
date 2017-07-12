@@ -1,3 +1,4 @@
+#include "j1App.h"
 #include "UI_Main.h"
 #include "UI_EventSystem.h"
 #include "UI_Element.h"
@@ -11,7 +12,7 @@ UI_Main::UI_Main() : j1Module()
 
 UI_Main::~UI_Main()
 {
-
+	
 }
 
 bool UI_Main::Awake(pugi::xml_node &)
@@ -28,6 +29,10 @@ bool UI_Main::Start()
 	bool ret = true;
 
 	LOG("Start module ui");
+
+	UI_Element* e = new UI_Element(ui_element_type::element_null);
+	e->OnClick = UI_Main::OnEvent;
+
 
 	return ret;
 }
