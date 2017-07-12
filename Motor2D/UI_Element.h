@@ -39,7 +39,6 @@ enum ui_element_type
 	element_button,
 };
 
-
 // --------------------------------------------------
 
 class UI_Element
@@ -53,20 +52,29 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
+protected:
+	void Delete();
 	void CleanElement();
 
 	ui_element_type GetType();
-	void AddChild(weak_ptr<UI_Element> child);
-	void RemoveChild(weak_ptr<UI_Element> child); 
-	list<weak_ptr<UI_Element>> GetChilds();
+
+	void AddChild(UI_Element* child);
+	void RemoveChild(UI_Element* child);
+	list<UI_Element*> GetChilds();
+	UI_Element* GetParent();
+	bool ToDelete();
 
 public:
 	Transform transform;
 	std::function<void(UI_Event*)> OnClick;
+	std::function<void(UI_Event*)> OnMouseEnter;
+	std::function<void(UI_Event*)> OnMouseOut;
 
 private: 
 	ui_element_type type = (ui_element_type)0;
-	list<weak_ptr<UI_Element>> childs;
+	list<UI_Element*> childs;
+	UI_Element* parent = nullptr;
+	bool to_delete = false;
 };
 
 #endif // __UI_EventSystem_H__

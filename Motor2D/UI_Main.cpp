@@ -1,4 +1,3 @@
-#include "j1App.h"
 #include "UI_Main.h"
 #include "UI_EventSystem.h"
 #include "UI_Element.h"
@@ -29,10 +28,6 @@ bool UI_Main::Start()
 	bool ret = true;
 
 	LOG("Start module ui");
-
-	UI_Element* e = new UI_Element(ui_element_type::element_null);
-	e->OnClick = UI_Main::OnEvent;
-
 
 	return ret;
 }
@@ -74,11 +69,11 @@ bool UI_Main::CleanUp()
 	return ret;
 }
 
-void UI_Main::OnEvent(UI_Event * ev)
+void UI_Main::ExpandEvent(UI_Event * ev)
 {
-	for (list<shared_ptr<UI_Element>>::iterator it = elements.begin(); it != elements.end(); it++)
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
-		(*it).get()->OnEvent(ev);
+		(*it)->OnEvent(ev);
 	}
 }
 
@@ -87,7 +82,48 @@ UI_EventSystem * UI_Main::GetEventSystem()
 	return ui_event_system;
 }
 
-list<shared_ptr<UI_Element>> UI_Main::GetElements()
+ui_point UI_Main::GetMousePos()
+{
+	ui_point ret;
+	int x, y;
+
+	App->input->GetMousePosition(x, y);
+
+	ret.x = x;
+	ret.y = y;
+
+	return ret;
+}
+
+bool UI_Main::GetMouseLeftDown()
+{
+	return (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN);
+}
+
+bool UI_Main::GetMouseRightDown()
+{
+	return (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN);
+}
+
+bool UI_Main::GetMouseLeftUp()
+{
+	return (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP);
+}
+
+bool UI_Main::GetMouseRightUp()
+{
+	return (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP);
+}
+
+void UI_Main::CheckOnMouseEnter()
+{
+}
+
+void UI_Main::DeleteElements()
+{
+}
+
+list<UI_Element*> UI_Main::GetElements()
 {
 	return elements;
 }

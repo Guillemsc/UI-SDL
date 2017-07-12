@@ -9,6 +9,11 @@ UI_Element::~UI_Element()
 {
 }
 
+void UI_Element::Delete()
+{
+	to_delete = true;
+}
+
 void UI_Element::CleanElement()
 {
 }
@@ -18,41 +23,43 @@ ui_element_type UI_Element::GetType()
 	return type;
 }
 
-void UI_Element::AddChild(weak_ptr<UI_Element> child)
+void UI_Element::AddChild(UI_Element* child)
 {
-	if (child.expired())
+	if (child == nullptr)
 		return;
 	
-	child.lock()->transform.AddToPos(transform.x, transform.y);
+	child->parent = this;
 	childs.push_back(child);
 }
 
-void UI_Element::RemoveChild(weak_ptr<UI_Element> child)
+void UI_Element::RemoveChild(UI_Element* child)
 {
-	if (child.expired())
+	if (child == nullptr)
 		return;
 
-	for (list<weak_ptr<UI_Element>>::iterator it = childs.begin(); it != childs.end();)
+	for (list<UI_Element*>::iterator it = childs.begin(); it != childs.end(); it++)
 	{
-		if ((*it).expired())
-		{
-			childs.erase(it);
-			continue;
-		}
-
-		if ((*it).lock() == child.lock())
+		if ((*it) == child)
 		{
 			childs.erase(it);
 			break;
 		}
-
-		++it;
 	}
 }
 
-list<weak_ptr<UI_Element>> UI_Element::GetChilds()
+list<UI_Element*> UI_Element::GetChilds()
 {
 	return childs;
+}
+
+UI_Element* UI_Element::GetParent()
+{
+	return parent;
+}
+
+bool UI_Element::ToDelete()
+{
+	return to_delete;
 }
 
 void Transform::operator=(Transform& trans)

@@ -14,6 +14,7 @@ public:
 	UI_EventSystem(UI_Main* ui_main);
 	virtual ~UI_EventSystem();
 
+	void Start();
 	void CleanUp();
 
 	void SendEvent(UI_Event* ev);
@@ -27,17 +28,17 @@ private:
 class UI_Event
 {
 public:
-	UI_Event(ui_event_type type, weak_ptr<UI_Element> sender);
+	UI_Event(ui_event_type type, UI_Element* sender);
 	virtual ~UI_Event();
 
 	void CleanUp();
 
 	ui_event_type GetEventType();
-	weak_ptr<UI_Element> GetSender();
+	UI_Element* GetSender();
 
 private:
 	ui_event_type event_type = (ui_event_type)0;
-	weak_ptr<UI_Element> sender;
+	UI_Element* sender;
 };
 
 enum ui_event_type

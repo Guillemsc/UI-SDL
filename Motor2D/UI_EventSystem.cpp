@@ -10,6 +10,10 @@ UI_EventSystem::~UI_EventSystem()
 {
 }
 
+void UI_EventSystem::Start()
+{
+}
+
 void UI_EventSystem::CleanUp()
 {
 	ui_main = nullptr;
@@ -18,10 +22,10 @@ void UI_EventSystem::CleanUp()
 void UI_EventSystem::SendEvent(UI_Event * ev)
 {
 	if(ui_main != nullptr)
-		ui_main->OnEvent(ev);
+		ui_main->ExpandEvent(ev);
 }
 
-UI_Event::UI_Event(ui_event_type _type, weak_ptr<UI_Element> _sender)
+UI_Event::UI_Event(ui_event_type _type, UI_Element* _sender)
 {
 	event_type = _type;
 	sender = _sender;
@@ -36,7 +40,7 @@ ui_event_type UI_Event::GetEventType()
 	return event_type;
 }
 
-weak_ptr<UI_Element> UI_Event::GetSender()
+UI_Element* UI_Event::GetSender()
 {
 	return sender;
 }

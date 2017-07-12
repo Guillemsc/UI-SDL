@@ -7,6 +7,8 @@
 
 #include "SDL/include/SDL.h"
 #include "j1Module.h"
+#include "j1App.h"
+#include "j1Input.h"
 
 using namespace std;
 
@@ -14,6 +16,8 @@ class UI_EventSystem;
 class UI_Event;
 class UI_Element;
 class Transform;
+
+struct ui_point;
 
 enum ui_event_type;
 enum ui_element_type;
@@ -43,14 +47,31 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	void OnEvent(UI_Event* ev);
+	void ExpandEvent(UI_Event* ev);
 
 	UI_EventSystem* GetEventSystem();
-	list<shared_ptr<UI_Element>> GetElements();
+	list<UI_Element*> GetElements();
+
+	ui_point GetMousePos();
+	bool GetMouseLeftDown();
+	bool GetMouseRightDown();
+	bool GetMouseLeftUp();
+	bool GetMouseRightUp();
+
+private:
+	void CheckOnMouseEnter();
+
+	void DeleteElements();
 
 private:
 	UI_EventSystem* ui_event_system = nullptr;
-	list<shared_ptr<UI_Element>> elements;
+	list<UI_Element*> elements;
+};
+
+struct ui_point
+{
+	int x = 0;
+	int y = 0;
 };
 
 #endif // __UI_Main_H__
