@@ -80,9 +80,9 @@ UI_EventSystem * UI_Main::GetEventSystem()
 	return ui_event_system;
 }
 
-ui_point UI_Main::GetMousePos()
+UI_Point UI_Main::GetMousePos()
 {
-	ui_point ret;
+	UI_Point ret;
 	int x, y;
 
 	App->input->GetMousePosition(x, y);
@@ -127,7 +127,7 @@ void UI_Main::DeleteElements()
 				continue;
 
 			// Clean from childs
-			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); (*el)->GetChilds().end; )
+			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); ch != (*el)->GetChilds().end(); )
 			{
 				if ((*ch) == (*del))
 				{

@@ -79,7 +79,7 @@ UI_EventSystem * UI_Element::GetEventSystem()
 	return event_system;
 }
 
-void Transform::operator=(Transform& trans)
+void UI_Transform::operator=(UI_Transform& trans)
 {
 	trans.x = x;
 	trans.y = y;
@@ -87,7 +87,7 @@ void Transform::operator=(Transform& trans)
 	trans.h = h;
 }
 
-bool Transform::operator == (Transform trans)
+bool UI_Transform::operator == (UI_Transform trans)
 {
 	if ((trans.x == x) && (trans.y == y) && (trans.w = w) && (trans.h == h))
 		return true;
@@ -95,26 +95,31 @@ bool Transform::operator == (Transform trans)
 }
 
 
-void Transform::SetPos(int _x, int _y)
+void UI_Transform::SetPos(int _x, int _y)
 {
 	x = _x;
 	y = _y;
 }
 
-void Transform::AddToPos(int add_x, int add_y)
+void UI_Transform::AddToPos(int add_x, int add_y)
 {
 	x += add_x;
 	y += add_y;
 }
 
-void Transform::SubstractToPos(int sub_x, int sub_y)
+void UI_Transform::SubstractToPos(int sub_x, int sub_y)
 {
 	x -= sub_x;
 	y -= sub_y;
 }
 
-void Transform::SetSize(int _width, int _height)
+void UI_Transform::SetSize(int _width, int _height)
 {
 	w = _width;
 	h = _height;
+}
+
+UI_Point UI_Transform::GetPos()
+{
+	return UI_Point();
 }

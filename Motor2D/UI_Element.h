@@ -4,25 +4,27 @@
 #include "UI_Main.h"
 
 class UI_Element;
-class Transform;
+class UI_Transform;
 class UI_Event;
+class UI_Point;
 
 enum ui_element_type;
 
 // --------------------------------------------------
 
-class Transform
+class UI_Transform
 {
 public:
-	void operator = (Transform& trans);
-	bool operator == (Transform trans);
+	void operator = (UI_Transform& trans);
+	bool operator == (UI_Transform trans);
 
 	void SetPos(int x, int y);
 	void AddToPos(int add_x, int add_y);
 	void SubstractToPos(int sub_x, int sub_y);
 	void SetSize(int width, int height);
+	UI_Point GetPos();
 
-public:
+private:
 	int x = 0;
 	int y = 0;
 	int w = 0;
@@ -61,14 +63,13 @@ public:
 	void CleanElement();
 
 protected:
-
 	ui_element_type GetType();
 
 	void AddChild(UI_Element* child);
 	void RemoveChild(UI_Element* child);
 
 public:
-	Transform transform;
+	UI_Transform transform;
 	std::function<void(UI_Event*)> OnClick;
 	std::function<void(UI_Event*)> OnMouseEnter;
 	std::function<void(UI_Event*)> OnMouseOut;

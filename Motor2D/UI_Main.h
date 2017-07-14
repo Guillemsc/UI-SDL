@@ -15,9 +15,8 @@ using namespace std;
 class UI_EventSystem;
 class UI_Event;
 class UI_Element;
-class Transform;
-
-struct ui_point;
+class UI_Transform;
+class UI_Point;
 
 enum ui_event_type;
 enum ui_element_type;
@@ -54,7 +53,7 @@ public:
 
 	void AddToDelete(UI_Element* element);
 
-	ui_point GetMousePos();
+	UI_Point GetMousePos();
 	bool GetMouseLeftDown();
 	bool GetMouseRightDown();
 	bool GetMouseLeftUp();
@@ -70,8 +69,9 @@ private:
 	list<UI_Element*> to_delete;
 };
 
-struct ui_point
+class UI_Point
 {
+public:
 	int x = 0;
 	int y = 0;
 };
