@@ -80,9 +80,9 @@ UI_EventSystem * UI_Main::GetEventSystem()
 	return ui_event_system;
 }
 
-ui_point UI_Main::GetMousePos()
+UI_Point UI_Main::GetMousePos()
 {
-	ui_point ret;
+	UI_Point ret;
 	int x, y;
 
 	App->input->GetMousePosition(x, y);

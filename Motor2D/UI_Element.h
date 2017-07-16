@@ -4,23 +4,25 @@
 #include "UI_Main.h"
 
 class UI_Element;
-class Transform;
+class UI_Transform;
 class UI_Event;
+class UI_Point;
 
 enum ui_element_type;
 
 // --------------------------------------------------
 
-class Transform
+class UI_Transform
 {
 public:
-	void operator = (Transform& trans);
-	bool operator == (Transform trans);
+	void operator = (UI_Transform& trans);
+	bool operator == (UI_Transform trans);
 
 	void SetPos(int x, int y);
 	void AddToPos(int add_x, int add_y);
 	void SubstractToPos(int sub_x, int sub_y);
 	void SetSize(int width, int height);
+
 	int X();
 	int Y();
 	int W();
@@ -56,8 +58,8 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
-	ui_point GetLocalPos();
-	ui_point GetRealtivePos();
+	UI_Point GetLocalPos();
+	UI_Point GetRealtivePos();
 
 	void Delete();
 	void DeleteAndChilds();
@@ -80,7 +82,7 @@ public:
 	std::function<void(UI_Event*)> OnMouseOut;
 
 private: 
-	Transform transform;
+	UI_Transform transform;
 	ui_element_type type = (ui_element_type)0;
 	list<UI_Element*> childs;
 	UI_Element* parent = nullptr;
