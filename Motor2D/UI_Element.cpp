@@ -20,6 +20,18 @@ void UI_Element::Delete()
 	ui_main->AddToDelete(this);
 }
 
+void UI_Element::DeleteAndChilds()
+{
+	for (list<UI_Element*>::iterator it = childs.begin(); it != childs.end();)
+	{
+		(*it)->Delete();
+
+		childs.erase(it);
+	}
+
+	Delete();
+}
+
 void UI_Element::CleanElement()
 {
 
@@ -117,4 +129,24 @@ void Transform::SetSize(int _width, int _height)
 {
 	w = _width;
 	h = _height;
+}
+
+int Transform::X()
+{
+	return x;
+}
+
+int Transform::Y()
+{
+	return y;
+}
+
+int Transform::W()
+{
+	return w;
+}
+
+int Transform::H()
+{
+	return h;
 }

@@ -21,8 +21,12 @@ public:
 	void AddToPos(int add_x, int add_y);
 	void SubstractToPos(int sub_x, int sub_y);
 	void SetSize(int width, int height);
+	int X();
+	int Y();
+	int W();
+	int H();
 
-public:
+private:
 	int x = 0;
 	int y = 0;
 	int w = 0;
@@ -52,7 +56,11 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
+	ui_point GetLocalPos();
+	ui_point GetRealtivePos();
+
 	void Delete();
+	void DeleteAndChilds();
 	UI_Main* GetUiMain();
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetChilds();
@@ -61,19 +69,18 @@ public:
 	void CleanElement();
 
 protected:
-
 	ui_element_type GetType();
 
 	void AddChild(UI_Element* child);
 	void RemoveChild(UI_Element* child);
 
 public:
-	Transform transform;
 	std::function<void(UI_Event*)> OnClick;
 	std::function<void(UI_Event*)> OnMouseEnter;
 	std::function<void(UI_Event*)> OnMouseOut;
 
 private: 
+	Transform transform;
 	ui_element_type type = (ui_element_type)0;
 	list<UI_Element*> childs;
 	UI_Element* parent = nullptr;

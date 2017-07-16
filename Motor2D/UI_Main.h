@@ -70,6 +70,8 @@ private:
 	list<UI_Element*> to_delete;
 };
 
+// --------------------------------------------------
+
 struct ui_point
 {
 	int x = 0;

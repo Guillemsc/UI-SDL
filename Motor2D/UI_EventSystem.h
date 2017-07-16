@@ -41,6 +41,8 @@ private:
 	UI_Element* sender;
 };
 
+// --------------------------------------------------
+
 enum ui_event_type
 {
 	event_null,

@@ -127,7 +127,7 @@ void UI_Main::DeleteElements()
 				continue;
 
 			// Clean from childs
-			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); (*el)->GetChilds().end; )
+			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); ch != (*el)->GetChilds().end(); )
 			{
 				if ((*ch) == (*del))
 				{
