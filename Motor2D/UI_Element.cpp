@@ -101,9 +101,7 @@ void UI_Transform::operator=(UI_Transform& trans)
 
 bool UI_Transform::operator == (UI_Transform trans)
 {
-	if ((trans.x == x) && (trans.y == y) && (trans.w = w) && (trans.h == h))
-		return true;
-	return false;
+	return ((trans.x == x) && (trans.y == y) && (trans.w = w) && (trans.h == h)) ? true : false;
 }
 
 
