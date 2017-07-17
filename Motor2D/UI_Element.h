@@ -58,8 +58,10 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
+	void SetPos(UI_Point pos);
 	UI_Point GetLocalPos();
 	UI_Point GetRealtivePos();
+	UI_Point GetSize();
 
 	void Delete();
 	void DeleteAndChilds();

@@ -12,6 +12,51 @@ UI_Element::~UI_Element()
 {
 }
 
+void UI_Element::SetPos(UI_Point pos)
+{
+	transform.SetPos(pos.x, pos.y);
+}
+
+UI_Point UI_Element::GetLocalPos()
+{
+	UI_Point ret;
+
+	ret.x = transform.X();
+	ret.y = transform.Y();
+
+	return ret;
+}
+
+UI_Point UI_Element::GetRealtivePos()
+{
+	UI_Point ret;
+
+	ret.x = transform.X();
+	ret.y = transform.Y();
+
+	UI_Element* curr_parent = parent;
+
+	while (curr_parent != nullptr)
+	{
+		ret.x += curr_parent->transform.X();
+		ret.y += curr_parent->transform.Y();
+
+		curr_parent = parent;
+	}
+
+	return ret;
+}
+
+UI_Point UI_Element::GetSize()
+{
+	UI_Point ret;
+
+	ret.x = transform.W();
+	ret.y = transform.H();
+
+	return ret;
+}
+
 void UI_Element::Delete()
 {
 	UI_Event* e = new UI_Event(ui_event_type::event_delete, this);

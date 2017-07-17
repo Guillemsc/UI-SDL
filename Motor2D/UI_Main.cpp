@@ -113,15 +113,37 @@ bool UI_Main::GetMouseRightUp()
 	return (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP);
 }
 
-void UI_Main::CheckOnMouseEnter()
+void UI_Main::CheckEvents()
 {
+	UI_Element* mouse_enter = nullptr;
+
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		// Mouse enter -------------
+
+		UI_Point mouse = GetMousePos();
+		UI_Point pos = (*it)->GetRealtivePos();
+		UI_Point size = (*it)->GetSize();
+
+		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
+			mouse_enter = (*it);
+
+		// -------------------------
+	}
+
+	if (mouse_enter != nullptr)
+	{
+		UI_Event* e = new UI_Event(ui_event_type::event_mouse_enter, mouse_enter);
+		mouse_enter->OnMouseEnter(e);
+		mouse_enter->GetEventSystem()->SendEvent(e);
+	}
 }
 
 void UI_Main::DeleteElements()
 {
 	for (list<UI_Element*>::iterator del = to_delete.begin(); del != to_delete.end();)
 	{
-		for (list<UI_Element*>::iterator el = elements.begin(); el != to_delete.end(); el++)
+		for (list<UI_Element*>::iterator el = elements.begin(); el != elements.end(); el++)
 		{
 			if ((*del) == (*el))
 				continue;

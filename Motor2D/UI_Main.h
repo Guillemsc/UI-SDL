@@ -60,7 +60,7 @@ public:
 	bool GetMouseRightUp();
 
 private:
-	void CheckOnMouseEnter();
+	void CheckEvents();
 	void DeleteElements();
 
 private:
