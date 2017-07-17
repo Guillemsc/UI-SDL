@@ -24,7 +24,7 @@ void UI_Element::DeleteAndChilds()
 {
 	for (list<UI_Element*>::iterator it = childs.begin(); it != childs.end();)
 	{
-		(*it)->Delete();
+		(*it)->DeleteAndChilds();
 
 		childs.erase(it);
 	}
