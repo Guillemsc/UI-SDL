@@ -43,6 +43,23 @@ private:
 
 // --------------------------------------------------
 
+class UI_EventMouse : public UI_Event
+{
+public:
+	UI_EventMouse(ui_event_type type, UI_Element* sender, bool _button_left, bool _button_right);
+
+	virtual ~UI_EventMouse();
+
+	bool ButtonLeft();
+	bool ButtonRight();
+
+private:
+	bool button_left = false;
+	bool button_right = false;
+};
+
+// --------------------------------------------------
+
 enum ui_event_type
 {
 	event_null,

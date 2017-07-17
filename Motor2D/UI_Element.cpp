@@ -12,6 +12,14 @@ UI_Element::~UI_Element()
 {
 }
 
+void UI_Element::InvokeOnMouseOver()
+{
+	UI_Event* e = new UI_Event(ui_event_type::event_mouse_enter, this);
+	OnMouseEnter(e);
+	GetEventSystem()->SendEvent(e);
+	mouse_over = true;
+}
+
 void UI_Element::SetPos(UI_Point pos)
 {
 	transform.SetPos(pos.x, pos.y);
@@ -55,6 +63,11 @@ UI_Point UI_Element::GetSize()
 	ret.y = transform.H();
 
 	return ret;
+}
+
+bool UI_Element::GetMouseOver()
+{
+	return mouse_over;
 }
 
 void UI_Element::Delete()

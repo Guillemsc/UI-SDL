@@ -6,6 +6,7 @@
 class UI_Element;
 class UI_Transform;
 class UI_Event;
+class UI_EventMouse;
 class UI_Point;
 
 enum ui_element_type;
@@ -58,10 +59,13 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
+	void InvokeOnMouseOver();
+
 	void SetPos(UI_Point pos);
 	UI_Point GetLocalPos();
 	UI_Point GetRealtivePos();
 	UI_Point GetSize();
+	bool GetMouseOver();
 
 	void Delete();
 	void DeleteAndChilds();
@@ -79,13 +83,16 @@ protected:
 	void RemoveChild(UI_Element* child);
 
 public:
-	std::function<void(UI_Event*)> OnClick;
+	std::function<void(UI_EventMouse*)> OnClick;
 	std::function<void(UI_Event*)> OnMouseEnter;
 	std::function<void(UI_Event*)> OnMouseOut;
 
 private: 
+	bool mouse_over = false;
+
 	UI_Transform transform;
 	ui_element_type type = (ui_element_type)0;
+
 	list<UI_Element*> childs;
 	UI_Element* parent = nullptr;
 

@@ -45,7 +45,7 @@ bool UI_Main::Update(float dt)
 {
 	bool ret = true;
 
-
+	CheckEvents();
 
 	return ret;
 }
@@ -53,6 +53,8 @@ bool UI_Main::Update(float dt)
 bool UI_Main::PostUpdate()
 {
 	bool ret = true;
+
+	DeleteElements();
 
 	return ret;
 }
@@ -116,26 +118,34 @@ bool UI_Main::GetMouseRightUp()
 void UI_Main::CheckEvents()
 {
 	UI_Element* mouse_enter = nullptr;
+	UI_Element* mouse_click = nullptr;
 
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
-		// Mouse enter -------------
+		// Mouse in quad -------------
 
 		UI_Point mouse = GetMousePos();
 		UI_Point pos = (*it)->GetRealtivePos();
 		UI_Point size = (*it)->GetSize();
 
 		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
-			mouse_enter = (*it);
+		{
+			// Mouse enter -------------
+			if (!(*it)->GetMouseOver())
+			{
+				mouse_enter = (*it);
+			}
 
-		// -------------------------
+			if (GetMouseLeftDown())
+			{
+				mouse_click = (*it);
+			}
+		}
 	}
 
 	if (mouse_enter != nullptr)
 	{
-		UI_Event* e = new UI_Event(ui_event_type::event_mouse_enter, mouse_enter);
-		mouse_enter->OnMouseEnter(e);
-		mouse_enter->GetEventSystem()->SendEvent(e);
+		mouse_enter->InvokeOnMouseOver();
 	}
 }
 
