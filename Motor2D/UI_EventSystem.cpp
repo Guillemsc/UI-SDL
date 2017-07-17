@@ -44,3 +44,23 @@ UI_Element* UI_Event::GetSender()
 {
 	return sender;
 }
+
+UI_EventMouse::UI_EventMouse(ui_event_type type, UI_Element * sender, bool _button_left, bool _button_right) : UI_Event(type, sender)
+{
+	button_left = _button_left;
+	button_right = _button_right;
+}
+
+UI_EventMouse::~UI_EventMouse()
+{
+}
+
+bool UI_EventMouse::ButtonLeft()
+{
+	return button_left;
+}
+
+bool UI_EventMouse::ButtonRight()
+{
+	return right;
+}
