@@ -1,7 +1,10 @@
 #include "UI_Main.h"
 #include "UI_EventSystem.h"
 #include "UI_Element.h"
+
 #include "j1Render.h"
+#include "j1Fonts.h"
+#include "j1Textures.h"
 
 #include "p2Log.h"
 
@@ -29,6 +32,7 @@ bool UI_Main::Start()
 	bool ret = true;
 
 	LOG("Start module ui");
+	LoadAtlas();
 
 	return ret;
 }
@@ -68,8 +72,17 @@ bool UI_Main::CleanUp()
 {
 	bool ret = true;
 
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		(*it)->Delete();
+	}
+
+	DeleteElements();
+
 	ui_event_system->CleanUp();
 	delete ui_event_system;
+
+	UnloadAtlas();
 
 	return ret;
 }
@@ -87,6 +100,18 @@ void UI_Main::UIUpdatingInfo(int _window_width, int _window_height)
 
 	window_width = _window_width;
 	window_height = _window_height;
+}
+
+bool UI_Main::LoadAtlas()
+{
+	atlas = App->tex->LoadTexture("atlas.png");
+
+	return (atlas != nullptr) ? true : false;
+}
+
+void UI_Main::UnloadAtlas()
+{
+	App->tex->UnLoadTexture(atlas);
 }
 
 void UI_Main::ExpandEvent(UI_Event * ev)
@@ -145,9 +170,36 @@ UI_Point UI_Main::GetWindowSize()
 	return ret;
 }
 
-void UI_Main::UIRenderQuad(int x, int y, int w, int h)
+void UI_Main::UIRenderQuad(int x, int y, int w, int h, int r, int g, int b, int a, bool filled)
 {
-	//App->render->DrawQuad();
+	App->render->DrawQuad({x, y, w, h}, r, g, b, a, filled);
+}
+
+void UI_Main::UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a)
+{
+	App->render->DrawLine(x1, y2, x2, y2, r, g, b, a);
+}
+
+void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a)
+{
+	int size_w, size_h = 0;
+
+	SDL_Texture* texture = App->font->Print(text, { (Uint8)r, (Uint8)g, (Uint8)b, (Uint8)a }, font);
+	App->font->CalcSize(text, size_w, size_h, font);
+
+	SDL_Rect rect = { 0, 0, size_w, size_h };
+
+	App->render->Blit(texture, x, y, &rect);
+}
+
+void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect)
+{
+	App->render->Blit(GetAtlas(), x, y, &rect);
+}
+
+SDL_Texture * UI_Main::GetAtlas()
+{
+	return atlas;
 }
 
 void UI_Main::UpdateElements()

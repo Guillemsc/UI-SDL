@@ -136,6 +136,7 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	bool ret = true;
 
 	float scale = _scale;
+
 	if(_scale == -1)
 		scale = App->win->GetScale();
 
@@ -184,7 +185,7 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	return ret;
 }
 
-bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, float _scale, Uint8 a, bool filled, bool use_camera) const
+bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, float _scale, bool use_camera) const
 {
 	bool ret = true;
 	uint scale = _scale;
@@ -215,7 +216,7 @@ bool j1Render::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, float _
 	return ret;
 }
 
-bool j1Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, float _scale, Uint8 a, bool use_camera) const
+bool j1Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float _scale, bool use_camera) const
 {
 	bool ret = true;
 	uint scale = _scale;
@@ -241,7 +242,7 @@ bool j1Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 
 	return ret;
 }
 
-bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, float _scale, Uint8 a, bool filled, bool use_camera) const
+bool j1Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float _scale, bool filled, bool use_camera) const
 {
 	bool ret = true;
 	uint scale = _scale;

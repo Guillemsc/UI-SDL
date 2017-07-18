@@ -21,6 +21,8 @@ class UI_Point;
 enum ui_event_type;
 enum ui_element_type;
 
+struct Font;
+
 class UI_Main : public j1Module
 {
 public:
@@ -48,10 +50,14 @@ public:
 
 	void UIUpdatingInfo(int window_width, int window_height);
 
+	bool LoadAtlas();
+	void UnloadAtlas();
+
 	void ExpandEvent(UI_Event* ev);
 
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetElements();
+	SDL_Texture* GetAtlas();
 
 	void BringToFrontElement(UI_Element* element);
 	void BringToFrontAndChilds(UI_Element* element);
@@ -65,8 +71,10 @@ public:
 	bool GetMouseRightUp();
 	UI_Point GetWindowSize();
 
-	void UIRenderQuad(int x, int y, int w, int h);
-	void UIRenderText(int x, int y, string text);
+	void UIRenderQuad(int x, int y, int w, int h, int r, int g, int b, int a, bool filled);
+	void UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a);
+	void UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a);
+	void UIRenderImage(int x, int y, SDL_Rect rect);
 
 private:
 	void UpdateElements();
@@ -80,6 +88,8 @@ private:
 
 	int window_width = 0;
 	int window_height = 0;
+
+	SDL_Texture* atlas = nullptr;
 };
 
 
