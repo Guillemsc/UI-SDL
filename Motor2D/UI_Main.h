@@ -53,7 +53,9 @@ public:
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetElements();
 
-	void BringToFrontElement(UI_Element* elements);
+	void BringToFrontElement(UI_Element* element);
+	void BringToFrontAndChilds(UI_Element* element);
+
 	void DeleteElement(UI_Element* element);
 
 	UI_Point GetMousePos();
@@ -62,6 +64,9 @@ public:
 	bool GetMouseLeftUp();
 	bool GetMouseRightUp();
 	UI_Point GetWindowSize();
+
+	void UIRenderQuad(int x, int y, int w, int h);
+	void UIRenderText(int x, int y, string text);
 
 private:
 	void UpdateElements();

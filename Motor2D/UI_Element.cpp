@@ -65,7 +65,7 @@ void UI_Element::SetPos(UI_Point pos)
 	transform.SetPos(pos.x, pos.y);
 }
 
-void UI_Element::SetRendeingViewport(int x, int y, int width, int height)
+void UI_Element::SetRenderingViewport(int x, int y, int width, int height)
 {
 	rendering_viewport.SetPos(x, y);
 	rendering_viewport.SetSize(width, height);
@@ -128,6 +128,7 @@ void UI_Element::BringToFront()
 
 void UI_Element::BringToFrontAndChilds()
 {
+	ui_main->BringToFrontAndChilds(this);
 }
 
 void UI_Element::Delete()

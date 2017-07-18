@@ -1,6 +1,7 @@
 #include "UI_Main.h"
 #include "UI_EventSystem.h"
 #include "UI_Element.h"
+#include "j1Render.h"
 
 #include "p2Log.h"
 
@@ -144,6 +145,11 @@ UI_Point UI_Main::GetWindowSize()
 	return ret;
 }
 
+void UI_Main::UIRenderQuad(int x, int y, int w, int h)
+{
+	//App->render->DrawQuad();
+}
+
 void UI_Main::UpdateElements()
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
@@ -281,6 +287,34 @@ void UI_Main::BringToFrontElement(UI_Element * element)
 	}
 
 	elements.push_back(element);
+}
+
+void UI_Main::BringToFrontAndChilds(UI_Element * element)
+{
+	list<UI_Element*> childs = element->GetChilds();
+
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end();)
+	{
+		bool deleted = false;
+
+		for (list<UI_Element*>::iterator ch = childs.begin(); ch != childs.end(); ch++)
+		{
+			if ((*it) == (*ch))
+			{
+				elements.erase(it);
+				deleted = true;
+				break;
+			}
+		}
+
+		if (!deleted)
+			++it;
+	}
+
+	for (list<UI_Element*>::iterator ch = childs.begin(); ch != childs.end(); ch++)
+	{
+		elements.push_back((*ch));
+	}
 }
 
 void UI_Main::DeleteElement(UI_Element * element)

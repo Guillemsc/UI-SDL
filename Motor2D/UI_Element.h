@@ -70,7 +70,7 @@ public:
 
 	void SetPos(UI_Point pos);
 
-	void SetRendeingViewport(int x, int y, int width, int height);
+	void SetRenderingViewport(int x, int y, int width, int height);
 
 	// Gets the local position of the object
 	UI_Point GetLocalPos();
