@@ -45,6 +45,10 @@ bool UI_Main::Update(float dt)
 {
 	bool ret = true;
 
+	// 1 //
+	UpdateElements();
+
+	// 2 //
 	CheckEvents();
 
 	return ret;
@@ -115,10 +119,23 @@ bool UI_Main::GetMouseRightUp()
 	return (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP);
 }
 
+void UI_Main::UpdateElements()
+{
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		(*it)->Update();
+	}
+}
+
 void UI_Main::CheckEvents()
 {
-	UI_Element* mouse_enter = nullptr;
+	UI_Element* mouse_over = nullptr;
+	UI_Element* mouse_over_enter = nullptr;
+	UI_Element* mouse_over_out = nullptr;
+
 	UI_Element* mouse_click = nullptr;
+	UI_Element* mouse_down = nullptr;
+	UI_Element* mouse_up = nullptr;
 
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
@@ -130,23 +147,61 @@ void UI_Main::CheckEvents()
 
 		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
 		{
-			// Mouse enter -------------
+			// Mouse over --------------
+			mouse_over = (*it);
+
+			// Mouse over enter --------
 			if (!(*it)->GetMouseOver())
 			{
-				mouse_enter = (*it);
+				mouse_over_enter = (*it);
 			}
 
-			if (GetMouseLeftDown())
+			// Mouse click -------------
+			if (!(*it)->GetMouseDown() && (GetMouseLeftDown() || GetMouseRightDown()))
 			{
 				mouse_click = (*it);
+			}
+
+			// Mouse down --------------
+			if (GetMouseLeftDown() || GetMouseRightDown())
+			{
+				mouse_down = (*it);
+			}
+		}
+		else
+		{
+			// Mouse over out ----------
+			if ((*it)->GetMouseOver())
+			{
+				mouse_over_out = (*it);
+			}
+
+			// Mouse up ----------------
+			if ((*it)->GetMouseDown() && (GetMouseLeftUp() || GetMouseRightUp()))
+			{
+				mouse_up = (*it);
 			}
 		}
 	}
 
-	if (mouse_enter != nullptr)
-	{
-		mouse_enter->InvokeOnMouseOver();
-	}
+	// Invoke
+	if (mouse_over != nullptr)
+		mouse_over->InvokeOnMouseOver();
+	
+	if (mouse_over_enter != nullptr)
+		mouse_over_enter->InvokeOnMouseOverEnter();
+	
+	if (mouse_over_out != nullptr)
+		mouse_over_out->InvokeOnMouseOverOut();
+	
+	if (mouse_click != nullptr)
+		mouse_click->InvokeOnMouseClick();
+	
+	if (mouse_down != nullptr)
+		mouse_down->InvokeOnMouseDown();
+	
+	if (mouse_up != nullptr)
+		mouse_up->InvokeOnMouseUp();
 }
 
 void UI_Main::DeleteElements()
@@ -189,7 +244,7 @@ list<UI_Element*> UI_Main::GetElements()
 	return elements;
 }
 
-void UI_Main::AddToDelete(UI_Element * element)
+void UI_Main::DeleteElement(UI_Element * element)
 {
 	to_delete.push_back(element);
 }

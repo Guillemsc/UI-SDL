@@ -38,7 +38,7 @@ public:
 
 private:
 	ui_event_type event_type = (ui_event_type)0;
-	UI_Element* sender;
+	UI_Element*   sender = nullptr;
 };
 
 // --------------------------------------------------
@@ -63,12 +63,18 @@ private:
 enum ui_event_type
 {
 	event_null,
-	event_click,
-	event_double_click,
+
 	event_mouse_over,
-	event_mouse_enter,
-	event_mouse_out,
+	event_mouse_over_enter,
+	event_mouse_over_out,
+	event_mouse_click,
+	event_mouse_double_click,
+	event_mouse_down,
+	event_mouse_up,
+
 	event_delete,
+
+	event_window_resize,
 };
 
 #endif // __UI_EventSystem_H__

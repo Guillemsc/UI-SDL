@@ -35,6 +35,10 @@ UI_Event::~UI_Event()
 {
 }
 
+void UI_Event::CleanUp()
+{
+}
+
 ui_event_type UI_Event::GetEventType()
 {
 	return event_type;

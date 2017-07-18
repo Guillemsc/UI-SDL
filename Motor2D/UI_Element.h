@@ -60,15 +60,26 @@ public:
 	virtual void OnEvent(UI_Event* ev) {};
 
 	void InvokeOnMouseOver();
+	void InvokeOnMouseOverEnter();
+	void InvokeOnMouseOverOut();
+
+	void InvokeOnMouseClick();
+	void InvokeOnMouseDown();
+	void InvokeOnMouseUp();
 
 	void SetPos(UI_Point pos);
 	UI_Point GetLocalPos();
 	UI_Point GetRealtivePos();
 	UI_Point GetSize();
 	bool GetMouseOver();
+	bool GetMouseDown();
+
+	void BringToFront();
+	void BringToFrontAndChilds();
 
 	void Delete();
 	void DeleteAndChilds();
+
 	UI_Main* GetUiMain();
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetChilds();
@@ -83,21 +94,36 @@ protected:
 	void RemoveChild(UI_Element* child);
 
 public:
-	std::function<void(UI_EventMouse*)> OnClick;
-	std::function<void(UI_Event*)> OnMouseEnter;
-	std::function<void(UI_Event*)> OnMouseOut;
+	// Called every frame that the mouse is over an element.
+	std::function<void(UI_Event*)> OnMouseOver;
+
+	// Called the frame that the mouse goes into an element.
+	std::function<void(UI_Event*)> OnMouseOverEnter;
+
+	// Called the frame that the mouse goes out an element.
+	std::function<void(UI_Event*)> OnMouseOverOut;
+
+	// Called the frame that the mouse clicks over an element.
+	std::function<void(UI_EventMouse*)> OnMouseClick;
+
+	// Called every frame that the mouse is clicked over an element.
+	std::function<void(UI_EventMouse*)> OnMouseDown;
+
+	// Called the frame that the mouse click is released of an element.
+	std::function<void(UI_EventMouse*)> OnMouseUp;
 
 private: 
-	bool mouse_over = false;
+	bool              mouse_over = false;
+	bool              mouse_down = false;
 
-	UI_Transform transform;
-	ui_element_type type = (ui_element_type)0;
+	UI_Transform      transform;
+	ui_element_type   type = (ui_element_type)0;
 
 	list<UI_Element*> childs;
-	UI_Element* parent = nullptr;
+	UI_Element*       parent = nullptr;
 
-	UI_Main* ui_main = nullptr;
-	UI_EventSystem* event_system = nullptr;
+	UI_Main*          ui_main = nullptr;
+	UI_EventSystem*   event_system = nullptr;
 };
 
 #endif // __UI_EventSystem_H__

@@ -14,10 +14,50 @@ UI_Element::~UI_Element()
 
 void UI_Element::InvokeOnMouseOver()
 {
-	UI_Event* e = new UI_Event(ui_event_type::event_mouse_enter, this);
-	OnMouseEnter(e);
+	UI_Event* e = new UI_Event(ui_event_type::event_mouse_over, this);
+	OnMouseOver(e);
 	GetEventSystem()->SendEvent(e);
 	mouse_over = true;
+}
+
+void UI_Element::InvokeOnMouseOverEnter()
+{
+	UI_Event* e = new UI_Event(ui_event_type::event_mouse_over_enter, this);
+	OnMouseOverEnter(e);
+	GetEventSystem()->SendEvent(e);
+	mouse_over = true;
+}
+
+void UI_Element::InvokeOnMouseOverOut()
+{
+	UI_Event* e = new UI_Event(ui_event_type::event_mouse_over_out, this);
+	OnMouseOverOut(e);
+	GetEventSystem()->SendEvent(e);
+	mouse_over = false;
+}
+
+void UI_Element::InvokeOnMouseClick()
+{
+	UI_EventMouse* e = new UI_EventMouse(ui_event_type::event_mouse_click, this, ui_main->GetMouseLeftDown(), ui_main->GetMouseRightDown());
+	OnMouseClick(e);
+	GetEventSystem()->SendEvent(e);
+	mouse_down = true;
+}
+
+void UI_Element::InvokeOnMouseDown()
+{
+	UI_EventMouse* e = new UI_EventMouse(ui_event_type::event_mouse_down, this, ui_main->GetMouseLeftDown(), ui_main->GetMouseRightDown());
+	OnMouseDown(e);
+	GetEventSystem()->SendEvent(e);
+	mouse_down = true;
+}
+
+void UI_Element::InvokeOnMouseUp()
+{
+	UI_EventMouse* e = new UI_EventMouse(ui_event_type::event_mouse_up, this, ui_main->GetMouseLeftDown(), ui_main->GetMouseRightDown());
+	OnMouseUp(e);
+	GetEventSystem()->SendEvent(e);
+	mouse_down = false;
 }
 
 void UI_Element::SetPos(UI_Point pos)
@@ -70,12 +110,25 @@ bool UI_Element::GetMouseOver()
 	return mouse_over;
 }
 
+bool UI_Element::GetMouseDown()
+{
+	return mouse_down;
+}
+
+void UI_Element::BringToFront()
+{
+}
+
+void UI_Element::BringToFrontAndChilds()
+{
+}
+
 void UI_Element::Delete()
 {
 	UI_Event* e = new UI_Event(ui_event_type::event_delete, this);
 	event_system->SendEvent(e);
 
-	ui_main->AddToDelete(this);
+	ui_main->DeleteElement(this);
 }
 
 void UI_Element::DeleteAndChilds()

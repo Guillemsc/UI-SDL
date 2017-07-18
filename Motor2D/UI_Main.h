@@ -46,12 +46,14 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	void UIUpdatingInfo(int window_width, int window_height);
+
 	void ExpandEvent(UI_Event* ev);
 
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetElements();
 
-	void AddToDelete(UI_Element* element);
+	void DeleteElement(UI_Element* element);
 
 	UI_Point GetMousePos();
 	bool GetMouseLeftDown();
@@ -60,13 +62,17 @@ public:
 	bool GetMouseRightUp();
 
 private:
+	void UpdateElements();
 	void CheckEvents();
 	void DeleteElements();
 
 private:
-	UI_EventSystem* ui_event_system = nullptr;
+	UI_EventSystem*   ui_event_system = nullptr;
 	list<UI_Element*> elements;
 	list<UI_Element*> to_delete;
+
+	int window_width = 0;
+	int window_height = 0;
 };
 
 
