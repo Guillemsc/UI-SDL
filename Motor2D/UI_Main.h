@@ -53,6 +53,7 @@ public:
 	UI_EventSystem* GetEventSystem();
 	list<UI_Element*> GetElements();
 
+	void BringToFrontElement(UI_Element* elements);
 	void DeleteElement(UI_Element* element);
 
 	UI_Point GetMousePos();
@@ -60,6 +61,7 @@ public:
 	bool GetMouseRightDown();
 	bool GetMouseLeftUp();
 	bool GetMouseRightUp();
+	UI_Point GetWindowSize();
 
 private:
 	void UpdateElements();

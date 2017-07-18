@@ -28,7 +28,7 @@ private:
 class UI_Event
 {
 public:
-	UI_Event(ui_event_type type, UI_Element* sender);
+	UI_Event(ui_event_type type, UI_Element* sender = nullptr);
 	virtual ~UI_Event();
 
 	void CleanUp();

@@ -65,6 +65,12 @@ void UI_Element::SetPos(UI_Point pos)
 	transform.SetPos(pos.x, pos.y);
 }
 
+void UI_Element::SetRendeingViewport(int x, int y, int width, int height)
+{
+	rendering_viewport.SetPos(x, y);
+	rendering_viewport.SetSize(width, height);
+}
+
 UI_Point UI_Element::GetLocalPos()
 {
 	UI_Point ret;
@@ -117,6 +123,7 @@ bool UI_Element::GetMouseDown()
 
 void UI_Element::BringToFront()
 {
+	ui_main->BringToFrontElement(this);
 }
 
 void UI_Element::BringToFrontAndChilds()
@@ -215,11 +222,16 @@ bool UI_Transform::operator == (UI_Transform trans)
 	return ((trans.x == x) && (trans.y == y) && (trans.w = w) && (trans.h == h)) ? true : false;
 }
 
-
 void UI_Transform::SetPos(int _x, int _y)
 {
 	x = _x;
 	y = _y;
+}
+
+void UI_Transform::SetPos(UI_Point pos)
+{
+	x = pos.x;
+	y = pos.y;
 }
 
 void UI_Transform::AddToPos(int add_x, int add_y)

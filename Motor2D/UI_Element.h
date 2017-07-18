@@ -20,6 +20,7 @@ public:
 	bool operator == (UI_Transform trans);
 
 	void SetPos(int x, int y);
+	void SetPos(UI_Point pos);
 	void AddToPos(int add_x, int add_y);
 	void SubstractToPos(int sub_x, int sub_y);
 	void SetSize(int width, int height);
@@ -68,9 +69,16 @@ public:
 	void InvokeOnMouseUp();
 
 	void SetPos(UI_Point pos);
+
+	void SetRendeingViewport(int x, int y, int width, int height);
+
+	// Gets the local position of the object
 	UI_Point GetLocalPos();
+
+	// Gets the position of the object relative to the window
 	UI_Point GetRealtivePos();
 	UI_Point GetSize();
+
 	bool GetMouseOver();
 	bool GetMouseDown();
 
@@ -113,6 +121,8 @@ public:
 	std::function<void(UI_EventMouse*)> OnMouseUp;
 
 private: 
+	UI_Transform      rendering_viewport;
+
 	bool              mouse_over = false;
 	bool              mouse_down = false;
 

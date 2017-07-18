@@ -73,6 +73,21 @@ bool UI_Main::CleanUp()
 	return ret;
 }
 
+void UI_Main::UIUpdatingInfo(int _window_width, int _window_height)
+{
+	if ((window_width != _window_width) || (window_height != _window_height))
+	{
+		window_width = _window_width;
+		window_height = _window_height;
+
+		UI_Event* e = new UI_Event(ui_event_type::event_window_resize);
+		GetEventSystem()->SendEvent(e);
+	}
+
+	window_width = _window_width;
+	window_height = _window_height;
+}
+
 void UI_Main::ExpandEvent(UI_Event * ev)
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
@@ -117,6 +132,16 @@ bool UI_Main::GetMouseLeftUp()
 bool UI_Main::GetMouseRightUp()
 {
 	return (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP);
+}
+
+UI_Point UI_Main::GetWindowSize()
+{
+	UI_Point ret;
+
+	ret.x = window_width;
+	ret.y = window_height;
+
+	return ret;
 }
 
 void UI_Main::UpdateElements()
@@ -242,6 +267,20 @@ void UI_Main::DeleteElements()
 list<UI_Element*> UI_Main::GetElements()
 {
 	return elements;
+}
+
+void UI_Main::BringToFrontElement(UI_Element * element)
+{
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		if ((*it) == element)
+		{
+			elements.erase(it);
+			break;
+		}
+	}
+
+	elements.push_back(element);
 }
 
 void UI_Main::DeleteElement(UI_Element * element)
