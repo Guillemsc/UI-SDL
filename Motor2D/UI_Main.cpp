@@ -116,6 +116,8 @@ void UI_Main::UnloadAtlas()
 
 void UI_Main::ExpandEvent(UI_Event * ev)
 {
+	OnEvent(ev);
+
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
 		(*it)->OnEvent(ev);
@@ -320,6 +322,21 @@ void UI_Main::DeleteElements()
 		// Delete
 		delete (*del);
 		to_delete.erase(del);
+	}
+}
+
+void UI_Main::OnEvent(UI_Event * ev)
+{
+	switch (ev->GetEventType())
+	{
+	case ui_event_type::event_window_resize:
+	{
+
+	}
+	break;
+
+	default:
+		break;
 	}
 }
 

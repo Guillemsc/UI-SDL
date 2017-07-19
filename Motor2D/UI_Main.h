@@ -81,6 +81,8 @@ private:
 	void CheckEvents();
 	void DeleteElements();
 
+	void OnEvent(UI_Event* ev);
+
 private:
 	UI_EventSystem*   ui_event_system = nullptr;
 	list<UI_Element*> elements;
