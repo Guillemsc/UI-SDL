@@ -207,6 +207,7 @@ void UI_Main::UpdateElements()
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
 		(*it)->Update();
+		(*it)->UpdateElement();
 	}
 }
 

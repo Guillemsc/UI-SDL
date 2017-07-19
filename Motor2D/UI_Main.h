@@ -98,8 +98,8 @@ private:
 class UI_Point
 {
 public:
-	int x = 0;
-	int y = 0;
+	float x = 0;
+	float y = 0;
 };
 
 #endif // __UI_Main_H__

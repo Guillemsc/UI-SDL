@@ -55,14 +55,14 @@
     <ClCompile Include="j1XMLLoader.cpp">
       <Filter>Engine\2. Components ======</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Element.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
+    </ClCompile>
     <ClCompile Include="UI_EventSystem.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClCompile>
     <ClCompile Include="UI_Main.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Element.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +132,14 @@
     <ClInclude Include="j1XMLLoader.h">
       <Filter>Engine\2. Components ======</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Main.h">
-      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    <ClInclude Include="UI_Element.h">
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
     <ClInclude Include="UI_EventSystem.h">
-      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Element.h">
-      <Filter>Engine\1. Modules =========\NewGUI</Filter>
+    <ClInclude Include="UI_Main.h">
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +163,12 @@
     </Filter>
     <Filter Include="Engine\1. Modules =========\NewGUI">
       <UniqueIdentifier>{98536d70-0587-4210-96cc-ab1adeb56237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\1. Modules =========\NewGUI\1. Main">
+      <UniqueIdentifier>{71e9e322-8429-437b-a108-3ba0771b247f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\1. Modules =========\NewGUI\2. Elements">
+      <UniqueIdentifier>{eab52a47-9755-42f5-8094-6f8425fc4a89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

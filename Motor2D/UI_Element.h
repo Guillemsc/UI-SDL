@@ -37,14 +37,13 @@ private:
 	int h = 0;
 };
 
-
 // --------------------------------------------------
 
 enum ui_element_type
 {
-	element_null,
-	element_panel,
-	element_button,
+	ui_element_null,
+	ui_element_panel,
+	ui_element_button,
 };
 
 // --------------------------------------------------
@@ -60,6 +59,10 @@ public:
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 
+	void StartElement();
+	void UpdateElement();
+	void CleanElement();
+
 	void InvokeOnMouseOver();
 	void InvokeOnMouseOverEnter();
 	void InvokeOnMouseOverOut();
@@ -68,7 +71,14 @@ public:
 	void InvokeOnMouseDown();
 	void InvokeOnMouseUp();
 
+	ui_element_type GetType();
+
+	void AddChild(UI_Element* child);
+	void RemoveChild(UI_Element* child);
+
 	void SetPos(UI_Point pos);
+	void SetAnchor(UI_Point anchor);
+	void DeleteAnchor();
 
 	void SetRenderingViewport(int x, int y, int width, int height);
 
@@ -77,6 +87,8 @@ public:
 
 	// Gets the position of the object relative to the window
 	UI_Point GetRealtivePos();
+
+	// Gets size of the element
 	UI_Point GetSize();
 
 	bool GetMouseOver();
@@ -93,13 +105,6 @@ public:
 	list<UI_Element*> GetChilds();
 	UI_Element* GetParent();
 	void ResetParent();
-	void CleanElement();
-
-protected:
-	ui_element_type GetType();
-
-	void AddChild(UI_Element* child);
-	void RemoveChild(UI_Element* child);
 
 public:
 	// Called every frame that the mouse is over an element.
@@ -127,7 +132,10 @@ private:
 	bool              mouse_down = false;
 
 	UI_Transform      transform;
-	ui_element_type   type = (ui_element_type)0;
+	UI_Point		  anchor_pos;
+	bool			  uses_anchor_pos = false;
+
+	ui_element_type   type = ui_element_type::ui_element_null;
 
 	list<UI_Element*> childs;
 	UI_Element*       parent = nullptr;

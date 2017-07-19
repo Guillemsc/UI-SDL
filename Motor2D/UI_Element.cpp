@@ -60,9 +60,33 @@ void UI_Element::InvokeOnMouseUp()
 	mouse_down = false;
 }
 
+// Position from 0 to 1 relative to the screen
 void UI_Element::SetPos(UI_Point pos)
 {
-	transform.SetPos(pos.x, pos.y);
+	if(uses_anchor_pos)
+	{
+		UI_Point window = ui_main->GetWindowSize();
+
+		int anchor_x = int(anchor_pos.x * window.x);
+		int anchor_y = int(anchor_pos.y * window.y);
+
+		transform.SetPos(anchor_x + pos.x, anchor_y + pos.y);
+	}
+	else
+	{
+		transform.SetPos(pos.x, pos.y);
+	}
+}
+
+void UI_Element::SetAnchor(UI_Point anchor)
+{
+	anchor_pos = anchor;
+	uses_anchor_pos = true;
+}
+
+void UI_Element::DeleteAnchor()
+{
+	uses_anchor_pos = false;
 }
 
 void UI_Element::SetRenderingViewport(int x, int y, int width, int height)
@@ -151,11 +175,6 @@ void UI_Element::DeleteAndChilds()
 	Delete();
 }
 
-void UI_Element::CleanElement()
-{
-
-}
-
 ui_element_type UI_Element::GetType()
 {
 	return type;
@@ -167,6 +186,7 @@ void UI_Element::AddChild(UI_Element* child)
 		return;
 	
 	child->parent = this;
+	child->DeleteAnchor();
 	childs.push_back(child);
 }
 
@@ -183,6 +203,18 @@ void UI_Element::RemoveChild(UI_Element* child)
 			break;
 		}
 	}
+}
+
+void UI_Element::StartElement()
+{
+}
+
+void UI_Element::UpdateElement()
+{
+}
+
+void UI_Element::CleanElement()
+{
 }
 
 list<UI_Element*> UI_Element::GetChilds()
