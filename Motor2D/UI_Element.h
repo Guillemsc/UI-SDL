@@ -51,7 +51,7 @@ enum ui_element_type
 class UI_Element
 {
 public:
-	UI_Element(UI_Main* ui_main, UI_EventSystem* event_system, ui_element_type type);
+	UI_Element(UI_Main* ui_main, ui_element_type type);
 	virtual ~UI_Element();
 
 	virtual void Start() {};
@@ -77,7 +77,9 @@ public:
 	void RemoveChild(UI_Element* child);
 
 	void SetPos(UI_Point pos);
+	void SetSize(UI_Point pos);
 	void SetAnchor(UI_Point anchor);
+
 	void DeleteAnchor();
 
 	void SetRenderingViewport(int x, int y, int width, int height);
@@ -85,7 +87,7 @@ public:
 	// Gets the local position of the object
 	UI_Point GetLocalPos();
 
-	// Gets the position of the object relative to the window
+	// Gets the position of the object relative to the it's parents
 	UI_Point GetRealtivePos();
 
 	// Gets size of the element

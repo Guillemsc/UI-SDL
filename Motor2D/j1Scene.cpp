@@ -7,6 +7,8 @@
 #include "j1Window.h"
 #include "j1Scene.h"
 
+#include "TestScene.h"
+
 j1Scene::j1Scene() : j1Module()
 {
 	name = "scene";
@@ -37,10 +39,11 @@ bool j1Scene::Start()
 
 
 	// Create scenes
-
+	test_scene = new TestScene();
 	// -------------
 
 	// Starting scene
+	current_scene = test_scene;
 
 	if(current_scene != nullptr)
 		ret = current_scene->Start();

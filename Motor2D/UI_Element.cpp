@@ -1,10 +1,10 @@
 #include "UI_Element.h"
 #include "UI_EventSystem.h"
 
-UI_Element::UI_Element(UI_Main* _ui_main, UI_EventSystem* _event_system, ui_element_type _type)
+UI_Element::UI_Element(UI_Main* _ui_main, ui_element_type _type)
 {
 	ui_main = _ui_main;
-	event_system = _event_system;
+	event_system = _ui_main->GetEventSystem();
 	type = _type;
 }
 
@@ -15,7 +15,10 @@ UI_Element::~UI_Element()
 void UI_Element::InvokeOnMouseOver()
 {
 	UI_Event* e = new UI_Event(ui_event_type::event_mouse_over, this);
-	OnMouseOver(e);
+
+	if(OnMouseOver)
+		OnMouseOver(e);
+
 	GetEventSystem()->SendEvent(e);
 	mouse_over = true;
 }
@@ -23,7 +26,10 @@ void UI_Element::InvokeOnMouseOver()
 void UI_Element::InvokeOnMouseOverEnter()
 {
 	UI_Event* e = new UI_Event(ui_event_type::event_mouse_over_enter, this);
-	OnMouseOverEnter(e);
+
+	if(OnMouseOverEnter)
+		OnMouseOverEnter(e);
+
 	GetEventSystem()->SendEvent(e);
 	mouse_over = true;
 }
@@ -31,7 +37,10 @@ void UI_Element::InvokeOnMouseOverEnter()
 void UI_Element::InvokeOnMouseOverOut()
 {
 	UI_Event* e = new UI_Event(ui_event_type::event_mouse_over_out, this);
-	OnMouseOverOut(e);
+
+	if(OnMouseOverOut)
+		OnMouseOverOut(e);
+
 	GetEventSystem()->SendEvent(e);
 	mouse_over = false;
 }
@@ -39,7 +48,10 @@ void UI_Element::InvokeOnMouseOverOut()
 void UI_Element::InvokeOnMouseClick()
 {
 	UI_EventMouse* e = new UI_EventMouse(ui_event_type::event_mouse_click, this, ui_main->GetMouseLeftDown(), ui_main->GetMouseRightDown());
-	OnMouseClick(e);
+
+	if(OnMouseClick)
+		OnMouseClick(e);
+
 	GetEventSystem()->SendEvent(e);
 	mouse_down = true;
 }
@@ -47,7 +59,10 @@ void UI_Element::InvokeOnMouseClick()
 void UI_Element::InvokeOnMouseDown()
 {
 	UI_EventMouse* e = new UI_EventMouse(ui_event_type::event_mouse_down, this, ui_main->GetMouseLeftDown(), ui_main->GetMouseRightDown());
-	OnMouseDown(e);
+
+	if(OnMouseDown)
+		OnMouseDown(e);
+
 	GetEventSystem()->SendEvent(e);
 	mouse_down = true;
 }
@@ -55,12 +70,14 @@ void UI_Element::InvokeOnMouseDown()
 void UI_Element::InvokeOnMouseUp()
 {
 	UI_EventMouse* e = new UI_EventMouse(ui_event_type::event_mouse_up, this, ui_main->GetMouseLeftDown(), ui_main->GetMouseRightDown());
-	OnMouseUp(e);
+
+	if(OnMouseUp)
+		OnMouseUp(e);
+
 	GetEventSystem()->SendEvent(e);
 	mouse_down = false;
 }
 
-// Position from 0 to 1 relative to the screen
 void UI_Element::SetPos(UI_Point pos)
 {
 	if(uses_anchor_pos)
@@ -76,6 +93,11 @@ void UI_Element::SetPos(UI_Point pos)
 	{
 		transform.SetPos(pos.x, pos.y);
 	}
+}
+
+void UI_Element::SetSize(UI_Point pos)
+{
+	transform.SetSize(pos.x, pos.y);
 }
 
 void UI_Element::SetAnchor(UI_Point anchor)
@@ -169,7 +191,7 @@ void UI_Element::DeleteAndChilds()
 	{
 		(*it)->DeleteAndChilds();
 
-		childs.erase(it);
+		it = childs.erase(it);
 	}
 
 	Delete();
@@ -199,7 +221,7 @@ void UI_Element::RemoveChild(UI_Element* child)
 	{
 		if ((*it) == child)
 		{
-			childs.erase(it);
+			it = childs.erase(it);
 			break;
 		}
 	}
@@ -211,6 +233,7 @@ void UI_Element::StartElement()
 
 void UI_Element::UpdateElement()
 {
+	GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, true);
 }
 
 void UI_Element::CleanElement()

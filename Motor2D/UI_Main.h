@@ -62,6 +62,7 @@ public:
 	void BringToFrontElement(UI_Element* element);
 	void BringToFrontAndChilds(UI_Element* element);
 
+	void AddElement(UI_Element* element);
 	void DeleteElement(UI_Element* element);
 
 	UI_Point GetMousePos();
@@ -75,6 +76,9 @@ public:
 	void UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a);
 	void UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a);
 	void UIRenderImage(int x, int y, SDL_Rect rect);
+
+	void UISetViewport(int x, int y, int w, int h);
+	void UIResetViewport();
 
 private:
 	void UpdateElements();
@@ -100,6 +104,13 @@ private:
 class UI_Point
 {
 public:
+	UI_Point() {};
+
+	UI_Point(float _x, float _y)
+	{
+		x = _x; y = _y;
+	}
+
 	float x = 0;
 	float y = 0;
 };

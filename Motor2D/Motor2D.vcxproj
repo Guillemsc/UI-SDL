@@ -96,6 +96,7 @@
     <ClCompile Include="j1Textures.cpp" />
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="UI_Element.cpp" />
     <ClCompile Include="UI_EventSystem.cpp" />
     <ClCompile Include="UI_Main.cpp" />
@@ -123,12 +124,15 @@
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="UI_Element.h" />
     <ClInclude Include="UI_EventSystem.h" />
     <ClInclude Include="UI_Main.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\Game\config.xml" />
+    <Xml Include="..\Game\config.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

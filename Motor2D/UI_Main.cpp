@@ -5,6 +5,7 @@
 #include "j1Render.h"
 #include "j1Fonts.h"
 #include "j1Textures.h"
+#include "j1Window.h"
 
 #include "p2Log.h"
 
@@ -199,6 +200,16 @@ void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect)
 	App->render->Blit(GetAtlas(), x, y, &rect);
 }
 
+void UI_Main::UISetViewport(int x, int y, int w, int h)
+{
+	App->render->SetViewPort({ x, y, w, h });
+}
+
+void UI_Main::UIResetViewport()
+{
+	App->render->ResetViewPort();
+}
+
 SDL_Texture * UI_Main::GetAtlas()
 {
 	return atlas;
@@ -208,8 +219,12 @@ void UI_Main::UpdateElements()
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
+		UISetViewport((*it)->GetLocalPos().x, (*it)->GetLocalPos().y, (*it)->GetSize().x, (*it)->GetSize().y);
+
 		(*it)->Update();
 		(*it)->UpdateElement();
+
+		UIResetViewport();
 	}
 }
 
@@ -253,6 +268,12 @@ void UI_Main::CheckEvents()
 			{
 				mouse_down = (*it);
 			}
+
+			// Mouse up ----------------
+			if ((*it)->GetMouseDown() && (GetMouseLeftUp() || GetMouseRightUp()))
+			{
+				mouse_up = (*it);
+			}
 		}
 		else
 		{
@@ -260,12 +281,6 @@ void UI_Main::CheckEvents()
 			if ((*it)->GetMouseOver())
 			{
 				mouse_over_out = (*it);
-			}
-
-			// Mouse up ----------------
-			if ((*it)->GetMouseDown() && (GetMouseLeftUp() || GetMouseRightUp()))
-			{
-				mouse_up = (*it);
 			}
 		}
 	}
@@ -294,17 +309,20 @@ void UI_Main::DeleteElements()
 {
 	for (list<UI_Element*>::iterator del = to_delete.begin(); del != to_delete.end();)
 	{
-		for (list<UI_Element*>::iterator el = elements.begin(); el != elements.end(); el++)
+		for (list<UI_Element*>::iterator el = elements.begin(); el != elements.end();)
 		{
 			if ((*del) == (*el))
+			{
+				el = elements.erase(el);
 				continue;
+			}
 
 			// Clean from childs
 			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); ch != (*el)->GetChilds().end(); )
 			{
 				if ((*ch) == (*del))
 				{
-					(*el)->GetChilds().erase(ch);
+					ch = (*el)->GetChilds().erase(ch);
 				}
 				else
 					++ch;
@@ -313,6 +331,8 @@ void UI_Main::DeleteElements()
 			// Clean from parents
 			if ((*el)->GetParent() == (*del))
 				(*el)->ResetParent();
+
+			++el;
 		}
 
 		// Clean
@@ -321,7 +341,7 @@ void UI_Main::DeleteElements()
 
 		// Delete
 		delete (*del);
-		to_delete.erase(del);
+		del = to_delete.erase(del);
 	}
 }
 
@@ -331,7 +351,10 @@ void UI_Main::OnEvent(UI_Event * ev)
 	{
 	case ui_event_type::event_window_resize:
 	{
-
+		for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+		{
+			(*it)->SetPos((*it)->GetLocalPos());
+		}
 	}
 	break;
 
@@ -351,7 +374,7 @@ void UI_Main::BringToFrontElement(UI_Element * element)
 	{
 		if ((*it) == element)
 		{
-			elements.erase(it);
+			it = elements.erase(it);
 			break;
 		}
 	}
@@ -371,7 +394,7 @@ void UI_Main::BringToFrontAndChilds(UI_Element * element)
 		{
 			if ((*it) == (*ch))
 			{
-				elements.erase(it);
+				it = elements.erase(it);
 				deleted = true;
 				break;
 			}
@@ -385,6 +408,11 @@ void UI_Main::BringToFrontAndChilds(UI_Element * element)
 	{
 		elements.push_back((*ch));
 	}
+}
+
+void UI_Main::AddElement(UI_Element * element)
+{
+	elements.push_back(element);
 }
 
 void UI_Main::DeleteElement(UI_Element * element)

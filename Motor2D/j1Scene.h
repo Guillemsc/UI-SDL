@@ -6,16 +6,7 @@
 #include "Scene.h"
 
 struct SDL_Texture;
-class MenuScene; 
-class MainScene;
-class FinalScreen; 
-class CharacterSelectionScene; 
-class TeamSelectScene;
-class TransitionScene; 
-class LogoScene;
-class RemapingScene; 
-class CreditsScene; 
-class Mapping;
+class TestScene;
 																					 
 																						 
 class j1Scene : public j1Module															  
@@ -51,13 +42,14 @@ public:
 
 public:
 	// Scenes
-
-private:
-	// Scenes list
-	list<Scene*>				 scenes;
-
-	// Current scene
-	Scene*						 current_scene = nullptr;
+	TestScene*	 test_scene = nullptr;
+				 
+private:		 
+	// Scenes li st
+	list<Scene*> scenes;
+				 
+	// Current s cen
+	Scene*		 current_scene = nullptr;
 
 		
 };
