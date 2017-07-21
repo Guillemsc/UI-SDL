@@ -80,6 +80,9 @@ public:
 	void UISetViewport(int x, int y, int w, int h);
 	void UIResetViewport();
 
+	bool GetDebug();
+	void SetDebug(bool set);
+
 private:
 	void UpdateElements();
 	void CheckEvents();
@@ -92,10 +95,12 @@ private:
 	list<UI_Element*> elements;
 	list<UI_Element*> to_delete;
 
-	int window_width = 0;
-	int window_height = 0;
+	int				  window_width = 0;
+	int				  window_height = 0;
 
-	SDL_Texture* atlas = nullptr;
+	SDL_Texture*      atlas = nullptr;
+
+	bool              debug = false;
 };
 
 

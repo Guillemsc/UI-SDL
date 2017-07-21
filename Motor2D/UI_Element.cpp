@@ -256,7 +256,10 @@ void UI_Element::StartElement()
 
 void UI_Element::UpdateElement()
 {
-	GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
+	if (GetUiMain()->GetDebug())
+	{
+		GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
+	}
 }
 
 void UI_Element::CleanElement()

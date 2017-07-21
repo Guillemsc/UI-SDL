@@ -56,6 +56,7 @@ public:
 
 	virtual void Start() {};
 	virtual void Update() {};
+	virtual void Draw() {};
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};
 

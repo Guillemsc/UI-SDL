@@ -210,6 +210,16 @@ void UI_Main::UIResetViewport()
 	App->render->ResetViewPort();
 }
 
+bool UI_Main::GetDebug()
+{
+	return debug;
+}
+
+void UI_Main::SetDebug(bool set)
+{
+	debug = set;
+}
+
 SDL_Texture * UI_Main::GetAtlas()
 {
 	return atlas;
@@ -219,15 +229,19 @@ void UI_Main::UpdateElements()
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
-		if ((*it)->GetUsesAnchor())
+		if (GetDebug())
 		{
-			UIRenderLine((*it)->GetAnchorPos().x, (*it)->GetAnchorPos().y - 20, (*it)->GetAnchorPos().x, (*it)->GetAnchorPos().y + 20, 255, 255, 255, 255);
-			UIRenderLine((*it)->GetAnchorPos().x - 20, (*it)->GetAnchorPos().y, (*it)->GetAnchorPos().x + 20, (*it)->GetAnchorPos().y, 255, 255, 255, 255);
+			if ((*it)->GetUsesAnchor())
+			{
+				UIRenderLine((*it)->GetAnchorPos().x, (*it)->GetAnchorPos().y - 5, (*it)->GetAnchorPos().x, (*it)->GetAnchorPos().y + 5, 255, 255, 255, 255);
+				UIRenderLine((*it)->GetAnchorPos().x - 5, (*it)->GetAnchorPos().y, (*it)->GetAnchorPos().x + 5, (*it)->GetAnchorPos().y, 255, 255, 255, 255);
+			}
 		}
 
 		UISetViewport((*it)->GetLocalPos().x, (*it)->GetLocalPos().y, (*it)->GetSize().x, (*it)->GetSize().y);
 
 		(*it)->Update();
+		(*it)->Draw();
 		(*it)->UpdateElement();
 
 		UIResetViewport();

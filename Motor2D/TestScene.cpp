@@ -12,6 +12,8 @@ TestScene::~TestScene()
 
 bool TestScene::Start()
 {
+	App->ui->SetDebug(true);
+
 	test_element = new UI_Element(App->ui, ui_element_button);
 	test_element->SetPos(UI_Point(-50, -15));
 	test_element->SetSize(UI_Point(100, 30));
