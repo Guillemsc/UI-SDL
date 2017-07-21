@@ -125,8 +125,6 @@ bool j1App::Update()
 	if(input->GetWindowEvent(WE_QUIT) == true || end_program)
 		ret = false;
 
-	App->ui->UIUpdatingInfo(App->win->GetWindowSize().x, App->win->GetWindowSize().y);
-
 	if(ret == true)
 		ret = PreUpdate();
 

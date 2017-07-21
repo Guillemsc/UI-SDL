@@ -51,6 +51,8 @@ bool UI_Main::Update(float dt)
 {
 	bool ret = true;
 
+	UIUpdatingInfo();
+
 	// 1 //
 	UpdateElements();
 
@@ -88,19 +90,21 @@ bool UI_Main::CleanUp()
 	return ret;
 }
 
-void UI_Main::UIUpdatingInfo(int _window_width, int _window_height)
+void UI_Main::UIUpdatingInfo()
 {
-	if ((window_width != _window_width) || (window_height != _window_height))
+	UI_Point actual_window = { GetWindowSize().x, GetWindowSize().y };
+
+	if ((window_width != actual_window.x) || (window_height != actual_window.y))
 	{
-		window_width = _window_width;
-		window_height = _window_height;
+		window_width = actual_window.x;
+		window_height = actual_window.y;
 
 		UI_Event* e = new UI_Event(ui_event_type::event_window_resize);
 		GetEventSystem()->SendEvent(e);
 	}
 
-	window_width = _window_width;
-	window_height = _window_height;
+	window_width = actual_window.x;
+	window_height = actual_window.y;
 }
 
 bool UI_Main::LoadAtlas()
@@ -167,8 +171,8 @@ UI_Point UI_Main::GetWindowSize()
 {
 	UI_Point ret;
 
-	ret.x = window_width;
-	ret.y = window_height;
+	ret.x = App->win->GetWindowSize().x;
+	ret.y = App->win->GetWindowSize().y;
 
 	return ret;
 }
@@ -193,6 +197,8 @@ void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, i
 	SDL_Rect rect = { 0, 0, size_w, size_h };
 
 	App->render->Blit(texture, x, y, &rect);
+
+	App->tex->UnLoadTexture(texture);
 }
 
 void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect)
@@ -238,7 +244,7 @@ void UI_Main::UpdateElements()
 			}
 		}
 
-		UISetViewport((*it)->GetLocalPos().x, (*it)->GetLocalPos().y, (*it)->GetSize().x, (*it)->GetSize().y);
+		UISetViewport((*it)->GetTransformPos().x, (*it)->GetTransformPos().y, (*it)->GetSize().x, (*it)->GetSize().y);
 
 		(*it)->Update();
 		(*it)->Draw();
@@ -263,7 +269,7 @@ void UI_Main::CheckEvents()
 		// Mouse in quad -------------
 
 		UI_Point mouse = GetMousePos();
-		UI_Point pos = (*it)->GetRelativePosToParents();
+		UI_Point pos = (*it)->GetTransformPos();
 		UI_Point size = (*it)->GetSize();
 
 		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
@@ -369,16 +375,6 @@ void UI_Main::OnEvent(UI_Event * ev)
 {
 	switch (ev->GetEventType())
 	{
-	case ui_event_type::event_window_resize:
-	{
-		for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
-		{
-			if((*it)->GetUsesAnchor())
-				(*it)->SetPos((*it)->GetRelativePosToAnchor());
-		}
-	}
-	break;
-
 	default:
 		break;
 	}
@@ -389,7 +385,7 @@ list<UI_Element*> UI_Main::GetElements()
 	return elements;
 }
 
-void UI_Main::BringToFrontElement(UI_Element * element)
+void UI_Main::ElementBringToFront(UI_Element * element)
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
@@ -403,7 +399,51 @@ void UI_Main::BringToFrontElement(UI_Element * element)
 	elements.push_back(element);
 }
 
-void UI_Main::BringToFrontAndChilds(UI_Element * element)
+void UI_Main::ElementBringToFrontAndChilds(UI_Element * element)
+{
+	list<UI_Element*> childs = element->GetChilds();
+
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end();)
+	{
+		bool deleted = false;
+
+		for (list<UI_Element*>::iterator ch = childs.begin(); ch != childs.end(); ch++)
+		{
+			if ((*it) == (*ch))
+			{
+				it = elements.erase(it);
+				deleted = true;
+				break;
+			}
+		}
+
+		if (!deleted)
+			++it;
+	}
+	
+	elements.push_back(element);
+
+	for (list<UI_Element*>::iterator ch = childs.begin(); ch != childs.end(); ch++)
+	{
+		elements.push_back((*ch));
+	}
+}
+
+void UI_Main::ElementSendToBack(UI_Element * element)
+{
+	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		if ((*it) == element)
+		{
+			it = elements.erase(it);
+			break;
+		}
+	}
+
+	elements.push_front(element);
+}
+
+void UI_Main::ElementSendToBackAndChilds(UI_Element * element)
 {
 	list<UI_Element*> childs = element->GetChilds();
 
@@ -425,9 +465,11 @@ void UI_Main::BringToFrontAndChilds(UI_Element * element)
 			++it;
 	}
 
+	elements.push_front(element);
+
 	for (list<UI_Element*>::iterator ch = childs.begin(); ch != childs.end(); ch++)
 	{
-		elements.push_back((*ch));
+		elements.push_front((*ch));
 	}
 }
 

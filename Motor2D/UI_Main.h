@@ -48,7 +48,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	void UIUpdatingInfo(int window_width, int window_height);
+	void UIUpdatingInfo();
 
 	bool LoadAtlas();
 	void UnloadAtlas();
@@ -59,8 +59,11 @@ public:
 	list<UI_Element*> GetElements();
 	SDL_Texture* GetAtlas();
 
-	void BringToFrontElement(UI_Element* element);
-	void BringToFrontAndChilds(UI_Element* element);
+	void ElementBringToFront(UI_Element* element);
+	void ElementBringToFrontAndChilds(UI_Element* element);
+	void ElementSendToBack(UI_Element* element);
+	void ElementSendToBackAndChilds(UI_Element* element);
+
 
 	void AddElement(UI_Element* element);
 	void DeleteElement(UI_Element* element);

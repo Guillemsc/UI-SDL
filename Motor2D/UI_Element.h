@@ -72,41 +72,55 @@ public:
 	void InvokeOnMouseDown();
 	void InvokeOnMouseUp();
 
+	// Get the UI_Element type
 	ui_element_type GetType();
 
+	// Adds a child to the current element
 	void AddChild(UI_Element* child);
+
+	// Removes a child from the current element
 	void RemoveChild(UI_Element* child);
 
+	// Sets the position of the element
 	void SetPos(UI_Point pos);
+
+	// Sets size of the element
 	void SetSize(UI_Point pos);
+
+	// Sets the anchor of the element
 	void SetAnchor(UI_Point anchor);
+
+	// Return if ui_element uses an anchor
 	bool GetUsesAnchor();
 
+	// Deletes the ui_element anchor
 	void DeleteAnchor();
-
-	void SetRenderingViewport(int x, int y, int width, int height);
-
-	// Gets the local position of the object
-	UI_Point GetLocalPos();
-
-	// Gets the position of the object relative to the it's parents
-	UI_Point GetRelativePosToParents();
-
-	// Gets the position, with (0, 0) on the anchor point
-	UI_Point GetRelativePosToAnchor();
 
 	// Gets size of the element
 	UI_Point GetSize();
 
+	// Gets the position of the transform element
+	UI_Point GetTransformPos();
+
+	// Gets the position of the anchor in the world
 	UI_Point GetAnchorPos();
 
+	// Returns true if the mouse is over the element
 	bool GetMouseOver();
+
+	// Returns true if the mouse is over the element and down
 	bool GetMouseDown();
 
 	void BringToFront();
 	void BringToFrontAndChilds();
 
+	void SendToBack();
+	void SendToBackAndChilds();
+
+	// Deletes the element
 	void Delete();
+
+	// Deletes the elements and it's childs
 	void DeleteAndChilds();
 
 	UI_Main* GetUiMain();
@@ -114,6 +128,19 @@ public:
 	list<UI_Element*> GetChilds();
 	UI_Element* GetParent();
 	void ResetParent();
+
+private:
+	// Gets the local position of the object
+	UI_Point GetPos();
+
+	// Gets the position of the object relative to the it's parents
+	UI_Point GetRelativePosToParents();
+
+	// Gets the position, with (0, 0) on the anchor point
+	UI_Point GetRelativePosToAnchor();
+
+	// Updates the position of the element in the world
+	void UpdatePos();
 
 public:
 	// Called every frame that the mouse is over an element.
@@ -135,13 +162,11 @@ public:
 	std::function<void(UI_EventMouse*)> OnMouseUp;
 
 private: 
-	UI_Transform      rendering_viewport;
-
 	bool              mouse_over = false;
 	bool              mouse_down = false;
 
 	UI_Transform      transform;
-	UI_Point		  pos_from_anchor;
+	UI_Point	      pos;
 	UI_Point		  anchor;
 	bool			  uses_anchor = false;
 

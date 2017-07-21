@@ -15,10 +15,16 @@ bool TestScene::Start()
 	App->ui->SetDebug(true);
 
 	test_element = new UI_Element(App->ui, ui_element_button);
-	test_element->SetPos(UI_Point(-50, -15));
-	test_element->SetSize(UI_Point(100, 30));
-	test_element->SetAnchor(UI_Point(0.5f, 0.5f));
+	test_element->SetPos(UI_Point(-305, 5));
+	test_element->SetSize(UI_Point(300, 300));
+	test_element->SetAnchor(UI_Point(1.0f, 0.0f));
 	App->ui->AddElement(test_element);
+
+	test_element2 = new UI_Element(App->ui, ui_element_button);
+	test_element2->SetPos(UI_Point(-100, 0));
+	test_element2->SetSize(UI_Point(50, 50));
+	test_element->AddChild(test_element2);
+	App->ui->AddElement(test_element2);
 
 	return true;
 }

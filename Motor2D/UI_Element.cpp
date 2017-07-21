@@ -78,24 +78,20 @@ void UI_Element::InvokeOnMouseUp()
 	mouse_down = false;
 }
 
-void UI_Element::SetPos(UI_Point pos)
+void UI_Element::SetPos(UI_Point _pos)
 {
-	if(uses_anchor)
-	{
-		UI_Point window = ui_main->GetWindowSize();
+	pos = _pos;
 
-		pos_from_anchor = pos;
+	UpdatePos();
+}
 
-		int anchor_x = int(anchor.x * window.x);
-		int anchor_y = int(anchor.y * window.y);
+void UI_Element::UpdatePos()
+{
+	UI_Point new_pos = pos;
 
-		transform.SetPos(anchor_x + pos.x, anchor_y + pos.y);
-	}
-	else
-	{
-		transform.SetPos(pos.x, pos.y);
-		pos_from_anchor = pos;
-	}
+	new_pos = GetRelativePosToParents();
+
+	transform.SetPos(new_pos);
 }
 
 void UI_Element::SetSize(UI_Point pos)
@@ -105,7 +101,16 @@ void UI_Element::SetSize(UI_Point pos)
 
 void UI_Element::SetAnchor(UI_Point _anchor)
 {
+	if (parent != nullptr)
+		return;
+
 	anchor = _anchor;
+
+	if (anchor.x > 1)
+		anchor.x = 1;
+	if (anchor.y > 1)
+		anchor.y = 1;
+
 	uses_anchor = true;
 }
 
@@ -119,37 +124,23 @@ void UI_Element::DeleteAnchor()
 	uses_anchor = false;
 }
 
-void UI_Element::SetRenderingViewport(int x, int y, int width, int height)
+UI_Point UI_Element::GetPos()
 {
-	rendering_viewport.SetPos(x, y);
-	rendering_viewport.SetSize(width, height);
-}
-
-UI_Point UI_Element::GetLocalPos()
-{
-	UI_Point ret;
-
-	ret.x = transform.X();
-	ret.y = transform.Y();
-
-	return ret;
+	return pos;
 }
 
 UI_Point UI_Element::GetRelativePosToParents()
 {
-	UI_Point ret;
-
-	ret.x = transform.X();
-	ret.y = transform.Y();
+	UI_Point ret = { GetRelativePosToAnchor().x , GetRelativePosToAnchor().y};
 
 	UI_Element* curr_parent = parent;
 
 	while (curr_parent != nullptr)
 	{
-		ret.x += curr_parent->transform.X();
-		ret.y += curr_parent->transform.Y();
+		ret.x += curr_parent->GetRelativePosToAnchor().x;
+		ret.y += curr_parent->GetRelativePosToAnchor().y;
 
-		curr_parent = parent;
+		curr_parent = curr_parent->parent;
 	}
 
 	return ret;
@@ -157,17 +148,22 @@ UI_Point UI_Element::GetRelativePosToParents()
 
 UI_Point UI_Element::GetRelativePosToAnchor()
 {
-	return pos_from_anchor;
+	UI_Point ret;
+
+	ret.x = GetPos().x + GetAnchorPos().x;
+	ret.y = GetPos().y + GetAnchorPos().y;
+
+	return ret;
 }
 
 UI_Point UI_Element::GetSize()
 {
-	UI_Point ret;
+	return UI_Point(transform.W(), transform.H());
+}
 
-	ret.x = transform.W();
-	ret.y = transform.H();
-
-	return ret;
+UI_Point UI_Element::GetTransformPos()
+{
+	return UI_Point(transform.X(), transform.Y());
 }
 
 UI_Point UI_Element::GetAnchorPos()
@@ -192,12 +188,22 @@ bool UI_Element::GetMouseDown()
 
 void UI_Element::BringToFront()
 {
-	ui_main->BringToFrontElement(this);
+	ui_main->ElementBringToFront(this);
 }
 
 void UI_Element::BringToFrontAndChilds()
 {
-	ui_main->BringToFrontAndChilds(this);
+	ui_main->ElementBringToFrontAndChilds(this);
+}
+
+void UI_Element::SendToBack()
+{
+	ui_main->ElementSendToBack(this);
+}
+
+void UI_Element::SendToBackAndChilds()
+{
+	ui_main->ElementSendToBackAndChilds(this);
 }
 
 void UI_Element::Delete()
@@ -260,6 +266,8 @@ void UI_Element::UpdateElement()
 	{
 		GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
 	}
+
+	UpdatePos();
 }
 
 void UI_Element::CleanElement()
