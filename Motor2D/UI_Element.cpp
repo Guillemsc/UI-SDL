@@ -80,18 +80,21 @@ void UI_Element::InvokeOnMouseUp()
 
 void UI_Element::SetPos(UI_Point pos)
 {
-	if(uses_anchor_pos)
+	if(uses_anchor)
 	{
 		UI_Point window = ui_main->GetWindowSize();
 
-		int anchor_x = int(anchor_pos.x * window.x);
-		int anchor_y = int(anchor_pos.y * window.y);
+		pos_from_anchor = pos;
+
+		int anchor_x = int(anchor.x * window.x);
+		int anchor_y = int(anchor.y * window.y);
 
 		transform.SetPos(anchor_x + pos.x, anchor_y + pos.y);
 	}
 	else
 	{
 		transform.SetPos(pos.x, pos.y);
+		pos_from_anchor = pos;
 	}
 }
 
@@ -100,15 +103,20 @@ void UI_Element::SetSize(UI_Point pos)
 	transform.SetSize(pos.x, pos.y);
 }
 
-void UI_Element::SetAnchor(UI_Point anchor)
+void UI_Element::SetAnchor(UI_Point _anchor)
 {
-	anchor_pos = anchor;
-	uses_anchor_pos = true;
+	anchor = _anchor;
+	uses_anchor = true;
+}
+
+bool UI_Element::GetUsesAnchor()
+{
+	return uses_anchor;
 }
 
 void UI_Element::DeleteAnchor()
 {
-	uses_anchor_pos = false;
+	uses_anchor = false;
 }
 
 void UI_Element::SetRenderingViewport(int x, int y, int width, int height)
@@ -127,7 +135,7 @@ UI_Point UI_Element::GetLocalPos()
 	return ret;
 }
 
-UI_Point UI_Element::GetRealtivePos()
+UI_Point UI_Element::GetRelativePosToParents()
 {
 	UI_Point ret;
 
@@ -147,12 +155,27 @@ UI_Point UI_Element::GetRealtivePos()
 	return ret;
 }
 
+UI_Point UI_Element::GetRelativePosToAnchor()
+{
+	return pos_from_anchor;
+}
+
 UI_Point UI_Element::GetSize()
 {
 	UI_Point ret;
 
 	ret.x = transform.W();
 	ret.y = transform.H();
+
+	return ret;
+}
+
+UI_Point UI_Element::GetAnchorPos()
+{
+	UI_Point ret;
+
+	ret.x = anchor.x * GetUiMain()->GetWindowSize().x;
+	ret.y = anchor.y * GetUiMain()->GetWindowSize().y;
 
 	return ret;
 }
@@ -233,7 +256,7 @@ void UI_Element::StartElement()
 
 void UI_Element::UpdateElement()
 {
-	GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, true);
+	GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
 }
 
 void UI_Element::CleanElement()

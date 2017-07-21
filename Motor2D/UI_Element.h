@@ -79,6 +79,7 @@ public:
 	void SetPos(UI_Point pos);
 	void SetSize(UI_Point pos);
 	void SetAnchor(UI_Point anchor);
+	bool GetUsesAnchor();
 
 	void DeleteAnchor();
 
@@ -88,10 +89,15 @@ public:
 	UI_Point GetLocalPos();
 
 	// Gets the position of the object relative to the it's parents
-	UI_Point GetRealtivePos();
+	UI_Point GetRelativePosToParents();
+
+	// Gets the position, with (0, 0) on the anchor point
+	UI_Point GetRelativePosToAnchor();
 
 	// Gets size of the element
 	UI_Point GetSize();
+
+	UI_Point GetAnchorPos();
 
 	bool GetMouseOver();
 	bool GetMouseDown();
@@ -134,8 +140,9 @@ private:
 	bool              mouse_down = false;
 
 	UI_Transform      transform;
-	UI_Point		  anchor_pos;
-	bool			  uses_anchor_pos = false;
+	UI_Point		  pos_from_anchor;
+	UI_Point		  anchor;
+	bool			  uses_anchor = false;
 
 	ui_element_type   type = ui_element_type::ui_element_null;
 

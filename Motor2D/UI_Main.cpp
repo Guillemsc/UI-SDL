@@ -180,7 +180,7 @@ void UI_Main::UIRenderQuad(int x, int y, int w, int h, int r, int g, int b, int 
 
 void UI_Main::UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a)
 {
-	App->render->DrawLine(x1, y2, x2, y2, r, g, b, a);
+	App->render->DrawLine(x1, y1, x2, y2, r, g, b, a);
 }
 
 void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a)
@@ -219,6 +219,12 @@ void UI_Main::UpdateElements()
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
+		if ((*it)->GetUsesAnchor())
+		{
+			UIRenderLine((*it)->GetAnchorPos().x, (*it)->GetAnchorPos().y - 20, (*it)->GetAnchorPos().x, (*it)->GetAnchorPos().y + 20, 255, 255, 255, 255);
+			UIRenderLine((*it)->GetAnchorPos().x - 20, (*it)->GetAnchorPos().y, (*it)->GetAnchorPos().x + 20, (*it)->GetAnchorPos().y, 255, 255, 255, 255);
+		}
+
 		UISetViewport((*it)->GetLocalPos().x, (*it)->GetLocalPos().y, (*it)->GetSize().x, (*it)->GetSize().y);
 
 		(*it)->Update();
@@ -243,7 +249,7 @@ void UI_Main::CheckEvents()
 		// Mouse in quad -------------
 
 		UI_Point mouse = GetMousePos();
-		UI_Point pos = (*it)->GetRealtivePos();
+		UI_Point pos = (*it)->GetRelativePosToParents();
 		UI_Point size = (*it)->GetSize();
 
 		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
@@ -353,7 +359,8 @@ void UI_Main::OnEvent(UI_Event * ev)
 	{
 		for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 		{
-			(*it)->SetPos((*it)->GetLocalPos());
+			if((*it)->GetUsesAnchor())
+				(*it)->SetPos((*it)->GetRelativePosToAnchor());
 		}
 	}
 	break;

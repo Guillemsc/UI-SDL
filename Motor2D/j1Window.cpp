@@ -120,13 +120,21 @@ void j1Window::SetWindowIcon(SDL_Surface* sur)
 
 void j1Window::GetWindowSize(uint& width, uint& height) const
 {
-	width = this->width;
-	height = this->height;
+	int w, h;
+
+	SDL_GetWindowSize(window, &w, &h);
+
+	width = w;
+	height = h;
 }
 
 iPoint j1Window::GetWindowSize()
 {
-	return iPoint(width, height);
+	uint w, h;
+
+	GetWindowSize(w, h);
+
+	return iPoint(w, h);
 }
 
 uint j1Window::GetScale() const
