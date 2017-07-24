@@ -48,7 +48,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	void UIUpdatingInfo();
+	void CheckWindowResize();
 
 	bool LoadAtlas();
 	void UnloadAtlas();
@@ -98,10 +98,10 @@ private:
 	list<UI_Element*> elements;
 	list<UI_Element*> to_delete;
 
+	SDL_Texture*      atlas = nullptr;
+
 	int				  window_width = 0;
 	int				  window_height = 0;
-
-	SDL_Texture*      atlas = nullptr;
 
 	bool              debug = false;
 };

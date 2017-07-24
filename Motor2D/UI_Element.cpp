@@ -1,5 +1,6 @@
 #include "UI_Element.h"
 #include "UI_EventSystem.h"
+#include "p2Log.h"
 
 UI_Element::UI_Element(UI_Main* _ui_main, ui_element_type _type)
 {
@@ -94,6 +95,42 @@ void UI_Element::UpdatePos()
 	transform.SetPos(new_pos);
 }
 
+void UI_Element::UpdateViewport()
+{
+	int view_x = GetTransformPos().x;
+	int view_y = GetTransformPos().y;
+	int view_w = GetSize().x;
+	int view_h = GetSize().y;
+
+	// Scizor
+	if(parent != nullptr)
+	{
+		if (parent->GetViewport().X() > view_x)
+			view_x = parent->GetViewport().X();
+
+		LOG("%d < %d", parent->GetViewport().Y(), view_y);
+		if (parent->GetViewport().Y() > view_y)
+			view_y = parent->GetViewport().Y();
+
+		LOG("%d > %d", parent->GetViewport().X() + parent->GetViewport().W(), view_x + view_w);
+		if (parent->GetViewport().X() + parent->GetViewport().W() < view_x + view_w)
+		{
+			view_w = parent->GetViewport().X() + parent->GetViewport().W() - view_x;
+
+			if (view_w < 0)
+				view_w = 0;
+		}
+
+		if (parent->GetViewport().Y() + parent->GetViewport().H() < view_y + view_h)
+		{
+			view_h = parent->GetViewport().Y() + parent->GetViewport().H() - view_y;
+		}
+	}
+
+	viewport.SetPos(view_x, view_y); 
+	viewport.SetSize(view_w, view_h);
+}
+
 void UI_Element::SetSize(UI_Point pos)
 {
 	transform.SetSize(pos.x, pos.y);
@@ -174,6 +211,11 @@ UI_Point UI_Element::GetAnchorPos()
 	ret.y = anchor.y * GetUiMain()->GetWindowSize().y;
 
 	return ret;
+}
+
+UI_Transform UI_Element::GetViewport()
+{
+	return viewport;
 }
 
 bool UI_Element::GetMouseOver()
@@ -264,10 +306,12 @@ void UI_Element::UpdateElement()
 {
 	if (GetUiMain()->GetDebug())
 	{
-		GetUiMain()->UIRenderQuad(0, 0, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
+		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
 	}
 
 	UpdatePos();
+
+	UpdateViewport();
 }
 
 void UI_Element::CleanElement()
@@ -287,6 +331,16 @@ UI_Element* UI_Element::GetParent()
 void UI_Element::ResetParent()
 {
 	parent = nullptr;
+}
+
+UI_Point UI_Element::ZeroPos()
+{
+	UI_Point ret;
+
+	ret.x = GetTransformPos().x - GetViewport().X();
+	ret.y = GetTransformPos().y - GetViewport().Y();
+
+	return ret;
 }
 
 UI_Main* UI_Element::GetUiMain()

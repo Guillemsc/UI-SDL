@@ -105,6 +105,9 @@ public:
 	// Gets the position of the anchor in the world
 	UI_Point GetAnchorPos();
 
+	// Gets the size of the element viewport
+	UI_Transform GetViewport();
+
 	// Returns true if the mouse is over the element
 	bool GetMouseOver();
 
@@ -129,6 +132,10 @@ public:
 	UI_Element* GetParent();
 	void ResetParent();
 
+protected:
+	// Gets the 0, 0 position inside the element
+	UI_Point ZeroPos();
+
 private:
 	// Gets the local position of the object
 	UI_Point GetPos();
@@ -141,6 +148,9 @@ private:
 
 	// Updates the position of the element in the world
 	void UpdatePos();
+
+	// Updated the viewport of the element depending on parents
+	void UpdateViewport();
 
 public:
 	// Called every frame that the mouse is over an element.
@@ -169,6 +179,7 @@ private:
 	UI_Point	      pos;
 	UI_Point		  anchor;
 	bool			  uses_anchor = false;
+	UI_Transform	  viewport;
 
 	ui_element_type   type = ui_element_type::ui_element_null;
 

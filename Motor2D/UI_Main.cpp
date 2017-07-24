@@ -51,12 +51,13 @@ bool UI_Main::Update(float dt)
 {
 	bool ret = true;
 
-	UIUpdatingInfo();
-
 	// 1 //
-	UpdateElements();
+	CheckWindowResize();
 
 	// 2 //
+	UpdateElements();
+
+	// 3 //
 	CheckEvents();
 
 	return ret;
@@ -90,7 +91,7 @@ bool UI_Main::CleanUp()
 	return ret;
 }
 
-void UI_Main::UIUpdatingInfo()
+void UI_Main::CheckWindowResize()
 {
 	UI_Point actual_window = { GetWindowSize().x, GetWindowSize().y };
 
@@ -244,7 +245,7 @@ void UI_Main::UpdateElements()
 			}
 		}
 
-		UISetViewport((*it)->GetTransformPos().x, (*it)->GetTransformPos().y, (*it)->GetSize().x, (*it)->GetSize().y);
+		UISetViewport((*it)->GetViewport().X(), (*it)->GetViewport().Y(), (*it)->GetViewport().W(), (*it)->GetViewport().H());
 
 		(*it)->Update();
 		(*it)->Draw();

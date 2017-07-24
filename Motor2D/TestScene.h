@@ -20,8 +20,8 @@ public:
 	bool CleanUp();
 
 	UI_Element* test_element = nullptr;
-
 	UI_Element* test_element2 = nullptr;
+	UI_Element* test_element3 = nullptr;
 };
 
 #endif

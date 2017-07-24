@@ -61,14 +61,14 @@ bool j1Viewports::Update(float dt)
 	DoLayerPrint();
 	// ---------------------
 
-	//if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	//	camera1.x++;
-	//if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	//	camera1.x--;
-	//if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	//	camera1.y++;
-	//if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	//	camera1.y--;
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		camera1.x++;
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		camera1.x--;
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		camera1.y++;
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		camera1.y--;
 
 	viewport_size = GetViewportRect(1);
 
