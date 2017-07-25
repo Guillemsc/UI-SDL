@@ -270,8 +270,8 @@ void UI_Main::CheckEvents()
 		// Mouse in quad -------------
 
 		UI_Point mouse = GetMousePos();
-		UI_Point pos = (*it)->GetTransformPos();
-		UI_Point size = (*it)->GetSize();
+		UI_Point pos = UI_Point((*it)->GetViewport().X(), (*it)->GetViewport().Y());
+		UI_Point size = UI_Point((*it)->GetViewport().W(), (*it)->GetViewport().H());
 
 		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
 		{

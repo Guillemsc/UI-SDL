@@ -1,6 +1,7 @@
 #include "TestScene.h"
 #include "j1App.h"
 #include "UI_Element.h"
+#include "p2Log.h"
 
 TestScene::TestScene()
 {
@@ -31,6 +32,7 @@ bool TestScene::Start()
 	test_element3->SetSize(UI_Point(30, 30));
 	test_element2->AddChild(test_element3);
 	App->ui->AddElement(test_element3);
+	test_element3->OnMouseClick = Test1MouseClick;
 
 	return true;
 }
@@ -53,4 +55,9 @@ bool TestScene::PostUpdate()
 bool TestScene::CleanUp()
 {
 	return true;
+}
+
+void Test1MouseClick(UI_EventMouse * ev)
+{
+	LOG("HI");
 }

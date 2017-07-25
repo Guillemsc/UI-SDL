@@ -74,6 +74,9 @@ enum ui_event_type
 
 	event_delete,
 
+	event_interactable_on,
+	event_interactable_off,
+
 	event_window_resize,
 };
 

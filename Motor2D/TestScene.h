@@ -6,6 +6,8 @@
 #include "j1App.h"
 #include "j1Render.h"
 
+class UI_EventMouse;
+
 class TestScene : public Scene
 {
 public:
@@ -23,5 +25,7 @@ public:
 	UI_Element* test_element2 = nullptr;
 	UI_Element* test_element3 = nullptr;
 };
+
+void Test1MouseClick(UI_EventMouse* ev);
 
 #endif

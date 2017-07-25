@@ -79,6 +79,26 @@ void UI_Element::InvokeOnMouseUp()
 	mouse_down = false;
 }
 
+void UI_Element::InvokeOnInteractableTrue()
+{
+	UI_Event* ev = new UI_Event(ui_event_type::event_interactable_on);
+
+	if (OnInteractableTrue)
+		OnInteractableTrue(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
+void UI_Element::InvokeOnInteractableFalse()
+{
+	UI_Event* ev = new UI_Event(ui_event_type::event_interactable_off);
+
+	if (OnInteractableFalse)
+		OnInteractableFalse(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
 void UI_Element::SetPos(UI_Point _pos)
 {
 	pos = _pos;
@@ -108,11 +128,9 @@ void UI_Element::UpdateViewport()
 		if (parent->GetViewport().X() > view_x)
 			view_x = parent->GetViewport().X();
 
-		LOG("%d < %d", parent->GetViewport().Y(), view_y);
 		if (parent->GetViewport().Y() > view_y)
 			view_y = parent->GetViewport().Y();
 
-		LOG("%d > %d", parent->GetViewport().X() + parent->GetViewport().W(), view_x + view_w);
 		if (parent->GetViewport().X() + parent->GetViewport().W() < view_x + view_w)
 		{
 			view_w = parent->GetViewport().X() + parent->GetViewport().W() - view_x;
@@ -149,6 +167,16 @@ void UI_Element::SetAnchor(UI_Point _anchor)
 		anchor.y = 1;
 
 	uses_anchor = true;
+}
+
+void UI_Element::SetInteractable(bool set)
+{
+	if (interactable != set)
+	{
+		interactable = set;
+
+		interactable ? InvokeOnInteractableTrue() : InvokeOnInteractableFalse();
+	}
 }
 
 bool UI_Element::GetUsesAnchor()
@@ -216,6 +244,11 @@ UI_Point UI_Element::GetAnchorPos()
 UI_Transform UI_Element::GetViewport()
 {
 	return viewport;
+}
+
+bool UI_Element::GetInteractable()
+{
+	return interactable;
 }
 
 bool UI_Element::GetMouseOver()

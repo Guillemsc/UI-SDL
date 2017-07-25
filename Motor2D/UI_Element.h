@@ -72,6 +72,9 @@ public:
 	void InvokeOnMouseDown();
 	void InvokeOnMouseUp();
 
+	void InvokeOnInteractableTrue();
+	void InvokeOnInteractableFalse();
+
 	// Get the UI_Element type
 	ui_element_type GetType();
 
@@ -90,6 +93,9 @@ public:
 	// Sets the anchor of the element
 	void SetAnchor(UI_Point anchor);
 
+	// Changes element detection of events
+	void SetInteractable(bool set);
+
 	// Return if ui_element uses an anchor
 	bool GetUsesAnchor();
 
@@ -107,6 +113,9 @@ public:
 
 	// Gets the size of the element viewport
 	UI_Transform GetViewport();
+
+	// Gets true if the element is interactable
+	bool GetInteractable();
 
 	// Returns true if the mouse is over the element
 	bool GetMouseOver();
@@ -137,7 +146,7 @@ protected:
 	UI_Point ZeroPos();
 
 private:
-	// Gets the local position of the object
+	// Gets the position of the object set by the user
 	UI_Point GetPos();
 
 	// Gets the position of the object relative to the it's parents
@@ -171,6 +180,12 @@ public:
 	// Called the frame that the mouse click is released of an element.
 	std::function<void(UI_EventMouse*)> OnMouseUp;
 
+	// Called the frame that an element interactability is set to true.
+	std::function<void(UI_Event*)> OnInteractableTrue;
+
+	// Called the frame that an element interactability is set to false.
+	std::function<void(UI_Event*)> OnInteractableFalse;
+
 private: 
 	bool              mouse_over = false;
 	bool              mouse_down = false;
@@ -182,6 +197,8 @@ private:
 	UI_Transform	  viewport;
 
 	ui_element_type   type = ui_element_type::ui_element_null;
+
+	bool			  interactable = true;
 
 	list<UI_Element*> childs;
 	UI_Element*       parent = nullptr;
