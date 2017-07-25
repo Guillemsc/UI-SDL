@@ -1,5 +1,8 @@
 #include "UI_EventSystem.h"
 #include "UI_Element.h"
+#include "p2Log.h"
+
+#define MAX_EVENTS_STORED 250
 
 UI_EventSystem::UI_EventSystem(UI_Main* _ui_main)
 {
@@ -14,15 +17,32 @@ void UI_EventSystem::Start()
 {
 }
 
+void UI_EventSystem::Update()
+{
+	if (events.size() > MAX_EVENTS_STORED)
+	{
+		delete *events.begin();
+		events.erase(events.begin());
+	}
+}
+
 void UI_EventSystem::CleanUp()
 {
 	ui_main = nullptr;
+
+	for (list<UI_Event*>::iterator it = events.begin(); it != events.end();)
+	{
+		delete (*it);
+		it = events.erase(it);
+	}
 }
 
 void UI_EventSystem::SendEvent(UI_Event * ev)
 {
 	if(ui_main != nullptr)
 		ui_main->ExpandEvent(ev);
+
+	events.push_back(ev);
 }
 
 UI_Event::UI_Event(ui_event_type _type, UI_Element* _sender)
@@ -37,6 +57,7 @@ UI_Event::~UI_Event()
 
 void UI_Event::CleanUp()
 {
+
 }
 
 ui_event_type UI_Event::GetEventType()

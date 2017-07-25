@@ -52,12 +52,15 @@ bool UI_Main::Update(float dt)
 	bool ret = true;
 
 	// 1 //
-	CheckWindowResize();
+	GetEventSystem()->Update();
 
 	// 2 //
-	UpdateElements();
+	CheckWindowResize();
 
 	// 3 //
+	UpdateElements();
+
+	// 4 //
 	CheckEvents();
 
 	return ret;
@@ -247,9 +250,14 @@ void UI_Main::UpdateElements()
 
 		UISetViewport((*it)->GetViewport().X(), (*it)->GetViewport().Y(), (*it)->GetViewport().W(), (*it)->GetViewport().H());
 
-		(*it)->Update();
-		(*it)->Draw();
-		(*it)->UpdateElement();
+		if ((*it)->GetVisible())
+		{
+			(*it)->Update();
+
+			(*it)->Draw();
+
+			(*it)->UpdateElement();
+		}
 
 		UIResetViewport();
 	}
@@ -267,6 +275,9 @@ void UI_Main::CheckEvents()
 
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
+		if (!(*it)->GetInteractable() || !(*it)->GetVisible())
+			continue;
+
 		// Mouse in quad -------------
 
 		UI_Point mouse = GetMousePos();

@@ -74,6 +74,8 @@ public:
 
 	void InvokeOnInteractableTrue();
 	void InvokeOnInteractableFalse();
+	void InvokeOnVisibleTrue();
+	void InvokeOnVisibleFalse();
 
 	// Get the UI_Element type
 	ui_element_type GetType();
@@ -96,6 +98,9 @@ public:
 	// Changes element detection of events
 	void SetInteractable(bool set);
 
+	// Changes the element visibility
+	void SetVisible(bool set);
+
 	// Return if ui_element uses an anchor
 	bool GetUsesAnchor();
 
@@ -114,8 +119,11 @@ public:
 	// Gets the size of the element viewport
 	UI_Transform GetViewport();
 
-	// Gets true if the element is interactable
+	// Returns true if the element is interactable
 	bool GetInteractable();
+
+	// Returns true if the element is visible
+	bool GetVisible();
 
 	// Returns true if the mouse is over the element
 	bool GetMouseOver();
@@ -186,6 +194,12 @@ public:
 	// Called the frame that an element interactability is set to false.
 	std::function<void(UI_Event*)> OnInteractableFalse;
 
+	// Called the frame that the element becomes visible.
+	std::function<void(UI_Event*)> OnVisibleTrue;
+
+	// Called the frame that the element becomes invisible.
+	std::function<void(UI_Event*)> OnVisibleFalse;
+
 private: 
 	bool              mouse_over = false;
 	bool              mouse_down = false;
@@ -199,6 +213,7 @@ private:
 	ui_element_type   type = ui_element_type::ui_element_null;
 
 	bool			  interactable = true;
+	bool			  visible = true;
 
 	list<UI_Element*> childs;
 	UI_Element*       parent = nullptr;

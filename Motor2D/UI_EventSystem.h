@@ -15,12 +15,15 @@ public:
 	virtual ~UI_EventSystem();
 
 	void Start();
+	void Update();
 	void CleanUp();
 
 	void SendEvent(UI_Event* ev);
 
 private:
 	UI_Main* ui_main = nullptr;
+
+	list<UI_Event*> events;
 };
 
 // --------------------------------------------------
@@ -76,6 +79,8 @@ enum ui_event_type
 
 	event_interactable_on,
 	event_interactable_off,
+	event_visible_on,
+	event_visible_off,
 
 	event_window_resize,
 };

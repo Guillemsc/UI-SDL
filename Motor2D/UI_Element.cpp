@@ -99,6 +99,26 @@ void UI_Element::InvokeOnInteractableFalse()
 	GetEventSystem()->SendEvent(ev);
 }
 
+void UI_Element::InvokeOnVisibleTrue()
+{
+	UI_Event* ev = new UI_Event(ui_event_type::event_visible_on);
+
+	if (OnVisibleTrue)
+		OnVisibleTrue(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
+void UI_Element::InvokeOnVisibleFalse()
+{
+	UI_Event* ev = new UI_Event(ui_event_type::event_visible_off);
+
+	if (OnVisibleFalse)
+		OnVisibleFalse(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
 void UI_Element::SetPos(UI_Point _pos)
 {
 	pos = _pos;
@@ -122,7 +142,7 @@ void UI_Element::UpdateViewport()
 	int view_w = GetSize().x;
 	int view_h = GetSize().y;
 
-	// Scizor
+	// Scissor
 	if(parent != nullptr)
 	{
 		if (parent->GetViewport().X() > view_x)
@@ -176,6 +196,16 @@ void UI_Element::SetInteractable(bool set)
 		interactable = set;
 
 		interactable ? InvokeOnInteractableTrue() : InvokeOnInteractableFalse();
+	}
+}
+
+void UI_Element::SetVisible(bool set)
+{
+	if (visible != set)
+	{
+		visible = set;
+
+		visible ? InvokeOnVisibleTrue() : InvokeOnVisibleFalse();
 	}
 }
 
@@ -249,6 +279,11 @@ UI_Transform UI_Element::GetViewport()
 bool UI_Element::GetInteractable()
 {
 	return interactable;
+}
+
+bool UI_Element::GetVisible()
+{
+	return visible;
 }
 
 bool UI_Element::GetMouseOver()
