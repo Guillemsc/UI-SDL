@@ -384,6 +384,7 @@ void UI_Element::UpdateElement()
 {
 	if (GetUiMain()->GetDebug())
 	{
+		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, GetDebugColor().r, GetDebugColor().g, GetDebugColor().b, GetDebugColor().a, true);
 	}
 
 	UpdatePos();
