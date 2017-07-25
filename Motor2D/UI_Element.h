@@ -8,6 +8,7 @@ class UI_Transform;
 class UI_Event;
 class UI_EventMouse;
 class UI_Point;
+class UI_Color;
 
 enum ui_element_type;
 
@@ -101,6 +102,8 @@ public:
 	// Changes the element visibility
 	void SetVisible(bool set);
 
+	void SetDebugColor(UI_Color color);
+
 	// Return if ui_element uses an anchor
 	bool GetUsesAnchor();
 
@@ -130,6 +133,8 @@ public:
 
 	// Returns true if the mouse is over the element and down
 	bool GetMouseDown();
+
+	UI_Color GetDebugColor();
 
 	void BringToFront();
 	void BringToFrontAndChilds();
@@ -220,6 +225,8 @@ private:
 
 	UI_Main*          ui_main = nullptr;
 	UI_EventSystem*   event_system = nullptr;
+
+	UI_Color		  debug_color;
 };
 
 #endif // __UI_EventSystem_H__

@@ -6,7 +6,6 @@
 #include "j1Render.h"
 #include "j1Window.h"
 #include "j1Scene.h"
-
 #include "TestScene.h"
 
 j1Scene::j1Scene() : j1Module()

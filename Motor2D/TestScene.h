@@ -1,8 +1,7 @@
 #ifndef _TEST_SCENE_
 #define _TEST_SCENE_
 
-#include "Scene.h"
-
+#include "j1Scene.h"
 #include "j1App.h"
 #include "j1Render.h"
 

@@ -64,7 +64,6 @@ public:
 	void ElementSendToBack(UI_Element* element);
 	void ElementSendToBackAndChilds(UI_Element* element);
 
-
 	void AddElement(UI_Element* element);
 	void DeleteElement(UI_Element* element);
 
@@ -121,6 +120,39 @@ public:
 
 	float x = 0;
 	float y = 0;
+};
+
+class UI_Color
+{
+public:
+	UI_Color() 
+	{
+		r = 255;
+		g = 255;
+		b = 255;
+		a = 255;
+	};
+
+	UI_Color(int _r, int _g, int _b, int _a)
+	{
+		r = _r;
+		g = _g;
+		b = _b;
+		a = _a;
+	}
+
+	void operator = (UI_Color color)
+	{
+		r = color.r;
+		g = color.g;
+		b = color.b;
+		a = color.a;
+	}
+	
+	int r = 0;
+	int g = 0;
+	int b = 0;
+	int a = 0;
 };
 
 #endif // __UI_Main_H__

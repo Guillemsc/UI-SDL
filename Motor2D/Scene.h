@@ -3,7 +3,6 @@
 
 #include "j1App.h"
 #include "j1Render.h"
-#include "UI_Main.h"
 #include "PugiXml\src\pugixml.hpp"
 
 #include <string>

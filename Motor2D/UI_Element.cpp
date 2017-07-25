@@ -209,6 +209,11 @@ void UI_Element::SetVisible(bool set)
 	}
 }
 
+void UI_Element::SetDebugColor(UI_Color color)
+{
+	debug_color = color;
+}
+
 bool UI_Element::GetUsesAnchor()
 {
 	return uses_anchor;
@@ -296,6 +301,11 @@ bool UI_Element::GetMouseDown()
 	return mouse_down;
 }
 
+UI_Color UI_Element::GetDebugColor()
+{
+	return debug_color;
+}
+
 void UI_Element::BringToFront()
 {
 	ui_main->ElementBringToFront(this);
@@ -374,7 +384,6 @@ void UI_Element::UpdateElement()
 {
 	if (GetUiMain()->GetDebug())
 	{
-		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, 255, 255, 255, 255, false);
 	}
 
 	UpdatePos();

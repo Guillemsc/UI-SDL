@@ -2,8 +2,8 @@
 #define __j1SCENE_H__
 
 #include "j1Module.h"
-#include "j1Gui.h"
 #include "Scene.h"
+#include "UI_Main.h"
 
 struct SDL_Texture;
 class TestScene;
