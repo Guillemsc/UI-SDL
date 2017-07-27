@@ -209,6 +209,11 @@ void UI_Element::SetVisible(bool set)
 	}
 }
 
+void UI_Element::SetFocus(bool set)
+{
+	focus = set;
+}
+
 void UI_Element::SetDebugColor(UI_Color color)
 {
 	debug_color = color;
@@ -289,6 +294,11 @@ bool UI_Element::GetInteractable()
 bool UI_Element::GetVisible()
 {
 	return visible;
+}
+
+bool UI_Element::GetFocus()
+{
+	return focus;
 }
 
 bool UI_Element::GetMouseOver()

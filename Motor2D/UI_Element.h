@@ -102,6 +102,8 @@ public:
 	// Changes the element visibility
 	void SetVisible(bool set);
 
+	void SetFocus(bool set);
+
 	void SetDebugColor(UI_Color color);
 
 	// Return if ui_element uses an anchor
@@ -127,6 +129,8 @@ public:
 
 	// Returns true if the element is visible
 	bool GetVisible();
+
+	bool GetFocus();
 
 	// Returns true if the mouse is over the element
 	bool GetMouseOver();
@@ -219,6 +223,7 @@ private:
 
 	bool			  interactable = true;
 	bool			  visible = true;
+	bool			  focus = false;
 
 	list<UI_Element*> childs;
 	UI_Element*       parent = nullptr;
