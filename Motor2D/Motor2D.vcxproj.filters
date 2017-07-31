@@ -67,6 +67,9 @@
     <ClCompile Include="TestScene.cpp">
       <Filter>Engine\3. Scenes ==========</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Animator.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -146,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>Engine\3. Scenes ==========</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Animator.h">
+      <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

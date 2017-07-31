@@ -13,6 +13,7 @@
 using namespace std;
 
 class UI_EventSystem;
+class UI_Bezier;
 class UI_Event;
 class UI_Element;
 class UI_Transform;
@@ -76,6 +77,7 @@ public:
 
 	void UIRenderQuad(int x, int y, int w, int h, int r, int g, int b, int a, bool filled);
 	void UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a);
+	void UIRenderPoint(int x, int y, int r, int g, int b, int a);
 	void UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a);
 	void UIRenderImage(int x, int y, SDL_Rect rect);
 
@@ -94,6 +96,7 @@ private:
 
 private:
 	UI_EventSystem*   ui_event_system = nullptr;
+	UI_Bezier*	      ui_bezier = nullptr;
 	list<UI_Element*> elements;
 	list<UI_Element*> to_delete;
 
@@ -116,6 +119,12 @@ public:
 	UI_Point(float _x, float _y)
 	{
 		x = _x; y = _y;
+	}
+
+	void operator = (UI_Point point)
+	{
+		x = point.x;
+		y = point.y;
 	}
 
 	float x = 0;

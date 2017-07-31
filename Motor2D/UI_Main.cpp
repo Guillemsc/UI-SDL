@@ -1,5 +1,6 @@
 #include "UI_Main.h"
 #include "UI_EventSystem.h"
+#include "UI_Animator.h"
 #include "UI_Element.h"
 
 #include "j1Render.h"
@@ -189,6 +190,11 @@ void UI_Main::UIRenderQuad(int x, int y, int w, int h, int r, int g, int b, int 
 void UI_Main::UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a)
 {
 	App->render->DrawLine(x1, y1, x2, y2, r, g, b, a);
+}
+
+void UI_Main::UIRenderPoint(int x, int y, int r, int g, int b, int a)
+{
+	App->render->DrawCircle(x, y, 1, r, g, b, a, true);
 }
 
 void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a)
