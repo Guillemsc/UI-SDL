@@ -20,22 +20,22 @@ public:
 	void operator = (UI_Transform& trans);
 	bool operator == (UI_Transform trans);
 
-	void SetPos(int x, int y);
+	void SetPos(float x, float y);
 	void SetPos(UI_Point pos);
-	void AddToPos(int add_x, int add_y);
-	void SubstractToPos(int sub_x, int sub_y);
-	void SetSize(int width, int height);
+	void AddToPos(float add_x, float add_y);
+	void SubstractToPos(float sub_x, float sub_y);
+	void SetSize(float width, float height);
 
-	int X();
-	int Y();
-	int W();
-	int H();
+	float X();
+	float Y();
+	float W();
+	float H();
 
 private:
-	int x = 0;
-	int y = 0;
-	int w = 0;
-	int h = 0;
+	float x = 0;
+	float y = 0;
+	float w = 0;
+	float h = 0;
 };
 
 // --------------------------------------------------
@@ -62,7 +62,7 @@ public:
 	virtual void OnEvent(UI_Event* ev) {};
 
 	void StartElement();
-	void UpdateElement();
+	void UpdateElement(float dt);
 	void CleanElement();
 
 	void InvokeOnMouseOver();
@@ -89,6 +89,9 @@ public:
 
 	// Sets the position of the element
 	void SetPos(UI_Point pos);
+
+	// Angle in degrees
+	void MoveToAngle(float distance, float angle);
 
 	// Sets size of the element
 	void SetSize(UI_Point pos);
@@ -154,6 +157,7 @@ public:
 
 	UI_Main* GetUiMain();
 	UI_EventSystem* GetEventSystem();
+	UI_Animator* GetAnimator();
 	list<UI_Element*> GetChilds();
 	UI_Element* GetParent();
 	void ResetParent();
@@ -230,6 +234,7 @@ private:
 
 	UI_Main*          ui_main = nullptr;
 	UI_EventSystem*   event_system = nullptr;
+	UI_Animator*	  ui_animator = nullptr;
 
 	UI_Color		  debug_color;
 };

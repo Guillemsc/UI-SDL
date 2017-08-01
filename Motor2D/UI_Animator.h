@@ -4,37 +4,52 @@
 #include "UI_Main.h"
 
 class UI_Point;
-
-enum ui_animation_type
-{
-	ui_animation_null,
-
-};
+enum uia_interpolation_type;
 
 class UI_Animation
 {
 public:
-	UI_Animation(UI_Main* ui_main);
+	UI_Animation(UI_Main* ui_main, UI_Element* target);
+
+	UI_Main* GetUIMain();
 
 	virtual void Update(float dt) {};
 
+	UI_Element* GetTarget();
 	bool GetFinished();
+	void Finished();
 
 private:
+	UI_Main* ui_main = nullptr;
+
 	bool finished = false;
+	UI_Element* target = nullptr;
 
 };
 
 class UI_Animator
 {
 public:
-	UI_Animator(UI_Main* ui_main);
+	UI_Animator(UI_Element* owner);
 	void Start();
 	void Update(float dt);
+	void PostUpdate();
 	void CleanUp();
 
+	void StartAnimationInterpolation(uia_interpolation_type type, UI_Point target_pos, float time_sec);
+
+	void AddToDelete(UI_Animation* ani);
+	float AngleFromTwoPoint(UI_Point p1, UI_Point p2);
+	float DistanceFromtTwoPoints(UI_Point p1, UI_Point p2);
+
 private:
+	void DeleteAnimations();
+
+private:
+	UI_Main* ui_main = nullptr;
+	UI_Element* owner = nullptr;
 	list<UI_Animation*> animations;
+	list<UI_Animation*> to_delete;
 
 private:
 };

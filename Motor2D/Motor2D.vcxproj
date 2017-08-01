@@ -97,6 +97,7 @@
     <ClCompile Include="j1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="UIA_Interpolation.cpp" />
     <ClCompile Include="UI_Animator.cpp" />
     <ClCompile Include="UI_Element.cpp" />
     <ClCompile Include="UI_EventSystem.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="UIA_Interpolation.h" />
     <ClInclude Include="UI_Animator.h" />
     <ClInclude Include="UI_Element.h" />
     <ClInclude Include="UI_EventSystem.h" />

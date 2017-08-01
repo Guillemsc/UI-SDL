@@ -1,6 +1,8 @@
 #include "j1Scene.h"
 #include "TestScene.h"
 #include "UI_Element.h"
+#include "UI_Animator.h"
+#include "UIA_Interpolation.h"
 #include "p2Log.h"
 
 TestScene::TestScene()
@@ -36,6 +38,8 @@ bool TestScene::Start()
 	test_element2->AddChild(test_element3);
 	App->ui->AddElement(test_element3);
 	test_element->OnMouseClick = Test1MouseClick;
+
+	test_element->GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_quadraticEaseInOut, UI_Point(100, 100), 10);
 
 	return true;
 }

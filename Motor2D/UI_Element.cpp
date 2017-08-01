@@ -1,5 +1,7 @@
 #include "UI_Element.h"
 #include "UI_EventSystem.h"
+#include "UI_Animator.h"
+#include "UIA_Interpolation.h"
 #include "p2Log.h"
 
 UI_Element::UI_Element(UI_Main* _ui_main, ui_element_type _type)
@@ -7,6 +9,8 @@ UI_Element::UI_Element(UI_Main* _ui_main, ui_element_type _type)
 	ui_main = _ui_main;
 	event_system = _ui_main->GetEventSystem();
 	type = _type;
+
+	ui_animator = new UI_Animator(this);
 }
 
 UI_Element::~UI_Element()
@@ -126,6 +130,12 @@ void UI_Element::SetPos(UI_Point _pos)
 	UpdatePos();
 }
 
+void UI_Element::MoveToAngle(float distance, float angle)
+{
+	pos.x += (abs(distance) * (cos(angle * DEGTORAD)));
+	pos.y += (abs(distance) * (sin(angle * DEGTORAD)));
+}
+
 void UI_Element::UpdatePos()
 {
 	UI_Point new_pos = pos;
@@ -187,6 +197,8 @@ void UI_Element::SetAnchor(UI_Point _anchor)
 		anchor.y = 1;
 
 	uses_anchor = true;
+
+	UpdatePos();
 }
 
 void UI_Element::SetInteractable(bool set)
@@ -390,7 +402,7 @@ void UI_Element::StartElement()
 {
 }
 
-void UI_Element::UpdateElement()
+void UI_Element::UpdateElement(float dt)
 {
 	if (GetUiMain()->GetDebug())
 	{
@@ -399,11 +411,16 @@ void UI_Element::UpdateElement()
 
 	UpdatePos();
 
+	ui_animator->Update(dt);
+	ui_animator->PostUpdate();
+
 	UpdateViewport();
 }
 
 void UI_Element::CleanElement()
 {
+	ui_animator->CleanUp();
+	delete ui_animator;
 }
 
 list<UI_Element*> UI_Element::GetChilds()
@@ -441,6 +458,11 @@ UI_EventSystem * UI_Element::GetEventSystem()
 	return event_system;
 }
 
+UI_Animator * UI_Element::GetAnimator()
+{
+	return ui_animator;
+}
+
 void UI_Transform::operator=(UI_Transform& trans)
 {
 	trans.x = x;
@@ -454,7 +476,7 @@ bool UI_Transform::operator == (UI_Transform trans)
 	return ((trans.x == x) && (trans.y == y) && (trans.w = w) && (trans.h == h)) ? true : false;
 }
 
-void UI_Transform::SetPos(int _x, int _y)
+void UI_Transform::SetPos(float _x, float _y)
 {
 	x = _x;
 	y = _y;
@@ -466,40 +488,40 @@ void UI_Transform::SetPos(UI_Point pos)
 	y = pos.y;
 }
 
-void UI_Transform::AddToPos(int add_x, int add_y)
+void UI_Transform::AddToPos(float add_x, float add_y)
 {
 	x += add_x;
 	y += add_y;
 }
 
-void UI_Transform::SubstractToPos(int sub_x, int sub_y)
+void UI_Transform::SubstractToPos(float sub_x, float sub_y)
 {
 	x -= sub_x;
 	y -= sub_y;
 }
 
-void UI_Transform::SetSize(int _width, int _height)
+void UI_Transform::SetSize(float _width, float _height)
 {
 	w = _width;
 	h = _height;
 }
 
-int UI_Transform::X()
+float UI_Transform::X()
 {
 	return x;
 }
 
-int UI_Transform::Y()
+float UI_Transform::Y()
 {
 	return y;
 }
 
-int UI_Transform::W()
+float UI_Transform::W()
 {
 	return w;
 }
 
-int UI_Transform::H()
+float UI_Transform::H()
 {
 	return h;
 }

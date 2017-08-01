@@ -59,7 +59,7 @@ bool UI_Main::Update(float dt)
 	CheckWindowResize();
 
 	// 3 //
-	UpdateElements();
+	UpdateElements(dt);
 
 	// 4 //
 	CheckEvents();
@@ -71,6 +71,7 @@ bool UI_Main::PostUpdate()
 {
 	bool ret = true;
 
+	// 1 //
 	DeleteElements();
 
 	return ret;
@@ -138,6 +139,7 @@ UI_EventSystem * UI_Main::GetEventSystem()
 {
 	return ui_event_system;
 }
+
 
 UI_Point UI_Main::GetMousePos()
 {
@@ -241,7 +243,7 @@ SDL_Texture * UI_Main::GetAtlas()
 	return atlas;
 }
 
-void UI_Main::UpdateElements()
+void UI_Main::UpdateElements(float dt)
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
@@ -262,7 +264,7 @@ void UI_Main::UpdateElements()
 
 			(*it)->Draw();
 
-			(*it)->UpdateElement();
+			(*it)->UpdateElement(dt);
 		}
 
 		UIResetViewport();

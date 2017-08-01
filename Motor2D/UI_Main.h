@@ -12,7 +12,12 @@
 
 using namespace std;
 
+#define DEGTORAD 0.0174532925199432957f
+#define RADTODEG 57.295779513082320876f
+#define PI       3.1415926535897932384f
+
 class UI_EventSystem;
+class UI_Animator;
 class UI_Bezier;
 class UI_Event;
 class UI_Element;
@@ -88,7 +93,7 @@ public:
 	void SetDebug(bool set);
 
 private:
-	void UpdateElements();
+	void UpdateElements(float dt);
 	void CheckEvents();
 	void DeleteElements();
 
@@ -96,7 +101,6 @@ private:
 
 private:
 	UI_EventSystem*   ui_event_system = nullptr;
-	UI_Bezier*	      ui_bezier = nullptr;
 	list<UI_Element*> elements;
 	list<UI_Element*> to_delete;
 

@@ -70,6 +70,9 @@
     <ClCompile Include="UI_Animator.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClCompile>
+    <ClCompile Include="UIA_Interpolation.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -153,6 +156,9 @@
     <ClInclude Include="UI_Animator.h">
       <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
+    <ClInclude Include="UIA_Interpolation.h">
+      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -181,6 +187,9 @@
     </Filter>
     <Filter Include="Engine\1. Modules =========\NewGUI\2. Elements">
       <UniqueIdentifier>{eab52a47-9755-42f5-8094-6f8425fc4a89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\1. Modules =========\NewGUI\3. Animations">
+      <UniqueIdentifier>{04819027-0cf3-41b6-9173-84481a58fdf8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
