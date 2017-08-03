@@ -41,6 +41,29 @@ void UIA_Interpolation::Update(float dt)
 	}
 }
 
+// The easeing functions code was extracted from the github page: https://github.com/warrenm/AHEasing/blob/master/AHEasing/easing.c
+// Copyright (c) 2011, Auerhaus Development, LLC
+//  This program is free software. It comes without any warranty, to
+//  the extent permitted by applicable law. You can redistribute it
+//  and/or modify it under the terms of the Do What The Fuck You Want
+//  To Public License, Version 2, as published by Sam Hocevar. See
+//  http://sam.zoy.org/wtfpl/COPYING for more details.
+
+/*
+The following types of easing functions are supported:
+
+- Linear
+- Quadratic
+- Cubic
+- Quartic
+- Quintic
+- Sine
+- Circular
+- Elastic
+- Bounce
+- Back
+*/
+
 float UIA_Interpolation::GetNormalizedPos(float normalized_time)
 {
 	switch (type)
@@ -69,6 +92,115 @@ float UIA_Interpolation::GetNormalizedPos(float normalized_time)
 			else
 			{
 				return (-2 * normalized_time * normalized_time) + (4 * normalized_time) - 1;
+			}
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_cubicEaseIn:
+		{
+			return normalized_time * normalized_time * normalized_time;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_cubicEaseOut:
+		{
+			float f = (normalized_time - 1);
+			return f * f * f + 1;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_cubicEaseInOut:
+		{
+			if (normalized_time < 0.5)
+			{
+				return 4 * normalized_time * normalized_time * normalized_time;
+			}
+			else
+			{
+				float f = ((2 * normalized_time) - 2);
+				return 0.5 * f * f * f + 1;
+			}
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_quarticEaseIn:
+		{
+			return normalized_time * normalized_time * normalized_time * normalized_time;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_quarticEaseOut:
+		{
+			float f = (normalized_time - 1);
+			return f * f * f * (1 - normalized_time) + 1;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_quarticEaseInOut:
+		{
+			if (normalized_time < 0.5)
+			{
+				return 8 * normalized_time * normalized_time * normalized_time * normalized_time;
+			}
+			else
+			{
+				float f = (normalized_time - 1);
+				return -8 * f * f * f * f + 1;
+			}
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_quinticEaseIn:
+		{
+			return normalized_time * normalized_time * normalized_time * normalized_time * normalized_time;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_quinticEaseOut:
+		{
+			float f = (normalized_time - 1);
+			return f * f * f * f * f + 1;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_quinticEaseInOut:
+		{
+			if (normalized_time < 0.5)
+			{
+				return 16 * normalized_time * normalized_time * normalized_time * normalized_time * normalized_time;
+			}
+			else
+			{
+				float f = ((2 * normalized_time) - 2);
+				return 0.5 * f * f * f * f * f + 1;
+			}
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_sineEaseIn:
+		{
+			return sin((normalized_time - 1) * (PI/2)) + 1;
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_sineEaseOut:
+		{
+			return sin(normalized_time * (PI/2));
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_sineEaseInOut:
+		{
+			return 0.5 * (1 - cos(normalized_time * PI));
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_circularEaseIn:
+		{
+			return 1 - sqrt(1 - (normalized_time * normalized_time));
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_circularEaseOut:
+		{
+			return sqrt((2 - normalized_time) * normalized_time);
+		}
+		break;
+		case uia_interpolation_type::uia_interpolation_circularEaseInOut:
+		{
+			if (normalized_time < 0.5)
+			{
+				return 0.5 * (1 - sqrt(1 - 4 * (normalized_time * normalized_time)));
+			}
+			else
+			{
+				return 0.5 * (sqrt(-((2 * normalized_time) - 3) * ((2 * normalized_time) - 1)) + 1);
 			}
 		}
 		break;

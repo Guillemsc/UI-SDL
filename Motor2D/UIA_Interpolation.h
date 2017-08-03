@@ -10,6 +10,21 @@ enum uia_interpolation_type
 	uia_interpolation_quadraticEaseIn,
 	uia_interpolation_quadraticEaseOut,
 	uia_interpolation_quadraticEaseInOut,
+	uia_interpolation_cubicEaseIn,
+	uia_interpolation_cubicEaseOut,
+	uia_interpolation_cubicEaseInOut,
+	uia_interpolation_quarticEaseIn,
+	uia_interpolation_quarticEaseOut,
+	uia_interpolation_quarticEaseInOut,
+	uia_interpolation_quinticEaseIn,
+	uia_interpolation_quinticEaseOut,
+	uia_interpolation_quinticEaseInOut,
+	uia_interpolation_sineEaseIn,
+	uia_interpolation_sineEaseOut,
+	uia_interpolation_sineEaseInOut,
+	uia_interpolation_circularEaseIn,
+	uia_interpolation_circularEaseOut,
+	uia_interpolation_circularEaseInOut,
 };
 
 class UIA_Interpolation : public UI_Animation
