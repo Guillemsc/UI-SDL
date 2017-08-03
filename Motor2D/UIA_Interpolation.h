@@ -7,24 +7,34 @@ enum uia_interpolation_type
 {
 	uia_interpolation_null,
 	uia_interpolation_linear,
+
 	uia_interpolation_quadraticEaseIn,
 	uia_interpolation_quadraticEaseOut,
 	uia_interpolation_quadraticEaseInOut,
+
 	uia_interpolation_cubicEaseIn,
 	uia_interpolation_cubicEaseOut,
 	uia_interpolation_cubicEaseInOut,
+
 	uia_interpolation_quarticEaseIn,
 	uia_interpolation_quarticEaseOut,
 	uia_interpolation_quarticEaseInOut,
+
 	uia_interpolation_quinticEaseIn,
 	uia_interpolation_quinticEaseOut,
 	uia_interpolation_quinticEaseInOut,
+
 	uia_interpolation_sineEaseIn,
 	uia_interpolation_sineEaseOut,
 	uia_interpolation_sineEaseInOut,
+
 	uia_interpolation_circularEaseIn,
 	uia_interpolation_circularEaseOut,
 	uia_interpolation_circularEaseInOut,
+
+	uia_interpolation_exponentialEaseIn,
+	uia_interpolation_exponentialEaseOut,
+	uia_interpolation_exponentialEaseInOut,
 };
 
 class UIA_Interpolation : public UI_Animation
@@ -35,6 +45,9 @@ public:
 
 private:
 	float GetNormalizedPos(float normalized_time);
+
+	float BounceEaseIn(float p);
+	float BounceEaseOut(float p);
 
 private:
 	uia_interpolation_type type = uia_interpolation_type::uia_interpolation_linear;

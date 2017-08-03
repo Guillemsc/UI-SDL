@@ -39,7 +39,7 @@ bool TestScene::Start()
 	App->ui->AddElement(test_element3);
 	test_element->OnMouseClick = Test1MouseClick;
 
-	test_element->GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_quarticEaseInOut, UI_Point(100, 100), 10);
+	test_element->GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseInOut, UI_Point(100, 100), 1);
 
 	return true;
 }
