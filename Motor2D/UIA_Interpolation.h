@@ -40,14 +40,11 @@ enum uia_interpolation_type
 class UIA_Interpolation : public UI_Animation
 {
 public:
-	UIA_Interpolation(UI_Main* ui_main, uia_interpolation_type type, UI_Element* target, UI_Point target_pos, float time_sec);
+	UIA_Interpolation(uia_interpolation_type type, UI_Element* target, UI_Point target_pos, float time_sec);
 	void Update(float dt);
 
 private:
 	float GetNormalizedPos(float normalized_time);
-
-	float BounceEaseIn(float p);
-	float BounceEaseOut(float p);
 
 private:
 	uia_interpolation_type type = uia_interpolation_type::uia_interpolation_linear;

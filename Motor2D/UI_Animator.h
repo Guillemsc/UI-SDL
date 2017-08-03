@@ -9,7 +9,7 @@ enum uia_interpolation_type;
 class UI_Animation
 {
 public:
-	UI_Animation(UI_Main* ui_main, UI_Element* target);
+	UI_Animation(UI_Element* target);
 
 	UI_Main* GetUIMain();
 

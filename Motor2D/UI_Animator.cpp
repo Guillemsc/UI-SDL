@@ -38,7 +38,7 @@ void UI_Animator::CleanUp()
 
 void UI_Animator::StartAnimationInterpolation(uia_interpolation_type type, UI_Point target_pos, float time_sec)
 {
-	UIA_Interpolation* anim = new UIA_Interpolation(owner->GetUiMain(), type, owner, target_pos, time_sec);
+	UIA_Interpolation* anim = new UIA_Interpolation(type, owner, target_pos, time_sec);
 
 	animations.push_back(anim);
 }
@@ -84,9 +84,9 @@ void UI_Animator::DeleteAnimations()
 	}
 }
 
-UI_Animation::UI_Animation(UI_Main * _ui_main, UI_Element* _target)
+UI_Animation::UI_Animation(UI_Element* _target)
 {
-	ui_main = _ui_main;
+	ui_main = _target->GetUiMain();
 	target = _target;
 }
 
