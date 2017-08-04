@@ -459,9 +459,9 @@ void j1Viewports::DoLayerPrint()
 
 				float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera1.x, curr.pos.y + (int)camera1.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera1.x, curr.pos.y + (int)camera1.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list1.pop();
 			}
@@ -516,9 +516,9 @@ void j1Viewports::DoLayerPrint()
 
 				float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera1.x, curr.pos.y + (int)camera1.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera1.x, curr.pos.y + (int)camera1.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list1.pop();
 			}
@@ -562,9 +562,9 @@ void j1Viewports::DoLayerPrint()
 
 				float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera2.x, curr.pos.y + (int)camera2.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera2.x, curr.pos.y + (int)camera2.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list2.pop();
 			}
@@ -622,9 +622,9 @@ void j1Viewports::DoLayerPrint()
 
 				float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera1.x, curr.pos.y + (int)camera1.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera1.x, curr.pos.y + (int)camera1.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list1.pop();
 			}
@@ -668,9 +668,9 @@ void j1Viewports::DoLayerPrint()
 
 					float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera2.x, curr.pos.y + (int)camera2.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
-				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera2.x, curr.pos.y + (int)camera2.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+				else 
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list2.pop();
 			}
@@ -714,9 +714,9 @@ void j1Viewports::DoLayerPrint()
 
 				float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera3.x, curr.pos.y + (int)camera3.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera3.x, curr.pos.y + (int)camera3.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list3.pop();
 			}
@@ -760,9 +760,9 @@ void j1Viewports::DoLayerPrint()
 
 				float blit_scale = (curr.scale != -1.0f) ? curr.scale : scale;
 				if (curr.use_camera)
-					App->render->Blit(curr.texture, curr.pos.x + (int)camera4.x, curr.pos.y + (int)camera4.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x + (int)camera4.x, curr.pos.y + (int)camera4.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 				else
-					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
+					App->render->Blit(curr.texture, curr.pos.x, curr.pos.y, &curr.section, 255, blit_scale, curr.use_camera, curr.flip, curr.angle, curr.pivot_x, curr.pivot_y);
 
 				layer_list4.pop();
 			}

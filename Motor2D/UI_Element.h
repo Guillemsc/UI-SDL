@@ -107,6 +107,8 @@ public:
 
 	void SetFocus(bool set);
 
+	void SetAlpha(float set);
+
 	void SetDebugColor(UI_Color color);
 
 	// Return if ui_element uses an anchor
@@ -134,6 +136,8 @@ public:
 	bool GetVisible();
 
 	bool GetFocus();
+
+	float GetAlpha();
 
 	// Returns true if the mouse is over the element
 	bool GetMouseOver();
@@ -222,6 +226,7 @@ private:
 	UI_Point		  anchor;
 	bool			  uses_anchor = false;
 	UI_Transform	  viewport;
+	float			  alpha = 255.0f;
 
 	ui_element_type   type = ui_element_type::ui_element_null;
 

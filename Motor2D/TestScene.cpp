@@ -3,6 +3,7 @@
 #include "UI_Element.h"
 #include "UI_Animator.h"
 #include "UIA_Interpolation.h"
+#include "UIA_Alpha.h"
 #include "p2Log.h"
 
 TestScene::TestScene()
@@ -39,7 +40,7 @@ bool TestScene::Start()
 	App->ui->AddElement(test_element3);
 	test_element->OnMouseClick = Test1MouseClick;
 
-	test_element->GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseInOut, UI_Point(100, 100), 1);
+	test_element->GetAnimator()->StartAnimationAlpha(uia_alpha_type::uia_alpha_quadraticEaseInOut, 0, 2);
 
 	return true;
 }

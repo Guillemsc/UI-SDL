@@ -84,7 +84,7 @@ public:
 	void UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a);
 	void UIRenderPoint(int x, int y, int r, int g, int b, int a);
 	void UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a);
-	void UIRenderImage(int x, int y, SDL_Rect rect);
+	void UIRenderImage(int x, int y, SDL_Rect rect, float alpha);
 
 	void UISetViewport(int x, int y, int w, int h);
 	void UIResetViewport();

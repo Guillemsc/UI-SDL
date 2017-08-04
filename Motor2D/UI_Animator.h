@@ -5,6 +5,7 @@
 
 class UI_Point;
 enum uia_interpolation_type;
+enum uia_alpha_type;
 
 class UI_Animation
 {
@@ -37,6 +38,7 @@ public:
 	void CleanUp();
 
 	void StartAnimationInterpolation(uia_interpolation_type type, UI_Point target_pos, float time_sec);
+	void StartAnimationAlpha(uia_alpha_type type, float target_alpha, float time_sec);
 
 	void AddToDelete(UI_Animation* ani);
 	float AngleFromTwoPoint(UI_Point p1, UI_Point p2);

@@ -11,8 +11,6 @@ UIA_Interpolation::UIA_Interpolation(uia_interpolation_type _type, UI_Element* t
 
 	angle = GetTarget()->GetAnimator()->AngleFromTwoPoint(starting_pos, target_pos);
 	starting_distance = GetTarget()->GetAnimator()->DistanceFromtTwoPoints(starting_pos, target_pos);
-
-	pos_track = target->GetTransformPos();
 }
 
 void UIA_Interpolation::Update(float dt)

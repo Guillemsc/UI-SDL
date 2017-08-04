@@ -56,8 +56,6 @@ private:
 	float    curr_time = 0.0f;
 	float	 angle = 0.0f;
 	float    starting_distance = 0.0f;
-
-	UI_Point pos_track;
 };
 
 #endif

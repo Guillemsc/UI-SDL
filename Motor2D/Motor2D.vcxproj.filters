@@ -73,6 +73,9 @@
     <ClCompile Include="UIA_Interpolation.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
     </ClCompile>
+    <ClCompile Include="UIA_Alpha.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -157,6 +160,9 @@
       <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
     <ClInclude Include="UIA_Interpolation.h">
+      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="UIA_Alpha.h">
       <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,6 +2,7 @@
 #include "UI_Main.h"
 #include "UI_Element.h"
 #include "UIA_Interpolation.h"
+#include "UIA_Alpha.h"
 #include "p2Log.h"
 
 UI_Animator::UI_Animator(UI_Element* _owner)
@@ -39,6 +40,13 @@ void UI_Animator::CleanUp()
 void UI_Animator::StartAnimationInterpolation(uia_interpolation_type type, UI_Point target_pos, float time_sec)
 {
 	UIA_Interpolation* anim = new UIA_Interpolation(type, owner, target_pos, time_sec);
+
+	animations.push_back(anim);
+}
+
+void UI_Animator::StartAnimationAlpha(uia_alpha_type type, float target_alpha, float time_sec)
+{
+	UIA_Alpha* anim = new UIA_Alpha(type, owner, target_alpha, time_sec);
 
 	animations.push_back(anim);
 }

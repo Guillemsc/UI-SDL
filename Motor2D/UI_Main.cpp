@@ -213,9 +213,9 @@ void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, i
 	App->tex->UnLoadTexture(texture);
 }
 
-void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect)
+void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect, float alpha)
 {
-	App->render->Blit(GetAtlas(), x, y, &rect);
+	App->render->Blit(GetAtlas(), x, y, &rect, alpha);
 }
 
 void UI_Main::UISetViewport(int x, int y, int w, int h)

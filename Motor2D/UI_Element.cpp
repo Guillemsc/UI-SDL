@@ -226,9 +226,21 @@ void UI_Element::SetFocus(bool set)
 	focus = set;
 }
 
+void UI_Element::SetAlpha(float set)
+{
+	alpha = set;
+
+	if (alpha > 255)
+		alpha = 255;
+
+	if (alpha < 0)
+		alpha = 0;
+}
+
 void UI_Element::SetDebugColor(UI_Color color)
 {
 	debug_color = color;
+	alpha = color.a;
 }
 
 bool UI_Element::GetUsesAnchor()
@@ -311,6 +323,11 @@ bool UI_Element::GetVisible()
 bool UI_Element::GetFocus()
 {
 	return focus;
+}
+
+float UI_Element::GetAlpha()
+{
+	return alpha;
 }
 
 bool UI_Element::GetMouseOver()
@@ -406,7 +423,7 @@ void UI_Element::UpdateElement(float dt)
 {
 	if (GetUiMain()->GetDebug())
 	{
-		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, GetDebugColor().r, GetDebugColor().g, GetDebugColor().b, GetDebugColor().a, true);
+		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, GetDebugColor().r, GetDebugColor().g, GetDebugColor().b, alpha, true);
 	}
 
 	UpdatePos();
