@@ -78,6 +78,9 @@ public:
 	void InvokeOnVisibleTrue();
 	void InvokeOnVisibleFalse();
 
+	void InvokeOnAnimationInterpolationFinished();
+	void InvokeOnAnimationAlphaFinished();
+
 	// Get the UI_Element type
 	ui_element_type GetType();
 
@@ -216,6 +219,8 @@ public:
 
 	// Called the frame that the element becomes invisible.
 	std::function<void(UI_Event*)> OnVisibleFalse;
+
+	std::function<void(UI_Event*)> OnAnimationFinished;
 
 private: 
 	bool              mouse_over = false;

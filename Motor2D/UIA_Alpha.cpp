@@ -36,8 +36,7 @@ void UIA_Alpha::Update(float dt)
 		GetTarget()->SetAlpha(target_alpha);
 		Finished();
 
-		UI_Event* ev = new UI_Event(ui_event_type::event_alpha_anim_finished, GetTarget());
-		GetUIMain()->ExpandEvent(ev);
+		GetTarget()->InvokeOnAnimationAlphaFinished();
 	}
 }
 

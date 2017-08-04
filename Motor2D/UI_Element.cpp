@@ -85,7 +85,7 @@ void UI_Element::InvokeOnMouseUp()
 
 void UI_Element::InvokeOnInteractableTrue()
 {
-	UI_Event* ev = new UI_Event(ui_event_type::event_interactable_on);
+	UI_Event* ev = new UI_Event(ui_event_type::event_interactable_on, this);
 
 	if (OnInteractableTrue)
 		OnInteractableTrue(ev);
@@ -95,7 +95,7 @@ void UI_Element::InvokeOnInteractableTrue()
 
 void UI_Element::InvokeOnInteractableFalse()
 {
-	UI_Event* ev = new UI_Event(ui_event_type::event_interactable_off);
+	UI_Event* ev = new UI_Event(ui_event_type::event_interactable_off, this);
 
 	if (OnInteractableFalse)
 		OnInteractableFalse(ev);
@@ -105,7 +105,7 @@ void UI_Element::InvokeOnInteractableFalse()
 
 void UI_Element::InvokeOnVisibleTrue()
 {
-	UI_Event* ev = new UI_Event(ui_event_type::event_visible_on);
+	UI_Event* ev = new UI_Event(ui_event_type::event_visible_on, this);
 
 	if (OnVisibleTrue)
 		OnVisibleTrue(ev);
@@ -115,10 +115,30 @@ void UI_Element::InvokeOnVisibleTrue()
 
 void UI_Element::InvokeOnVisibleFalse()
 {
-	UI_Event* ev = new UI_Event(ui_event_type::event_visible_off);
+	UI_Event* ev = new UI_Event(ui_event_type::event_visible_off, this);
 
 	if (OnVisibleFalse)
 		OnVisibleFalse(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
+void UI_Element::InvokeOnAnimationInterpolationFinished()
+{
+	UI_Event* ev = new UI_Event(ui_event_type::event_interpolation_anim_finished, this);
+
+	if (OnAnimationFinished)
+		OnAnimationFinished(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
+void UI_Element::InvokeOnAnimationAlphaFinished()
+{
+	UI_Event* ev = new UI_Event(ui_event_type::event_alpha_anim_finished, this);
+
+	if (OnAnimationFinished)
+		OnAnimationFinished(ev);
 
 	GetEventSystem()->SendEvent(ev);
 }

@@ -38,8 +38,7 @@ void UIA_Interpolation::Update(float dt)
 		GetTarget()->MoveToAngle(distance, angle);
 		Finished();
 
-		UI_Event* ev = new UI_Event(ui_event_type::event_interpolation_anim_finished, GetTarget());
-		GetUIMain()->ExpandEvent(ev);
+		GetTarget()->InvokeOnAnimationInterpolationFinished();
 	}
 }
 
