@@ -257,6 +257,11 @@ void UI_Element::SetAlpha(float set)
 		alpha = 0;
 }
 
+void UI_Element::SetTabIndex(int set)
+{
+	tab_index = set;
+}
+
 void UI_Element::SetDebugColor(UI_Color color)
 {
 	debug_color = color;
@@ -348,6 +353,11 @@ bool UI_Element::GetFocus()
 float UI_Element::GetAlpha()
 {
 	return alpha;
+}
+
+int UI_Element::GetTabIndex()
+{
+	return tab_index;
 }
 
 bool UI_Element::GetMouseOver()

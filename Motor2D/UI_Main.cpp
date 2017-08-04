@@ -197,16 +197,16 @@ void UI_Main::UIRenderPoint(int x, int y, int r, int g, int b, int a)
 	App->render->DrawCircle(x, y, 1, r, g, b, a, true);
 }
 
-void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, int b, int a)
+void UI_Main::UIRenderText(int x, int y, const char* text, Font* font, int r, int g, int b, int a)
 {
 	int size_w, size_h = 0;
 
-	SDL_Texture* texture = App->font->Print(text, { (Uint8)r, (Uint8)g, (Uint8)b, (Uint8)a }, font);
+	SDL_Texture* texture = App->font->Print(text, { (Uint8)r, (Uint8)g, (Uint8)b, 255 }, font);
 	App->font->CalcSize(text, size_w, size_h, font);
 
 	SDL_Rect rect = { 0, 0, size_w, size_h };
 
-	App->render->Blit(texture, x, y, &rect);
+	App->render->Blit(texture, x, y, &rect, a);
 
 	App->tex->UnLoadTexture(texture);
 }
@@ -214,6 +214,15 @@ void UI_Main::UIRenderText(int x, int y, char* text, Font* font, int r, int g, i
 void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect, float alpha)
 {
 	App->render->Blit(GetAtlas(), x, y, &rect, alpha);
+}
+
+Font * UI_Main::UILoadFont(const char * name)
+{
+	Font* ret = nullptr;
+
+	ret = App->font->GetFont(name);
+
+	return ret;
 }
 
 void UI_Main::UISetViewport(int x, int y, int w, int h)

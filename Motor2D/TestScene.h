@@ -23,6 +23,8 @@ public:
 	UI_Element* test_element = nullptr;
 	UI_Element* test_element2 = nullptr;
 	UI_Element* test_element3 = nullptr;
+
+	UI_Text*    text_test = nullptr;
 };
 
 void Test1MouseClick(UI_EventMouse* ev);

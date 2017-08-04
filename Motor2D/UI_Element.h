@@ -43,6 +43,7 @@ private:
 enum ui_element_type
 {
 	ui_element_null,
+	ui_element_text,
 	ui_element_panel,
 	ui_element_button,
 };
@@ -112,6 +113,8 @@ public:
 
 	void SetAlpha(float set);
 
+	void SetTabIndex(int set);
+
 	void SetDebugColor(UI_Color color);
 
 	// Return if ui_element uses an anchor
@@ -141,6 +144,8 @@ public:
 	bool GetFocus();
 
 	float GetAlpha();
+
+	int GetTabIndex();
 
 	// Returns true if the mouse is over the element
 	bool GetMouseOver();
@@ -232,6 +237,7 @@ private:
 	bool			  uses_anchor = false;
 	UI_Transform	  viewport;
 	float			  alpha = 255.0f;
+	int				  tab_index = 0;
 
 	ui_element_type   type = ui_element_type::ui_element_null;
 

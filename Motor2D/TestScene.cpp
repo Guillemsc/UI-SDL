@@ -4,6 +4,7 @@
 #include "UI_Animator.h"
 #include "UIA_Interpolation.h"
 #include "UIA_Alpha.h"
+#include "UI_Text.h"
 #include "p2Log.h"
 
 TestScene::TestScene()
@@ -41,6 +42,14 @@ bool TestScene::Start()
 	test_element->OnMouseClick = Test1MouseClick;
 
 	test_element->GetAnimator()->StartAnimationAlpha(uia_alpha_type::uia_alpha_quadraticEaseInOut, 0, 2);
+
+	text_test = new UI_Text(App->ui);
+	text_test->SetAnchor(UI_Point(0, 1));
+	text_test->SetPos(UI_Point(50, -100));
+	text_test->SetSize(UI_Point(50, 50));
+	text_test->SetText("hi :)");
+	text_test->SetDebugColor(UI_Color(0, 255, 0, 30));
+	App->ui->AddElement(text_test);
 
 	return true;
 }
