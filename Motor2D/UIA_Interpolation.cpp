@@ -1,5 +1,6 @@
 #include "UIA_Interpolation.h"
 #include "UI_Element.h"
+#include "UI_EventSystem.h"
 #include "p2Log.h"
 
 UIA_Interpolation::UIA_Interpolation(uia_interpolation_type _type, UI_Element* target, UI_Point _target_pos, float _time_sec) : UI_Animation(target)
@@ -36,6 +37,9 @@ void UIA_Interpolation::Update(float dt)
 		float distance = GetTarget()->GetAnimator()->DistanceFromtTwoPoints(GetTarget()->GetTransformPos(), target_pos);
 		GetTarget()->MoveToAngle(distance, angle);
 		Finished();
+
+		UI_Event* ev = new UI_Event(ui_event_type::event_interpolation_anim_finished, GetTarget());
+		GetUIMain()->ExpandEvent(ev);
 	}
 }
 

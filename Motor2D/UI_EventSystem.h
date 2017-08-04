@@ -82,6 +82,9 @@ enum ui_event_type
 	event_visible_on,
 	event_visible_off,
 
+	event_interpolation_anim_finished,
+	event_alpha_anim_finished,
+
 	event_window_resize,
 };
 

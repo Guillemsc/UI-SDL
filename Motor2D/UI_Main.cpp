@@ -82,10 +82,8 @@ bool UI_Main::CleanUp()
 	bool ret = true;
 
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
-	{
 		(*it)->Delete();
-	}
-
+	
 	DeleteElements();
 
 	ui_event_system->CleanUp();

@@ -32,9 +32,9 @@ void UI_Animator::PostUpdate()
 void UI_Animator::CleanUp()
 {
 	for (list<UI_Animation*>::iterator it = animations.begin(); it != animations.end(); it++)
-	{
 		(*it)->Finished();
-	}
+	
+	DeleteAnimations();
 }
 
 void UI_Animator::StartAnimationInterpolation(uia_interpolation_type type, UI_Point target_pos, float time_sec)

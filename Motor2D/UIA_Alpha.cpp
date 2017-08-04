@@ -1,5 +1,6 @@
 #include "UIA_Alpha.h"
 #include "UI_Element.h"
+#include "UI_EventSystem.h"
 
 UIA_Alpha::UIA_Alpha(uia_alpha_type _type, UI_Element * target, float _target_alpha, float _time_sec) : UI_Animation(target)
 {
@@ -34,6 +35,9 @@ void UIA_Alpha::Update(float dt)
 	{
 		GetTarget()->SetAlpha(target_alpha);
 		Finished();
+
+		UI_Event* ev = new UI_Event(ui_event_type::event_alpha_anim_finished, GetTarget());
+		GetUIMain()->ExpandEvent(ev);
 	}
 }
 
