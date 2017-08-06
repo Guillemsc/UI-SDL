@@ -46,6 +46,7 @@ enum ui_element_type
 	ui_element_text,
 	ui_element_panel,
 	ui_element_button,
+	ui_element_image,
 };
 
 // --------------------------------------------------
@@ -114,6 +115,9 @@ public:
 	void SetAlpha(float set);
 
 	void SetTabIndex(int set);
+
+	void SetBackgroundColor(UI_Color color);
+	void SetOutlineColor(UI_Color color);
 
 	void SetDebugColor(UI_Color color);
 
@@ -251,6 +255,9 @@ private:
 	UI_Main*          ui_main = nullptr;
 	UI_EventSystem*   event_system = nullptr;
 	UI_Animator*	  ui_animator = nullptr;
+
+	UI_Color		  background_color = {0, 0, 0, 0};
+	UI_Color		  outline_color = { 0, 0, 0, 0 };
 
 	UI_Color		  debug_color;
 };

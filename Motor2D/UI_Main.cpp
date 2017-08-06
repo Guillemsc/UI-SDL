@@ -197,22 +197,25 @@ void UI_Main::UIRenderPoint(int x, int y, int r, int g, int b, int a)
 	App->render->DrawCircle(x, y, 1, r, g, b, a, true);
 }
 
-void UI_Main::UIRenderText(int x, int y, const char* text, Font* font, int r, int g, int b, int a)
+UI_Point UI_Main::UIRenderText(int x, int y, const char* text, Font* font, int r, int g, int b, int a)
 {
 	int size_w, size_h = 0;
 
-	SDL_Texture* texture = App->font->Print(text, { (Uint8)r, (Uint8)g, (Uint8)b, 255 }, font);
+	SDL_Texture* texture = App->font->Print(text, { (Uint8)r, (Uint8)g, (Uint8)b, (Uint8)a }, font);
 	App->font->CalcSize(text, size_w, size_h, font);
 
 	SDL_Rect rect = { 0, 0, size_w, size_h };
 
-	App->render->Blit(texture, x, y, &rect, a);
+	App->render->Blit(texture, x, y, &rect, (Uint8)a);
 
 	App->tex->UnLoadTexture(texture);
+
+	return UI_Point(size_w, size_h);
 }
 
-void UI_Main::UIRenderImage(int x, int y, SDL_Rect rect, float alpha)
+void UI_Main::UIRenderImage(int x, int y, int rect_x, int rect_y, int rect_w, int rect_h, float alpha)
 {
+	SDL_Rect rect = { rect_x, rect_y, rect_w, rect_h };
 	App->render->Blit(GetAtlas(), x, y, &rect, alpha);
 }
 
@@ -267,11 +270,11 @@ void UI_Main::UpdateElements(float dt)
 
 		if ((*it)->GetVisible())
 		{
+			(*it)->UpdateElement(dt);
+
 			(*it)->Update();
 
 			(*it)->Draw();
-
-			(*it)->UpdateElement(dt);
 		}
 
 		UIResetViewport();
@@ -362,6 +365,7 @@ void UI_Main::DeleteElements()
 {
 	for (list<UI_Element*>::iterator del = to_delete.begin(); del != to_delete.end();)
 	{
+		// Iterate thorugh all elements and clean everything
 		for (list<UI_Element*>::iterator el = elements.begin(); el != elements.end();)
 		{
 			if ((*del) == (*el))

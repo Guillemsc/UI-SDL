@@ -262,10 +262,19 @@ void UI_Element::SetTabIndex(int set)
 	tab_index = set;
 }
 
+void UI_Element::SetBackgroundColor(UI_Color color)
+{
+	background_color = color;
+}
+
+void UI_Element::SetOutlineColor(UI_Color color)
+{
+	outline_color = color;
+}
+
 void UI_Element::SetDebugColor(UI_Color color)
 {
 	debug_color = color;
-	alpha = color.a;
 }
 
 bool UI_Element::GetUsesAnchor()
@@ -453,8 +462,15 @@ void UI_Element::UpdateElement(float dt)
 {
 	if (GetUiMain()->GetDebug())
 	{
-		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, GetDebugColor().r, GetDebugColor().g, GetDebugColor().b, alpha, true);
+		// Debug
+		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, debug_color.r, debug_color.g, debug_color.b, alpha, true);
 	}
+
+	// Background
+	GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, background_color.r, background_color.g, background_color.b, alpha, true);
+
+	// Outline
+	GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, outline_color.r, outline_color.g, outline_color.b, alpha, false);
 
 	UpdatePos();
 

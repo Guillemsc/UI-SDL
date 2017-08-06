@@ -6,6 +6,7 @@
 #include "UIA_Alpha.h"
 #include "UI_Text.h"
 #include "p2Log.h"
+#include "UI_Image.h"
 
 TestScene::TestScene()
 {
@@ -23,33 +24,44 @@ bool TestScene::Start()
 	test_element->SetPos(UI_Point(-355, 35));
 	test_element->SetSize(UI_Point(300, 300));
 	test_element->SetAnchor(UI_Point(1.0f, 0.0f));
-	test_element->SetDebugColor(UI_Color(255, 0, 0, 255));
+	test_element->SetBackgroundColor(UI_Color(255, 0, 0));
+	test_element->SetAlpha(0);
 	App->ui->AddElement(test_element);
 
 	test_element2 = new UI_Element(App->ui, ui_element_button);
 	test_element2->SetPos(UI_Point(130, 100));
 	test_element2->SetSize(UI_Point(100, 100));
-	test_element2->SetDebugColor(UI_Color(0, 255, 0, 255));
+	test_element2->SetBackgroundColor(UI_Color(0, 255, 0));
 	test_element->AddChild(test_element2);
 	App->ui->AddElement(test_element2);
 
 	test_element3 = new UI_Element(App->ui, ui_element_button);
 	test_element3->SetPos(UI_Point(-10, 10));
 	test_element3->SetSize(UI_Point(30, 30));
-	test_element3->SetDebugColor(UI_Color(0, 0, 255, 255));
+	test_element3->SetBackgroundColor(UI_Color(0, 0, 255));
 	test_element2->AddChild(test_element3);
 	App->ui->AddElement(test_element3);
 	test_element->OnMouseClick = Test1MouseClick;
 
-	test_element->GetAnimator()->StartAnimationAlpha(uia_alpha_type::uia_alpha_quadraticEaseInOut, 0, 2);
+	test_element->GetAnimator()->StartAnimationAlpha(uia_alpha_type::uia_alpha_quadraticEaseInOut, 255, 2);
 
 	text_test = new UI_Text(App->ui);
 	text_test->SetAnchor(UI_Point(0, 1));
 	text_test->SetPos(UI_Point(50, -100));
-	text_test->SetSize(UI_Point(50, 50));
-	text_test->SetText("hi :)");
-	text_test->SetDebugColor(UI_Color(0, 255, 0, 30));
+	text_test->SetSize(UI_Point(100, 70));
+	text_test->SetText("hi\nlolgfdg");
+	text_test->SetTextAlign(ui_text_align::ui_text_align_left);
+	text_test->SetDebugColor(UI_Color(0, 255, 0, 0));
+	text_test->SetBackgroundColor(UI_Color(0, 32, 0, 100));
+	text_test->SetOutlineColor(UI_Color(0, 32, 0, 100));
+	text_test->OnMouseClick = TextClick;
 	App->ui->AddElement(text_test);
+
+	image_test = new UI_Image(App->ui);
+	image_test->SetPos(UI_Point(500, 400));
+	image_test->SetImage(0, 0, 190, 49);
+	image_test->SetAlpha(255);
+	App->ui->AddElement(image_test);
 
 	return true;
 }
@@ -77,4 +89,9 @@ bool TestScene::CleanUp()
 void Test1MouseClick(UI_EventMouse * ev)
 {
 	LOG("hi");
+}
+
+void TextClick(UI_EventMouse * ev)
+{
+	App->ui->CleanUp();
 }

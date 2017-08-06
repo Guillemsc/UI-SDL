@@ -143,7 +143,9 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	float speed = (1 * 1) / scale;
 
 	SDL_Rect rect;
-	if (use_camera) {
+
+	if (use_camera) 
+	{
 		rect.x = (int)(camera.x * speed) + x * scale;
 		rect.y = (int)(camera.y * speed) + y * scale;
 	}
@@ -152,15 +154,16 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 		rect.x = (int)x * scale;
 		rect.y = (int)y * scale;
 	}
+
+	SDL_SetTextureAlphaMod(texture, alpha);
+
 	if(section != NULL)
 	{
 		rect.w = section->w;
 		rect.h = section->h;
 	}
-
 	else
 	{
-		SDL_SetTextureAlphaMod(texture, alpha);
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 

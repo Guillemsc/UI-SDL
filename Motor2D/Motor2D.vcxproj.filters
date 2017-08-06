@@ -79,6 +79,9 @@
     <ClCompile Include="UI_Text.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Image.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -169,6 +172,9 @@
       <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
     </ClInclude>
     <ClInclude Include="UI_Text.h">
+      <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Image.h">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClInclude>
   </ItemGroup>

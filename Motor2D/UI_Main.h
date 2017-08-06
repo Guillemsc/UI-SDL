@@ -83,8 +83,8 @@ public:
 	void UIRenderQuad(int x, int y, int w, int h, int r, int g, int b, int a, bool filled);
 	void UIRenderLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a);
 	void UIRenderPoint(int x, int y, int r, int g, int b, int a);
-	void UIRenderText(int x, int y, const char* text, Font* font, int r, int g, int b, int a);
-	void UIRenderImage(int x, int y, SDL_Rect rect, float alpha);
+	UI_Point UIRenderText(int x, int y, const char* text, Font* font, int r, int g, int b, int a);
+	void UIRenderImage(int x, int y, int rect_x, int rect_y, int rect_w, int rect_h, float alpha);
 	Font* UILoadFont(const char* name);
 
 	void UISetViewport(int x, int y, int w, int h);
@@ -149,7 +149,7 @@ public:
 		a = 255;
 	};
 
-	UI_Color(int _r, int _g, int _b, int _a)
+	UI_Color(int _r, int _g, int _b, int _a = 255)
 	{
 		r = _r;
 		g = _g;
