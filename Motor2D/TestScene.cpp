@@ -5,6 +5,7 @@
 #include "UIA_Interpolation.h"
 #include "UIA_Alpha.h"
 #include "UI_Text.h"
+#include "UI_Button.h"
 #include "p2Log.h"
 #include "UI_Image.h"
 
@@ -56,6 +57,10 @@ bool TestScene::Start()
 	//image_test->SetImage(0, 0, 190, 49);
 
 	App->ui->AddElement(image_test);
+
+	button_test = new UI_Button(App->ui);
+	button_test->SetPos(UI_Point(200, 200));
+	App->ui->AddElement(button_test);
 
 	return true;
 }

@@ -8,6 +8,7 @@
 class UI_EventMouse;
 
 class UI_Image;
+class UI_Button;
 
 class TestScene : public Scene
 {
@@ -29,6 +30,8 @@ public:
 	UI_Text*    text_test = nullptr;
 
 	UI_Image*   image_test = nullptr;
+
+	UI_Button*  button_test = nullptr;
 };
 
 void Test1MouseClick(UI_EventMouse* ev);
