@@ -228,6 +228,18 @@ Font * UI_Main::UILoadFont(const char * name)
 	return ret;
 }
 
+float UI_Main::UIGetFontSize(Font* font)
+{
+	float ret = 0;
+
+	int size_w, size_h = 0;
+	App->font->CalcSize("@", size_w, size_h, font);
+
+	ret = size_h;
+
+	return ret;
+}
+
 void UI_Main::UISetViewport(int x, int y, int w, int h)
 {
 	App->render->SetViewPort({ x, y, w, h });

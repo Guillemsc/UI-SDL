@@ -2,7 +2,8 @@
 
 UI_Image::UI_Image(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::ui_element_image)
 {
-
+	SetSize(UI_Point(100, 100));
+	SetBackgroundColor(UI_Color(255, 0, 0, 255));
 }
 
 void UI_Image::SetImage(int _rect_x, int _rect_y, int _rect_w, int _rect_h)
@@ -12,11 +13,8 @@ void UI_Image::SetImage(int _rect_x, int _rect_y, int _rect_w, int _rect_h)
 	rect_w = _rect_w;
 	rect_h = _rect_h;
 
-	if (GetSize().x < _rect_w)
-		SetSize(UI_Point(_rect_w, GetSize().y));
 
-	if (GetSize().y < _rect_h)
-		SetSize(UI_Point(GetSize().x, _rect_h));
+	SetSize(UI_Point(_rect_w, _rect_h));
 }
 
 void UI_Image::Update()

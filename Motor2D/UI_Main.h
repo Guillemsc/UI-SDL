@@ -86,6 +86,7 @@ public:
 	UI_Point UIRenderText(int x, int y, const char* text, Font* font, int r, int g, int b, int a);
 	void UIRenderImage(int x, int y, int rect_x, int rect_y, int rect_w, int rect_h, float alpha);
 	Font* UILoadFont(const char* name);
+	float UIGetFontSize(Font* font);
 
 	void UISetViewport(int x, int y, int w, int h);
 	void UIResetViewport();

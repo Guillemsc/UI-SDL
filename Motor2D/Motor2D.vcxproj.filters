@@ -76,10 +76,10 @@
     <ClCompile Include="UIA_Alpha.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Text.cpp">
+    <ClCompile Include="UI_Image.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Image.cpp">
+    <ClCompile Include="UI_Text.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClCompile>
   </ItemGroup>
