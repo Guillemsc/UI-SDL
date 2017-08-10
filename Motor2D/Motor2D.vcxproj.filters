@@ -85,6 +85,9 @@
     <ClCompile Include="UI_Button.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Panel.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -181,6 +184,9 @@
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClInclude>
     <ClInclude Include="UI_Button.h">
+      <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Panel.h">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClInclude>
   </ItemGroup>

@@ -316,7 +316,17 @@ void UI_Main::CheckEvents()
 
 		if (mouse.x > pos.x && mouse.x < pos.x + size.x && mouse.y > pos.y && mouse.y < pos.y + size.y)
 		{
+			mouse_over_enter = nullptr;
+			mouse_click = nullptr;
+			mouse_down = nullptr;
+			mouse_up = nullptr;
+
 			// Mouse over --------------
+			if (mouse_over != nullptr && mouse_over->GetMouseOver())
+			{
+				mouse_over_out = mouse_over;
+			}
+
 			mouse_over = (*it);
 
 			// Mouse over enter --------
@@ -387,15 +397,7 @@ void UI_Main::DeleteElements()
 			}
 
 			// Clean from childs
-			for (list<UI_Element*>::iterator ch = (*el)->GetChilds().begin(); ch != (*el)->GetChilds().end(); )
-			{
-				if ((*ch) == (*del))
-				{
-					ch = (*el)->GetChilds().erase(ch);
-				}
-				else
-					++ch;
-			}
+			(*el)->RemoveChild((*del));
 
 			// Clean from parents
 			if ((*el)->GetParent() == (*del))
@@ -523,5 +525,11 @@ void UI_Main::AddElement(UI_Element * element)
 
 void UI_Main::DeleteElement(UI_Element * element)
 {
+	for (list<UI_Element*>::iterator del = to_delete.begin(); del != to_delete.end(); del++)
+	{
+		if ((*del) == element)
+			return;
+	}
+
 	to_delete.push_back(element);
 }

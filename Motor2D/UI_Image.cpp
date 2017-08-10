@@ -15,7 +15,8 @@ void UI_Image::SetImage(int _rect_x, int _rect_y, int _rect_w, int _rect_h)
 
 	SetSize(UI_Point(_rect_w, _rect_h));
 
-	SetBackgroundColor(UI_Color(255, 0, 0, 255));
+	SetBackgroundColor(UI_Color(0, 0, 0, 0));
+	SetBackgroundColor(UI_Color(0, 0, 0, 0));
 }
 
 void UI_Image::Update()

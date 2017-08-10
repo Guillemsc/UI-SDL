@@ -14,10 +14,13 @@ public:
 	void SetOverColor(UI_Color background, UI_Color outline);
 	void SetIdleColor(UI_Color background, UI_Color outline);
 
+	UI_Text* GetText();
+
 private:
 	void Update();
 	void Draw();
 	void OnEvent(UI_Event* ev);
+	void CleanUp();
 
 	void SetIdle();
 	void SetOver();
@@ -32,6 +35,8 @@ private:
 
 	UI_Color outline_over;
 	UI_Color outline_pressed;
+
+	UI_Text* text = nullptr;
 };
 
 #endif

@@ -105,6 +105,7 @@
     <ClCompile Include="UI_EventSystem.cpp" />
     <ClCompile Include="UI_Image.cpp" />
     <ClCompile Include="UI_Main.cpp" />
+    <ClCompile Include="UI_Panel.cpp" />
     <ClCompile Include="UI_Text.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="UI_EventSystem.h" />
     <ClInclude Include="UI_Image.h" />
     <ClInclude Include="UI_Main.h" />
+    <ClInclude Include="UI_Panel.h" />
     <ClInclude Include="UI_Text.h" />
   </ItemGroup>
   <ItemGroup>

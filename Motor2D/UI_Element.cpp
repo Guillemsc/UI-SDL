@@ -11,6 +11,8 @@ UI_Element::UI_Element(UI_Main* _ui_main, ui_element_type _type)
 	type = _type;
 
 	ui_animator = new UI_Animator(this);
+
+	ui_main->AddElement(this);
 }
 
 UI_Element::~UI_Element()
@@ -463,14 +465,14 @@ void UI_Element::UpdateElement(float dt)
 	if (GetUiMain()->GetDebug())
 	{
 		// Debug
-		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, debug_color.r, debug_color.g, debug_color.b, alpha, true);
+		GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, debug_color.r, debug_color.g, debug_color.b, debug_color.a, true);
 	}
 
 	// Background
-	GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, background_color.r, background_color.g, background_color.b, alpha, true);
+	GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, background_color.r, background_color.g, background_color.b, background_color.a, true);
 
 	// Outline
-	GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, outline_color.r, outline_color.g, outline_color.b, alpha, false);
+	GetUiMain()->UIRenderQuad(ZeroPos().x, ZeroPos().y, GetSize().x, GetSize().y, outline_color.r, outline_color.g, outline_color.b, outline_color.a, false);
 
 	UpdatePos();
 
