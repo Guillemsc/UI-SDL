@@ -8,6 +8,7 @@
 #include "UI_Button.h"
 #include "p2Log.h"
 #include "UI_Image.h"
+#include "UI_Panel.h"
 
 TestScene::TestScene()
 {
@@ -54,7 +55,11 @@ bool TestScene::Start()
 	////image_test->SetImage(0, 0, 190, 49);
 
 	button_test = new UI_Button(App->ui);
-	button_test->SetPos(UI_Point(0, 0));
+	button_test->SetPos(UI_Point(0, 300));
+
+	panel_test = new UI_Panel(App->ui);
+	panel_test->SetPos(UI_Point(100, 100));
+	panel_test->AddChild(button_test);
 
 	return true;
 }

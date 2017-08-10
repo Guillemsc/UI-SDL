@@ -16,7 +16,19 @@ private:
 	void OnEvent(UI_Event* ev);
 	void CleanUp();
 
+	void UpdateSize();
+
 public:
+	UI_Button* updown_scroll_button = nullptr;
+	UI_Button* leftright_scroll_button = nullptr;
+
+	float updrown_scroll = 0.0f;
+	float leftright_scroll = 0.0f;
+
+	float updown_size = 0.0f;
+	float leftright_size = 0.0f;
+
+	int button_size = 0;
 };
 
 #endif

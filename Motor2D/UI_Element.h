@@ -130,6 +130,9 @@ public:
 	// Gets size of the element
 	UI_Point GetSize();
 
+	// Gets the position of the object set by the user
+	UI_Point GetPos();
+
 	// Gets the position of the transform element
 	UI_Point GetTransformPos();
 
@@ -183,9 +186,6 @@ protected:
 	UI_Point ZeroPos();
 
 private:
-	// Gets the position of the object set by the user
-	UI_Point GetPos();
-
 	// Gets the position of the object relative to the it's parents
 	UI_Point GetRelativePosToParents();
 
@@ -231,7 +231,7 @@ public:
 
 	std::function<void(UI_Event*)> OnAnimationFinished;
 
-private: 
+protected: 
 	bool              mouse_over = false;
 	bool              mouse_down = false;
 

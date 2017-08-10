@@ -438,6 +438,7 @@ void UI_Element::AddChild(UI_Element* child)
 	
 	child->parent = this;
 	child->DeleteAnchor();
+	child->BringToFrontAndChilds();
 	childs.push_back(child);
 }
 
