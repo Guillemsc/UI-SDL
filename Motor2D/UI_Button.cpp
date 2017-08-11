@@ -43,13 +43,28 @@ void UI_Button::OnEvent(UI_Event * ev)
 		return;
 
 	if (ev->GetEventType() == ui_event_type::event_mouse_down)
+	{
 		SetPressed();
-
-	else if (ev->GetEventType() == ui_event_type::event_mouse_over_enter || ev->GetEventType() == ui_event_type::event_mouse_up)
+	}
+	else if (ev->GetEventType() == ui_event_type::event_mouse_up)
+	{
+		if(ev->GetSender()->GetMouseOver())
+			SetOver();
+		else
+			SetIdle();
+	}
+	else if (ev->GetEventType() == ui_event_type::event_mouse_over_enter)
+	{
+		if(!ev->GetSender()->GetMouseDown())
 		SetOver();
-
+	}
 	else if (ev->GetEventType() == ui_event_type::event_mouse_over_out)
-		SetIdle();
+	{
+		if(ev->GetSender()->GetMouseDown())
+			SetPressed();
+		else
+			SetIdle();
+	}
 }
 
 void UI_Button::CleanUp()
