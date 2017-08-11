@@ -63,6 +63,21 @@ private:
 
 // --------------------------------------------------
 
+class UI_EventTarget : public UI_Event
+{
+public:
+	UI_EventTarget(ui_event_type type, UI_Element* sender, UI_Element* target);
+
+	virtual ~UI_EventTarget();
+
+	UI_Element* GetTarget();
+
+private:
+	UI_Element* target = nullptr;
+};
+
+// --------------------------------------------------
+
 enum ui_event_type
 {
 	event_null,
@@ -84,6 +99,9 @@ enum ui_event_type
 
 	event_interpolation_anim_finished,
 	event_alpha_anim_finished,
+
+	event_child_added,
+	event_child_removed,
 
 	event_window_resize,
 };

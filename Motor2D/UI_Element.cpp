@@ -145,6 +145,26 @@ void UI_Element::InvokeOnAnimationAlphaFinished()
 	GetEventSystem()->SendEvent(ev);
 }
 
+void UI_Element::InvokeOnChildAdded(UI_Element* child)
+{
+	UI_EventTarget* ev = new UI_EventTarget(ui_event_type::event_child_added, this, child);
+
+	if (OnChildAdded)
+		OnChildAdded(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
+void UI_Element::InvokeOnChildRemoved(UI_Element* child)
+{
+	UI_EventTarget* ev = new UI_EventTarget(ui_event_type::event_child_removed, this, child);
+
+	if (OnChildRemoved)
+		OnChildRemoved(ev);
+
+	GetEventSystem()->SendEvent(ev);
+}
+
 void UI_Element::SetPos(UI_Point _pos)
 {
 	pos = _pos;
@@ -440,6 +460,8 @@ void UI_Element::AddChild(UI_Element* child)
 	child->DeleteAnchor();
 	child->BringToFrontAndChilds();
 	childs.push_back(child);
+
+	InvokeOnChildAdded(child);
 }
 
 void UI_Element::RemoveChild(UI_Element* child)
@@ -455,6 +477,10 @@ void UI_Element::RemoveChild(UI_Element* child)
 			break;
 		}
 	}
+
+	child->ResetParent();
+
+	InvokeOnChildRemoved(child);
 }
 
 void UI_Element::StartElement()

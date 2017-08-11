@@ -7,6 +7,7 @@ class UI_Element;
 class UI_Transform;
 class UI_Event;
 class UI_EventMouse;
+class UI_EventTarget;
 class UI_Point;
 class UI_Color;
 
@@ -82,6 +83,9 @@ public:
 
 	void InvokeOnAnimationInterpolationFinished();
 	void InvokeOnAnimationAlphaFinished();
+
+	void InvokeOnChildAdded(UI_Element* child);
+	void InvokeOnChildRemoved(UI_Element* child);
 
 	// Get the UI_Element type
 	ui_element_type GetType();
@@ -230,6 +234,10 @@ public:
 	std::function<void(UI_Event*)> OnVisibleFalse;
 
 	std::function<void(UI_Event*)> OnAnimationFinished;
+
+	std::function<void(UI_EventTarget*)> OnChildAdded;
+
+	std::function<void(UI_EventTarget*)> OnChildRemoved;
 
 protected: 
 	bool              mouse_over = false;

@@ -89,3 +89,17 @@ bool UI_EventMouse::ButtonRight()
 {
 	return right;
 }
+
+UI_EventTarget::UI_EventTarget(ui_event_type type, UI_Element * sender, UI_Element * _target) : UI_Event(type, sender)
+{
+	target = _target;
+}
+
+UI_EventTarget::~UI_EventTarget()
+{
+}
+
+UI_Element * UI_EventTarget::GetTarget()
+{
+	return target;
+}

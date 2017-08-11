@@ -346,12 +346,6 @@ void UI_Main::CheckEvents()
 			{
 				mouse_down = (*it);
 			}
-
-			// Mouse up ----------------
-			if ((*it)->GetMouseDown() && (GetMouseLeftUp() || GetMouseRightUp()))
-			{
-				mouse_up = (*it);
-			}
 		}
 		else
 		{
@@ -360,6 +354,12 @@ void UI_Main::CheckEvents()
 			{
 				mouse_over_out = (*it);
 			}
+		}
+
+		// Mouse up ----------------
+		if ((*it)->GetMouseDown() && (GetMouseLeftUp() || GetMouseRightUp()))
+		{
+			mouse_up = (*it);
 		}
 	}
 
@@ -462,10 +462,17 @@ void UI_Main::ElementBringToFrontAndChilds(UI_Element * element)
 			}
 		}
 
+		if ((*it) == element)
+		{
+			it = elements.erase(it);
+			deleted = true;
+		}
+
 		if (!deleted)
 			++it;
 	}
 	
+
 	elements.push_back(element);
 
 	for (list<UI_Element*>::iterator ch = childs.begin(); ch != childs.end(); ch++)
@@ -504,6 +511,12 @@ void UI_Main::ElementSendToBackAndChilds(UI_Element * element)
 				deleted = true;
 				break;
 			}
+		}
+
+		if ((*it) == element)
+		{
+			it = elements.erase(it);
+			deleted = true;
 		}
 
 		if (!deleted)
