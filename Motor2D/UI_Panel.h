@@ -22,26 +22,44 @@ private:
 	void OnEvent(UI_Event* ev);
 	void CleanUp();
 
-	void UpdateSize();
+	void UpdateUpdownButton();
+	void UpdownInput();
+	void UpdateUpdownScroll();
+
+	void UpdateLeftrightButton();
+	void LeftrightInput();
+	void UpdateLeftrightScroll();
+
+	void UpdateElementsPos();
 
 public:
+	// Button
 	UI_Button* updown_scroll_button = nullptr;
 	UI_Button* leftright_scroll_button = nullptr;
 
+	// Scroll positoin
 	float updown_scroll = 0.0f;
 	float leftright_scroll = 0.0f;
 
+	// Button position
 	float updown_button_pos = 0.0f;
+	float leftright_button_pos = 0.0f;
 
+	// Size of the elements
 	float updown_size = 0.0f;
 	float leftright_size = 0.0f;
 
+	// Track mouse pos
 	bool track_updown = false;
+	bool track_leftright = false;
 
+	// Button size
 	int button_size = 0;
 
+	// Last mouse pos
 	UI_Point last_mouse;
 
+	// List of elements
 	list<ui_panel_element> panel_elements;
 };
 

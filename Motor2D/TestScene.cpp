@@ -55,7 +55,7 @@ bool TestScene::Start()
 	////image_test->SetImage(0, 0, 190, 49);
 
 	button_test = new UI_Button(App->ui);
-	button_test->SetPos(UI_Point(0, 300));
+	button_test->SetPos(UI_Point(300, 300));
 
 	panel_test = new UI_Panel(App->ui);
 	panel_test->SetPos(UI_Point(100, 100));
