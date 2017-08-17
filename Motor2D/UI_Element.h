@@ -113,6 +113,7 @@ public:
 
 	// Changes the element visibility
 	void SetVisible(bool set);
+	void SetVisibleAndChilds(bool set);
 
 	void SetFocus(bool set);
 

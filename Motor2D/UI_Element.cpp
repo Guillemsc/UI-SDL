@@ -263,6 +263,15 @@ void UI_Element::SetVisible(bool set)
 	}
 }
 
+void UI_Element::SetVisibleAndChilds(bool set)
+{
+	this->SetVisible(set);
+	for (list<UI_Element*>::iterator it = childs.begin(); it != childs.end(); it++)
+	{
+		(*it)->SetVisible(set);
+	}
+}
+
 void UI_Element::SetFocus(bool set)
 {
 	focus = set;

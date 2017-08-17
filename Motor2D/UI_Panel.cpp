@@ -20,6 +20,21 @@ UI_Panel::UI_Panel(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::ui_
 
 	AddChild(updown_scroll_button);
 	AddChild(leftright_scroll_button);
+
+	SetUseScrolls(false);
+}
+
+void UI_Panel::SetUseScrolls(bool set)
+{
+	use_scrolls = set;
+
+	updown_scroll_button->SetVisibleAndChilds(set);
+	leftright_scroll_button->SetVisibleAndChilds(set);
+}
+
+void UI_Panel::SetAutoScrollDown(float set)
+{
+	auto_scroll_down = set;
 }
 
 void UI_Panel::Update()
@@ -27,7 +42,7 @@ void UI_Panel::Update()
 	// Updown ----
 	UpdateUpdownButton();
 
-	if (track_updown)
+	if (track_updown && use_scrolls)
 		UpdownInput();
 	
 	UpdateUpdownScroll();
@@ -36,7 +51,7 @@ void UI_Panel::Update()
 	// Leftright --
 	UpdateLeftrightButton();
 
-	if(track_leftright)
+	if(track_leftright && use_scrolls)
 	LeftrightInput();
 
 	UpdateLeftrightScroll();
@@ -76,7 +91,7 @@ void UI_Panel::OnEvent(UI_Event * ev)
 		}
 	}
 
-	if (ev->GetSender() == this)
+	else if (ev->GetSender() == this)
 	{
 		if (ev->GetEventType() == ui_event_type::event_child_added)
 		{
@@ -90,12 +105,50 @@ void UI_Panel::OnEvent(UI_Event * ev)
 
 			updown_scroll_button->BringToFront();
 			leftright_scroll_button->BringToFront();
+
+			if (auto_scroll_down)
+				ScrollDown();
+		}
+		else if (ev->GetEventType() == ui_event_type::event_child_removed)
+		{
+			UI_EventTarget* ta = (UI_EventTarget*)ev;
+
+			for (list<ui_panel_element>::iterator it = panel_elements.begin(); it != panel_elements.end();)
+			{
+				if (ta->GetTarget() == (*it).element)
+				{
+					panel_elements.erase(it);
+					break;
+				}
+				else
+					++it;
+			}
+		}
+	}
+	else if (ev->GetSender() == updown_scroll_button)
+	{
+		if (ev->GetEventType() == ui_event_type::event_delete)
+		{
+			updown_scroll_button = nullptr;
+		}
+	}
+	else if (ev->GetSender() == leftright_scroll_button)
+	{
+		if (ev->GetEventType() == ui_event_type::event_delete)
+		{
+			leftright_scroll_button = nullptr;
 		}
 	}
 }
 
 void UI_Panel::CleanUp()
 {
+	if (updown_scroll_button != nullptr)
+		updown_scroll_button->Delete();
+	
+	if (leftright_scroll_button != nullptr)
+		leftright_scroll_button->Delete();
+
 }
 
 void UI_Panel::UpdateUpdownButton()
@@ -186,5 +239,15 @@ void UI_Panel::UpdateElementsPos()
 		if (leftright_size < (*it).starting_pos.x + (*it).element->GetSize().x)
 			leftright_size = (*it).starting_pos.x + (*it).element->GetSize().x;
 	}
+}
+
+void UI_Panel::ScrollDown()
+{
+	UpdateElementsPos();
+	UpdateUpdownButton();
+
+	updown_button_pos = GetSize().y - updown_scroll_button->GetSize().y - button_size;
+
+	UpdateUpdownButton();
 }
 

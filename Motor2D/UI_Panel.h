@@ -15,6 +15,9 @@ class UI_Panel : public UI_Element
 {
 public:
 	UI_Panel(UI_Main* ui_main);
+
+	void SetUseScrolls(bool set);
+	void SetAutoScrollDown(float set);
 	
 private:
 	void Update();
@@ -32,7 +35,12 @@ private:
 
 	void UpdateElementsPos();
 
+	void ScrollDown();
+
 public:
+	bool auto_scroll_down = false;
+	bool use_scrolls = false;
+
 	// Button
 	UI_Button* updown_scroll_button = nullptr;
 	UI_Button* leftright_scroll_button = nullptr;
