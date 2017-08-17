@@ -48,6 +48,7 @@ enum ui_element_type
 	ui_element_panel,
 	ui_element_button,
 	ui_element_image,
+	ui_element_checkbox,
 };
 
 // --------------------------------------------------

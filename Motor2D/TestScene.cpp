@@ -54,12 +54,14 @@ bool TestScene::Start()
 	//image_test->SetPos(UI_Point(500, 400));
 	////image_test->SetImage(0, 0, 190, 49);
 
-	button_test = new UI_Button(App->ui);
-	button_test->SetPos(UI_Point(10, 10));
+	//button_test = new UI_Button(App->ui);
+	//button_test->SetPos(UI_Point(10, 10));
 
-	panel_test = new UI_Panel(App->ui);
-	panel_test->SetPos(UI_Point(10, 10));
-	panel_test->AddChild(button_test);
+	//panel_test = new UI_Panel(App->ui);
+	//panel_test->SetPos(UI_Point(10, 10));
+	//panel_test->AddChild(button_test);
+
+
 
 	return true;
 }

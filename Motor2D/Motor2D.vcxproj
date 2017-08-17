@@ -101,6 +101,7 @@
     <ClCompile Include="UIA_Interpolation.cpp" />
     <ClCompile Include="UI_Animator.cpp" />
     <ClCompile Include="UI_Button.cpp" />
+    <ClCompile Include="UI_CheckBox.cpp" />
     <ClCompile Include="UI_Element.cpp" />
     <ClCompile Include="UI_EventSystem.cpp" />
     <ClCompile Include="UI_Image.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="UIA_Interpolation.h" />
     <ClInclude Include="UI_Animator.h" />
     <ClInclude Include="UI_Button.h" />
+    <ClInclude Include="UI_CheckBox.h" />
     <ClInclude Include="UI_Element.h" />
     <ClInclude Include="UI_EventSystem.h" />
     <ClInclude Include="UI_Image.h" />

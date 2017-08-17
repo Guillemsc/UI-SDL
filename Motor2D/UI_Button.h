@@ -14,6 +14,10 @@ public:
 	void SetOverColor(UI_Color background, UI_Color outline);
 	void SetIdleColor(UI_Color background, UI_Color outline);
 
+	void SetPressedImage(int rect_x, int rect_y, int rect_w, int rect_h);
+	void SetOverImage(int rect_x, int rect_y, int rect_w, int rect_h);
+	void SetIdleImage(int rect_x, int rect_y, int rect_w, int rect_h);
+
 	UI_Text* GetText();
 
 private:
