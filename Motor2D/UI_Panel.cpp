@@ -37,7 +37,7 @@ void UI_Panel::SetAutoScrollDown(float set)
 	auto_scroll_down = set;
 }
 
-void UI_Panel::Update()
+void UI_Panel::Update(float dt)
 {
 	// Updown ----
 	UpdateUpdownButton();

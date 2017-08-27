@@ -5,9 +5,10 @@ UI_Text::UI_Text(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::ui_el
 	SetFont("default");
 	SetText("Text");
 	SetTextColor(UI_Color(255, 255, 255));
+	SetMultiLine(true);
 }
 
-void UI_Text::Update()
+void UI_Text::Update(float dt)
 {
 
 }
@@ -38,13 +39,16 @@ void UI_Text::Draw()
 		break;
 		}
 
-		(*it).text_size = this->GetUiMain()->UIRenderText(ZeroPos().x + (*it).align_pos.x, ZeroPos().y + (*it).align_pos.y + height, (*it).text.c_str(), font, color.r, color.g, color.b, this->GetAlpha());
+		(*it).text_size = ui_main->UIRenderText(ZeroPos().x + (*it).align_pos.x, ZeroPos().y + (*it).align_pos.y + height, (*it).text.c_str(), font, color.r, color.g, color.b, this->GetAlpha());
 
 		height += (*it).text_size.y;
 
 		if ((*it).text_size.x > biggest_width)
 			biggest_width = (*it).text_size.x;
 	}
+
+	if (height == 0 && font != nullptr)
+		height = ui_main->UIGetFontSize(font);
 
 	SetSize(UI_Point(biggest_width, height));
 }
@@ -58,7 +62,7 @@ void UI_Text::SetText(const char* _text)
 	string acumulate;
 	for (int i = 0; i < text.length(); i++)
 	{
-		if (text[i] == '\n')
+		if (text[i] == '\n' && multi_line)
 		{
 			ui_text_line new_line;
 			new_line.text = acumulate;
@@ -93,7 +97,7 @@ const char * UI_Text::GetText()
 
 void UI_Text::SetFont(const char * name)
 {
-	font = this->GetUiMain()->UILoadFont(name);
+	font = ui_main->UILoadFont(name);
 }
 
 void UI_Text::SetTextAlign(ui_text_align _align)
@@ -104,4 +108,14 @@ void UI_Text::SetTextAlign(ui_text_align _align)
 void UI_Text::SetLineHeight(int _height)
 {
 	line_height = _height;
+}
+
+void UI_Text::SetMultiLine(bool set)
+{
+	multi_line = set;
+}
+
+Font * UI_Text::GetFont()
+{
+	return font;
 }

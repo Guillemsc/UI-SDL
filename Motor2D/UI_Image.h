@@ -13,7 +13,7 @@ public:
 	void SetImage(int rect_x, int rect_y, int rect_w, int rect_h);
 
 private:
-	void Update();
+	void Update(float dt);
 	void Draw();
 
 private:

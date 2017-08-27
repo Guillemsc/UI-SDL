@@ -20,7 +20,7 @@ UI_Button::UI_Button(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::u
 	AddChild(text);
 }
 
-void UI_Button::Update()
+void UI_Button::Update(float dt)
 {
 }
 

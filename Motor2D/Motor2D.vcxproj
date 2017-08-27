@@ -108,6 +108,7 @@
     <ClCompile Include="UI_Main.cpp" />
     <ClCompile Include="UI_Panel.cpp" />
     <ClCompile Include="UI_Text.cpp" />
+    <ClCompile Include="UI_TextInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="UI_Main.h" />
     <ClInclude Include="UI_Panel.h" />
     <ClInclude Include="UI_Text.h" />
+    <ClInclude Include="UI_TextInput.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Game\config.xml">

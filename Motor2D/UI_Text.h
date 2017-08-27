@@ -30,9 +30,11 @@ public:
 	void SetFont(const char* name);
 	void SetTextAlign(ui_text_align align);
 	void SetLineHeight(int height);
+	void SetMultiLine(bool set);
+	Font* GetFont();
 
 private:
-	void Update();
+	void Update(float dt);
 	void Draw();
 
 private:
@@ -45,6 +47,8 @@ private:
 	ui_text_align align = ui_text_align_left;
 
 	list<ui_text_line> text_lines;
+
+	bool		  multi_line = true;
 };
 
 #endif

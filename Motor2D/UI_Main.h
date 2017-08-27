@@ -87,6 +87,8 @@ public:
 	void UIRenderImage(int x, int y, int rect_x, int rect_y, int rect_w, int rect_h, float alpha);
 	Font* UILoadFont(const char* name);
 	float UIGetFontSize(Font* font);
+	UI_Point UIGetTextSize(const char* text, Font* font);
+	bool UIGetKeyboardInput(const char*& input);
 
 	void UISetViewport(int x, int y, int w, int h);
 	void UIResetViewport();

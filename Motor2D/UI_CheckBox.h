@@ -2,9 +2,9 @@
 #define __UI_Button_H__
 
 #include "UI_Element.h"
+#include "UI_Image.h"
 
 class UI_Main;
-class UI_Image;
 
 class UI_CheckBox : public UI_Element
 {

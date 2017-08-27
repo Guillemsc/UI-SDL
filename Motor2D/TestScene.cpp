@@ -9,6 +9,7 @@
 #include "p2Log.h"
 #include "UI_Image.h"
 #include "UI_Panel.h"
+#include "UI_TextInput.h"
 
 TestScene::TestScene()
 {
@@ -61,7 +62,7 @@ bool TestScene::Start()
 	//panel_test->SetPos(UI_Point(10, 10));
 	//panel_test->AddChild(button_test);
 
-
+	textinput_test = new UI_TextInput(App->ui);
 
 	return true;
 }

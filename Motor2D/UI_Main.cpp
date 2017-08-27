@@ -240,6 +240,30 @@ float UI_Main::UIGetFontSize(Font* font)
 	return ret;
 }
 
+UI_Point UI_Main::UIGetTextSize(const char * text, Font* font)
+{
+	UI_Point ret;
+
+	int w, h;
+	App->font->CalcSize(text, w, h, font);
+
+	ret.x = w;
+	ret.y = h;
+
+	return ret;
+}
+
+bool UI_Main::UIGetKeyboardInput(const char *& input)
+{
+	if (App->input->input_text != "")
+	{
+		input = App->input->input_text.c_str();
+		return true;
+	}
+
+	return false;
+}
+
 void UI_Main::UISetViewport(int x, int y, int w, int h)
 {
 	App->render->SetViewPort({ x, y, w, h });
@@ -284,7 +308,7 @@ void UI_Main::UpdateElements(float dt)
 		{
 			(*it)->UpdateElement(dt);
 
-			(*it)->Update();
+			(*it)->Update(dt);
 
 			(*it)->Draw();
 		}

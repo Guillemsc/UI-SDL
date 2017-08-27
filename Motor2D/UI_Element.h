@@ -49,6 +49,7 @@ enum ui_element_type
 	ui_element_button,
 	ui_element_image,
 	ui_element_checkbox,
+	ui_element_textinput,
 };
 
 // --------------------------------------------------
@@ -60,7 +61,7 @@ public:
 	virtual ~UI_Element();
 
 	virtual void Start() {};
-	virtual void Update() {};
+	virtual void Update(float dt) {};
 	virtual void Draw() {};
 	virtual void CleanUp() {};
 	virtual void OnEvent(UI_Event* ev) {};

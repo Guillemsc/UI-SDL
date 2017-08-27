@@ -20,7 +20,7 @@ public:
 	void SetAutoScrollDown(float set);
 	
 private:
-	void Update();
+	void Update(float dt);
 	void Draw();
 	void OnEvent(UI_Event* ev);
 	void CleanUp();
