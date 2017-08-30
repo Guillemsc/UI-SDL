@@ -272,11 +272,6 @@ void UI_Element::SetVisibleAndChilds(bool set)
 	}
 }
 
-void UI_Element::SetFocus(bool set)
-{
-	focus = set;
-}
-
 void UI_Element::SetAlpha(float set)
 {
 	alpha = set;
@@ -383,11 +378,6 @@ bool UI_Element::GetInteractable()
 bool UI_Element::GetVisible()
 {
 	return visible;
-}
-
-bool UI_Element::GetFocus()
-{
-	return focus;
 }
 
 float UI_Element::GetAlpha()

@@ -18,6 +18,7 @@ private:
 
 	void UpdateBarPos(float dt);
 
+
 private:
 	UI_Text* text = nullptr;
 	string   internal_text = "";

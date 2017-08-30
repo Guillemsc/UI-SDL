@@ -117,8 +117,6 @@ public:
 	void SetVisible(bool set);
 	void SetVisibleAndChilds(bool set);
 
-	void SetFocus(bool set);
-
 	void SetAlpha(float set);
 
 	void SetTabIndex(int set);
@@ -154,8 +152,6 @@ public:
 
 	// Returns true if the element is visible
 	bool GetVisible();
-
-	bool GetFocus();
 
 	float GetAlpha();
 
@@ -258,7 +254,6 @@ protected:
 
 	bool			  interactable = true;
 	bool			  visible = true;
-	bool			  focus = false;
 
 	list<UI_Element*> childs;
 	UI_Element*       parent = nullptr;

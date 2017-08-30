@@ -72,6 +72,7 @@ public:
 
 	void AddElement(UI_Element* element);
 	void DeleteElement(UI_Element* element);
+	UI_Element* GetFocusedElement();
 
 	UI_Point GetMousePos();
 	bool GetMouseLeftDown();
@@ -114,6 +115,8 @@ private:
 	int				  window_height = 0;
 
 	bool              debug = false;
+
+	UI_Element*		  focused_element = nullptr;
 };
 
 

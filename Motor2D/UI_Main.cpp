@@ -444,6 +444,11 @@ void UI_Main::OnEvent(UI_Event * ev)
 {
 	switch (ev->GetEventType())
 	{
+		case ui_event_type::event_mouse_down:
+		{
+			focused_element = ev->GetSender();
+		}
+		break;
 	default:
 		break;
 	}
@@ -569,4 +574,9 @@ void UI_Main::DeleteElement(UI_Element * element)
 	}
 
 	to_delete.push_back(element);
+}
+
+UI_Element * UI_Main::GetFocusedElement()
+{
+	return focused_element;
 }
