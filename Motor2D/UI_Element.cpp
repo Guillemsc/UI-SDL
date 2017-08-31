@@ -303,6 +303,12 @@ void UI_Element::SetDebugColor(UI_Color color)
 	debug_color = color;
 }
 
+void UI_Element::ClearFocus()
+{
+	if (ui_main->GetFocusedElement() == this)
+		ui_main->ClearFocusedElement();
+}
+
 bool UI_Element::GetUsesAnchor()
 {
 	return uses_anchor;

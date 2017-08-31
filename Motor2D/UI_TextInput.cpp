@@ -8,7 +8,11 @@ UI_TextInput::UI_TextInput(UI_Main * ui_main) : UI_Element(ui_main, ui_element_t
 	text = new UI_Text(ui_main);
 	text->SetMultiLine(false);
 	text->SetText("");
+	text->SetPos(UI_Point(5, text->GetPos().y));
 	text->SetInteractable(false);
+
+	bar_x = text->GetPos().x;
+
 	SetSize(UI_Point(200, text->GetSize().y));
 	SetOutlineColor(UI_Color(255, 255, 255, 255));
 
@@ -83,9 +87,18 @@ void UI_TextInput::Update(float dt)
 
 		// Update text
 		text->SetText(internal_text.c_str());
+
+		// Dinamic pos
+		UpdateDynamicPos();
 	}
 
 	SetSize(UI_Point(GetSize().x, text->GetSize().y));
+}
+
+void UI_TextInput::CleanUp()
+{
+	if (text != nullptr)
+		text->Delete();
 }
 
 void UI_TextInput::Draw()
@@ -115,5 +128,20 @@ void UI_TextInput::UpdateBarPos(float dt)
 {
 	string part = internal_text.substr(0, bar_pos);
 
-	bar_x = ui_main->UIGetTextSize(part.c_str(), text->GetFont()).x;
+	bar_x = text->GetPos().x + ui_main->UIGetTextSize(part.c_str(), text->GetFont()).x;
+}
+
+void UI_TextInput::UpdateDynamicPos()
+{
+	if (bar_x > GetSize().x)
+	{
+		int difference = bar_x - GetSize().x;
+		text->SetPos(UI_Point(text->GetPos().x - difference, text->GetPos().y));
+	}
+
+	if (bar_x < 0)
+	{
+		int difference = 0 - bar_x;
+		text->SetPos(UI_Point(text->GetPos().x + difference, text->GetPos().y));
+	}
 }

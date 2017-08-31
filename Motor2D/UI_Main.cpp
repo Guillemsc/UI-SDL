@@ -274,6 +274,11 @@ void UI_Main::UIResetViewport()
 	App->render->ResetViewPort();
 }
 
+void UI_Main::ClearFocusedElement()
+{
+	focused_element = nullptr;
+}
+
 bool UI_Main::GetDebug()
 {
 	return debug;

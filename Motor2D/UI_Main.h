@@ -93,6 +93,7 @@ public:
 
 	void UISetViewport(int x, int y, int w, int h);
 	void UIResetViewport();
+	void ClearFocusedElement();
 
 	bool GetDebug();
 	void SetDebug(bool set);

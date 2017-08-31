@@ -13,11 +13,12 @@ public:
 
 private:
 	void Update(float dt);
+	void CleanUp();
 	void Draw();
 	void OnEvent(UI_Event* ev);
 
 	void UpdateBarPos(float dt);
-
+	void UpdateDynamicPos();
 
 private:
 	UI_Text* text = nullptr;

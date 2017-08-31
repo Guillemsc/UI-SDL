@@ -126,6 +126,8 @@ public:
 
 	void SetDebugColor(UI_Color color);
 
+	void ClearFocus();
+
 	// Return if ui_element uses an anchor
 	bool GetUsesAnchor();
 
