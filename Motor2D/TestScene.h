@@ -38,6 +38,11 @@ public:
 	UI_Panel*   panel_test = nullptr;
 
 	UI_TextInput* textinput_test = nullptr;
+
+	//
+	UI_Panel* base_panel = nullptr;
+	UI_Button* button = nullptr;
+	//
 };
 
 void Test1MouseClick(UI_EventMouse* ev);

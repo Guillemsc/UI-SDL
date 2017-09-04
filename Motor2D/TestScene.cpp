@@ -21,6 +21,23 @@ TestScene::~TestScene()
 
 bool TestScene::Start()
 {
+	base_panel = new UI_Panel(App->ui);
+	base_panel->SetPos(UI_Point(10, 10));
+	base_panel->SetAnchor(UI_Point(0, 0));
+	base_panel->SetSize(UI_Point(500, 500));
+	base_panel->SetBackgroundColor(UI_Color(30, 30, 30, 100));
+
+	button = new UI_Button(App->ui);
+	button->SetPos(UI_Point(10, 10));
+	button->SetSize(UI_Point(190, 49));
+	button->SetIdleImage(UI_Quad(0, 192, 190, 45));
+	button->SetOverImage(UI_Quad(190, 49, 190, 45));
+	button->SetPressedImage(UI_Quad(0, 49, 190, 45));
+	button->GetText()->SetText("Start");
+	button->GetText()->SetPos(UI_Point(70, 3));
+	button->GetText()->SetTextColor(UI_Color(255, 255, 255, 200));
+	base_panel->AddChild(button);
+
 	//App->ui->SetDebug(true);
 
 	//test_element = new UI_Element(App->ui, ui_element_button);
@@ -62,7 +79,7 @@ bool TestScene::Start()
 	//panel_test->SetPos(UI_Point(10, 10));
 	//panel_test->AddChild(button_test);
 
-	textinput_test = new UI_TextInput(App->ui);
+	//textinput_test = new UI_TextInput(App->ui);
 
 	return true;
 }

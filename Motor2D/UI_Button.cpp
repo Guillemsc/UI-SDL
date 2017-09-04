@@ -26,6 +26,7 @@ void UI_Button::Update(float dt)
 
 void UI_Button::Draw()
 {
+	ui_main->UIRenderImage(0, 0, current_image.x, current_image.y, current_image.w, current_image.h, GetAlpha());
 }
 
 void UI_Button::OnEvent(UI_Event * ev)
@@ -77,18 +78,21 @@ void UI_Button::SetIdle()
 {
 	SetBackgroundColor(background_idle);
 	SetOutlineColor(outline_idle);
+	current_image = image_idle;
 }
 
 void UI_Button::SetOver()
 {
 	SetBackgroundColor(background_over);
 	SetOutlineColor(outline_over);
+	current_image = image_over;
 }
 
 void UI_Button::SetPressed()
 {
 	SetBackgroundColor(background_pressed);
 	SetOutlineColor(outline_pressed);
+	current_image = image_pressed;
 }
 
 void UI_Button::SetPressedColor(UI_Color _background, UI_Color _outline)
@@ -107,6 +111,29 @@ void UI_Button::SetIdleColor(UI_Color _background, UI_Color _outline)
 {
 	background_idle = _background;
 	outline_idle = _outline;
+}
+
+void UI_Button::SetPressedImage(UI_Quad rect)
+{
+	image_pressed = rect;
+	background_pressed = UI_Color(0, 0, 0, 0);
+	outline_pressed = UI_Color(0, 0, 0, 0);
+}
+
+void UI_Button::SetOverImage(UI_Quad rect)
+{
+	image_over = rect;
+	background_over = UI_Color(0, 0, 0, 0);
+	outline_over = UI_Color(0, 0, 0, 0);
+}
+
+void UI_Button::SetIdleImage(UI_Quad rect)
+{
+	image_idle = rect;
+	current_image = image_idle;
+	background_idle = UI_Color(0, 0, 0, 0);
+	outline_idle = UI_Color(0, 0, 0, 0);
+	SetBackgroundColor(background_idle);
 }
 
 UI_Text * UI_Button::GetText()

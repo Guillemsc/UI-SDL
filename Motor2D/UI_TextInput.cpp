@@ -14,7 +14,7 @@ UI_TextInput::UI_TextInput(UI_Main * ui_main) : UI_Element(ui_main, ui_element_t
 	bar_x = text->GetPos().x;
 
 	SetSize(UI_Point(200, text->GetSize().y));
-	SetOutlineColor(UI_Color(255, 255, 255, 255));
+	//SetOutlineColor(UI_Color(255, 255, 255, 255));
 
 	AddChild(text);
 }
@@ -71,10 +71,9 @@ void UI_TextInput::Update(float dt)
 		}
 	}
 
-
 	if (update_text)
 	{
-		bar_flicker_time = -0.5f;
+		bar_flicker_time = -0.4f;
 
 		if (bar_pos < 0)
 			bar_pos = 0;
@@ -135,7 +134,7 @@ void UI_TextInput::UpdateDynamicPos()
 {
 	if (bar_x > GetSize().x)
 	{
-		int difference = bar_x - GetSize().x;
+		int difference = bar_x + bar_w - GetSize().x;
 		text->SetPos(UI_Point(text->GetPos().x - difference, text->GetPos().y));
 	}
 

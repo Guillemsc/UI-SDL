@@ -145,6 +145,31 @@ public:
 
 // --------------------------------------------------
 
+class UI_Quad
+{
+public:
+	UI_Quad() {};
+
+	UI_Quad(float _x, float _y, float _w, float _h)
+	{
+		x = _x; y = _y; w = _w; h = _h;
+	}
+
+	void operator = (UI_Quad quad)
+	{
+		x = quad.x;
+		y = quad.y;
+		w = quad.w;
+		h = quad.h;
+	}
+
+	float x = 0;
+	float y = 0;
+	float w = 0;
+	float h = 0;
+};
+
+// --------------------------------------------------
 class UI_Color
 {
 public:

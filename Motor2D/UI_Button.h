@@ -14,9 +14,9 @@ public:
 	void SetOverColor(UI_Color background, UI_Color outline);
 	void SetIdleColor(UI_Color background, UI_Color outline);
 
-	void SetPressedImage(int rect_x, int rect_y, int rect_w, int rect_h);
-	void SetOverImage(int rect_x, int rect_y, int rect_w, int rect_h);
-	void SetIdleImage(int rect_x, int rect_y, int rect_w, int rect_h);
+	void SetPressedImage(UI_Quad rect);
+	void SetOverImage(UI_Quad rect);
+	void SetIdleImage(UI_Quad rect);
 
 	UI_Text* GetText();
 
@@ -33,13 +33,17 @@ private:
 private:
 	UI_Color background_idle;
 	UI_Color outline_idle;
-
-	UI_Color background_over;
-	UI_Color background_pressed;
+	UI_Quad image_idle;
 
 	UI_Color outline_over;
-	UI_Color outline_pressed;
+	UI_Color background_over;
+	UI_Quad image_over;
 
+	UI_Color outline_pressed;
+	UI_Color background_pressed;
+	UI_Quad image_pressed;
+
+	UI_Quad current_image;
 	UI_Text* text = nullptr;
 };
 

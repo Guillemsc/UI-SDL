@@ -458,7 +458,7 @@ ui_element_type UI_Element::GetType()
 
 void UI_Element::AddChild(UI_Element* child)
 {
-	if (child == nullptr)
+	if (child == nullptr || child == this)
 		return;
 	
 	child->parent = this;
