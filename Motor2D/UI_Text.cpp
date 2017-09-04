@@ -1,4 +1,5 @@
 #include "UI_Text.h"
+#include "UI_EventSystem.h"
 
 UI_Text::UI_Text(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::ui_element_text)
 {
@@ -53,6 +54,16 @@ void UI_Text::Draw()
 	SetSize(UI_Point(biggest_width, height));
 }
 
+void UI_Text::InvokeOnTextChanged()
+{
+	UI_Event* e = new UI_Event(ui_event_type::event_text_changed, this);
+
+	if (OnTextChanged)
+		OnTextChanged(e);
+
+	GetEventSystem()->SendEvent(e);
+}
+
 void UI_Text::SetText(const char* _text)
 {
 	text = _text;
@@ -83,6 +94,8 @@ void UI_Text::SetText(const char* _text)
 
 		text_lines.push_back(new_line);
 	}
+
+	InvokeOnTextChanged();
 }
 
 void UI_Text::SetTextColor(UI_Color _color)

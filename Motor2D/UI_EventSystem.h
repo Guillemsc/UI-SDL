@@ -82,6 +82,8 @@ enum ui_event_type
 {
 	event_null,
 
+	event_text_changed,
+
 	event_mouse_over,
 	event_mouse_over_enter,
 	event_mouse_over_out,

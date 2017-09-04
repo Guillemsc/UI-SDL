@@ -36,6 +36,7 @@ bool TestScene::Start()
 	button->GetText()->SetText("Start");
 	button->GetText()->SetPos(UI_Point(70, 3));
 	button->GetText()->SetTextColor(UI_Color(255, 255, 255, 200));
+	button->OnMouseClick = Test1MouseClick;
 	base_panel->AddChild(button);
 
 	//App->ui->SetDebug(true);
@@ -79,7 +80,7 @@ bool TestScene::Start()
 	//panel_test->SetPos(UI_Point(10, 10));
 	//panel_test->AddChild(button_test);
 
-	//textinput_test = new UI_TextInput(App->ui);
+	textinput_test = new UI_TextInput(App->ui);
 
 	return true;
 }
@@ -106,7 +107,7 @@ bool TestScene::CleanUp()
 
 void Test1MouseClick(UI_EventMouse * ev)
 {
-	LOG("hi");
+	App->scene->test_scene->textinput_test->SetText("Hellooooooooooooooooo");
 }
 
 void TextClick(UI_EventMouse * ev)
