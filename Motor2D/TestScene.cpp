@@ -10,6 +10,8 @@
 #include "UI_Image.h"
 #include "UI_Panel.h"
 #include "UI_TextInput.h"
+#include "UIU_Message.h"
+#include "UIU_Console.h"
 
 TestScene::TestScene()
 {
@@ -21,23 +23,23 @@ TestScene::~TestScene()
 
 bool TestScene::Start()
 {
-	base_panel = new UI_Panel(App->ui);
-	base_panel->SetPos(UI_Point(10, 10));
-	base_panel->SetAnchor(UI_Point(0, 0));
-	base_panel->SetSize(UI_Point(500, 500));
-	base_panel->SetBackgroundColor(UI_Color(30, 30, 30, 100));
+	//base_panel = new UI_Panel(App->ui);
+	//base_panel->SetPos(UI_Point(10, 10));
+	//base_panel->SetAnchor(UI_Point(0, 0));
+	//base_panel->SetSize(UI_Point(500, 500));
+	//base_panel->SetBackgroundColor(UI_Color(30, 30, 30, 100));
 
 	button = new UI_Button(App->ui);
-	button->SetPos(UI_Point(10, 10));
+	button->SetPos(UI_Point(10,-60));
+	button->SetAnchor(UI_Point(0, 1));
 	button->SetSize(UI_Point(190, 49));
 	button->SetIdleImage(UI_Quad(0, 192, 190, 45));
 	button->SetOverImage(UI_Quad(190, 49, 190, 45));
 	button->SetPressedImage(UI_Quad(0, 49, 190, 45));
-	button->GetText()->SetText("Start");
+	button->GetText()->SetText("Press");
 	button->GetText()->SetPos(UI_Point(70, 3));
 	button->GetText()->SetTextColor(UI_Color(255, 255, 255, 200));
 	button->OnMouseClick = Test1MouseClick;
-	base_panel->AddChild(button);
 
 	//App->ui->SetDebug(true);
 
@@ -80,7 +82,11 @@ bool TestScene::Start()
 	//panel_test->SetPos(UI_Point(10, 10));
 	//panel_test->AddChild(button_test);
 
-	textinput_test = new UI_TextInput(App->ui);
+	//textinput_test = new UI_TextInput(App->ui);
+
+	//message = new UIU_Message(App->ui, uia_message_errortype::uia_message_danger);
+	console = new UIU_Console(App->ui);
+	console->AddText("helllooo");
 
 	return true;
 }
@@ -107,7 +113,9 @@ bool TestScene::CleanUp()
 
 void Test1MouseClick(UI_EventMouse * ev)
 {
-	App->scene->test_scene->textinput_test->SetText("Hellooooooooooooooooo");
+	string a = to_string(App->scene->test_scene->counter) + "dfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd";
+	App->scene->test_scene->console->AddText(a.c_str());
+	App->scene->test_scene->counter++;
 }
 
 void TextClick(UI_EventMouse * ev)

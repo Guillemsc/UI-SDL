@@ -35,6 +35,8 @@ bool j1Fonts::Awake(pugi::xml_node& conf)
 
 		// Load fonts
 		LoadFont(path, "default", size);
+		LoadFont(path, "default_small", size-5);
+		LoadFont(path, "default_verysmall", size - 10);
 	}
 
 	return ret;

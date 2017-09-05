@@ -50,6 +50,9 @@ enum ui_element_type
 	ui_element_image,
 	ui_element_checkbox,
 	ui_element_textinput,
+
+	uiu_message,
+	uiu_console,
 };
 
 // --------------------------------------------------

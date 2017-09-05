@@ -1,5 +1,6 @@
 #include "UI_Text.h"
 #include "UI_EventSystem.h"
+#include "p2Log.h"
 
 UI_Text::UI_Text(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::ui_element_text)
 {

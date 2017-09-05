@@ -99,6 +99,8 @@
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="UIA_Alpha.cpp" />
     <ClCompile Include="UIA_Interpolation.cpp" />
+    <ClCompile Include="UIU_Console.cpp" />
+    <ClCompile Include="UIU_Message.cpp" />
     <ClCompile Include="UI_Animator.cpp" />
     <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_CheckBox.cpp" />
@@ -136,6 +138,8 @@
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="UIA_Alpha.h" />
     <ClInclude Include="UIA_Interpolation.h" />
+    <ClInclude Include="UIU_Console.h" />
+    <ClInclude Include="UIU_Message.h" />
     <ClInclude Include="UI_Animator.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_CheckBox.h" />

@@ -18,7 +18,15 @@ public:
 
 	void SetUseScrolls(bool set);
 	void SetAutoScrollDown(float set);
-	
+	void ScrollDown();
+	void RemoveFirst();
+	void ClearPanel();
+
+	void MoveChilds(UI_Point offset);
+
+	UI_Button* GetUpDownButton();
+	UI_Button* GetLeftRightButton();
+
 private:
 	void Update(float dt);
 	void Draw();
@@ -35,10 +43,9 @@ private:
 
 	void UpdateElementsPos();
 
-	void ScrollDown();
-
 public:
 	bool auto_scroll_down = false;
+	bool scroll_down = false;
 	bool use_scrolls = false;
 
 	// Button

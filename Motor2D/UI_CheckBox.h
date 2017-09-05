@@ -20,12 +20,14 @@ public:
 
 	void AddBox(UI_Point pos, int index);
 	void SetBoxSize(UI_Point size);
-	void SetBoxImages(int idle_x, int idle_y, int idle_w, int idle_h, int pressed_x, int pressed_y, int pressed_w, int pressed_h);
-
-	//void SetImages();
+	void SetBoxImages(UI_Quad checked, UI_Quad unchecked);
 
 private:
 	list<ui_box> boxes;
+
+	UI_Point size;
+	UI_Quad checked;
+	UI_Quad unchecked;
 };
 
 #endif

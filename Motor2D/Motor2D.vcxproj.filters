@@ -94,6 +94,12 @@
     <ClCompile Include="UI_TextInput.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClCompile>
+    <ClCompile Include="UIU_Message.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="UIU_Console.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -201,6 +207,12 @@
     <ClInclude Include="UI_TextInput.h">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClInclude>
+    <ClInclude Include="UIU_Message.h">
+      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="UIU_Console.h">
+      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -232,6 +244,9 @@
     </Filter>
     <Filter Include="Engine\1. Modules =========\NewGUI\3. Animations">
       <UniqueIdentifier>{04819027-0cf3-41b6-9173-84481a58fdf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\1. Modules =========\NewGUI\4. Utilities">
+      <UniqueIdentifier>{45937f9c-2661-411b-8e6b-cdd318c21932}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

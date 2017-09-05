@@ -139,6 +139,13 @@ public:
 		y = point.y;
 	}
 
+	bool operator != (UI_Point point)
+	{
+		if (x == point.x && y == point.y)
+			return false;
+		return true;
+	}
+
 	float x = 0;
 	float y = 0;
 };

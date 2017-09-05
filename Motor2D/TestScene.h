@@ -11,6 +11,8 @@ class UI_Image;
 class UI_Button;
 class UI_Panel;
 class UI_TextInput;
+class UIU_Message;
+class UIU_Console;
 
 class TestScene : public Scene
 {
@@ -43,6 +45,11 @@ public:
 	UI_Panel* base_panel = nullptr;
 	UI_Button* button = nullptr;
 	//
+
+	UIU_Message* message = nullptr;
+
+	UIU_Console* console = nullptr;
+	int counter = 0;
 };
 
 void Test1MouseClick(UI_EventMouse* ev);

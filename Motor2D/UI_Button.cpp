@@ -111,6 +111,8 @@ void UI_Button::SetIdleColor(UI_Color _background, UI_Color _outline)
 {
 	background_idle = _background;
 	outline_idle = _outline;
+	SetBackgroundColor(_background);
+	SetOutlineColor(_outline);
 }
 
 void UI_Button::SetPressedImage(UI_Quad rect)
