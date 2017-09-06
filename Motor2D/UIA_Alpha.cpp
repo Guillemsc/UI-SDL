@@ -2,7 +2,8 @@
 #include "UI_Element.h"
 #include "UI_EventSystem.h"
 
-UIA_Alpha::UIA_Alpha(uia_alpha_type _type, UI_Element * target, float _target_alpha, float _time_sec) : UI_Animation(target)
+UIA_Alpha::UIA_Alpha(uia_alpha_type _type, UI_Element * target, float _target_alpha, float _time_sec) 
+	: UI_Animation(target, ui_animation_type::ui_animation_alpha)
 {
 	type = _type;
 	target_alpha = _target_alpha;

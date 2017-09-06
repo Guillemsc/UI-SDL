@@ -217,6 +217,12 @@ void UI_Element::UpdateViewport()
 		}
 	}
 
+	if (view_x < 0)
+		view_x = 0;
+
+	if (view_y < 0)
+		view_y = 0;
+
 	viewport.SetPos(view_x, view_y); 
 	viewport.SetSize(view_w, view_h);
 }

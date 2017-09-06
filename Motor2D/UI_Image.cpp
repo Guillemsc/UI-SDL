@@ -25,5 +25,6 @@ void UI_Image::Update(float dt)
 
 void UI_Image::Draw()
 {
-	this->GetUiMain()->UIRenderImage(ZeroPos().x, ZeroPos().y, rect_x, rect_y, rect_w, rect_h, GetAlpha());
+	if(rect_w != 0 && rect_h != 0)
+		this->GetUiMain()->UIRenderImage(ZeroPos().x, ZeroPos().y, rect_x, rect_y, rect_w, rect_h, GetAlpha());
 }

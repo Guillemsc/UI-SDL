@@ -72,7 +72,7 @@ bool TestScene::Start()
 	//text_test->SetBackgroundColor(UI_Color(0, 0, 255));
 
 	//image_test = new UI_Image(App->ui);
-	//image_test->SetPos(UI_Point(500, 400));
+	//image_test->SetPos(UI_Point(0, -90));
 	////image_test->SetImage(0, 0, 190, 49);
 
 	//button_test = new UI_Button(App->ui);
@@ -113,9 +113,14 @@ bool TestScene::CleanUp()
 
 void Test1MouseClick(UI_EventMouse * ev)
 {
-	string a = to_string(App->scene->test_scene->counter) + "dfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd";
-	App->scene->test_scene->console->AddText(a.c_str());
-	App->scene->test_scene->counter++;
+	//string a = to_string(App->scene->test_scene->counter) + "dfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd";
+	//App->scene->test_scene->console->AddText(a.c_str());
+	//App->scene->test_scene->counter++;
+
+	if(!App->scene->test_scene->console->GetVisible())
+		App->scene->test_scene->console->SetVisible(false);
+	else
+		App->scene->test_scene->console->SetVisible(true);
 }
 
 void TextClick(UI_EventMouse * ev)

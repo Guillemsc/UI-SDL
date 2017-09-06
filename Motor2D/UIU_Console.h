@@ -23,6 +23,8 @@ public:
 	void AddText(const char* text, uia_console_errortype type = uia_console_succes);
 	void SetMaxElements(int set);
 	UI_TextInput* GetTextInput();
+	void Hide();
+	void Show();
 
 private:
 	void Update(float dt);
@@ -40,6 +42,8 @@ private:
 
 	int elements_count = 0;
 	int elements_max = 20;
+
+	bool hide = false;
 };
 
 #endif

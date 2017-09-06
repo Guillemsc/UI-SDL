@@ -41,14 +41,14 @@ void UI_Animator::StartAnimationInterpolation(uia_interpolation_type type, UI_Po
 {
 	UIA_Interpolation* anim = new UIA_Interpolation(type, owner, target_pos, time_sec);
 
-	animations.push_back(anim);
+	AddAnimation(anim);
 }
 
 void UI_Animator::StartAnimationAlpha(uia_alpha_type type, float target_alpha, float time_sec)
 {
 	UIA_Alpha* anim = new UIA_Alpha(type, owner, target_alpha, time_sec);
 
-	animations.push_back(anim);
+	AddAnimation(anim);
 }
 
 void UI_Animator::AddToDelete(UI_Animation * ani)
@@ -92,10 +92,24 @@ void UI_Animator::DeleteAnimations()
 	}
 }
 
-UI_Animation::UI_Animation(UI_Element* _target)
+void UI_Animator::AddAnimation(UI_Animation * ani)
+{
+	for (list<UI_Animation*>::iterator an = animations.begin(); an != animations.end(); an++)
+	{
+		if ((*an)->GetType() == ani->GetType())
+		{
+			(*an)->Finished();
+		}
+	}
+
+	animations.push_back(ani);
+}
+
+UI_Animation::UI_Animation(UI_Element* _target, ui_animation_type _type)
 {
 	ui_main = _target->GetUiMain();
 	target = _target;
+	type = _type;
 }
 
 UI_Main * UI_Animation::GetUIMain()
@@ -106,6 +120,11 @@ UI_Main * UI_Animation::GetUIMain()
 UI_Element * UI_Animation::GetTarget()
 {
 	return target;
+}
+
+ui_animation_type UI_Animation::GetType()
+{
+	return type;
 }
 
 bool UI_Animation::GetFinished()

@@ -136,6 +136,7 @@ void UI_Button::SetIdleImage(UI_Quad rect)
 	background_idle = UI_Color(0, 0, 0, 0);
 	outline_idle = UI_Color(0, 0, 0, 0);
 	SetBackgroundColor(background_idle);
+	SetOutlineColor(outline_idle);
 }
 
 UI_Text * UI_Button::GetText()

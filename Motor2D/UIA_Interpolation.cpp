@@ -3,7 +3,8 @@
 #include "UI_EventSystem.h"
 #include "p2Log.h"
 
-UIA_Interpolation::UIA_Interpolation(uia_interpolation_type _type, UI_Element* target, UI_Point _target_pos, float _time_sec) : UI_Animation(target)
+UIA_Interpolation::UIA_Interpolation(uia_interpolation_type _type, UI_Element* target, UI_Point _target_pos, float _time_sec) 
+	: UI_Animation(target, ui_animation_type::ui_animation_interpolation)
 {
 	type = _type;
 	target_pos = _target_pos;
@@ -35,7 +36,7 @@ void UIA_Interpolation::Update(float dt)
 	{
 		float angle = GetTarget()->GetAnimator()->AngleFromTwoPoint(GetTarget()->GetTransformPos(), target_pos);
 		float distance = GetTarget()->GetAnimator()->DistanceFromtTwoPoints(GetTarget()->GetTransformPos(), target_pos);
-		GetTarget()->MoveToAngle(distance, angle);
+		GetTarget()->SetPos(target_pos);
 		Finished();
 
 		GetTarget()->InvokeOnAnimationInterpolationFinished();

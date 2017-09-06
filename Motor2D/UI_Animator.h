@@ -7,18 +7,27 @@ class UI_Point;
 enum uia_interpolation_type;
 enum uia_alpha_type;
 
+enum ui_animation_type
+{
+	ui_animation_null,
+	ui_animation_interpolation,
+	ui_animation_alpha,
+};
+
 class UI_Animation
 {
 public:
-	UI_Animation(UI_Element* target);
+	UI_Animation(UI_Element* target, ui_animation_type type);
 
 	UI_Main* GetUIMain();
 
 	virtual void Update(float dt) {};
 
 	UI_Element* GetTarget();
+	ui_animation_type GetType();
 	bool GetFinished();
 	void Finished();
+	
 
 private:
 	UI_Main* ui_main = nullptr;
@@ -26,6 +35,7 @@ private:
 	bool finished = false;
 	UI_Element* target = nullptr;
 
+	ui_animation_type type = ui_animation_null;
 };
 
 class UI_Animator
@@ -46,6 +56,7 @@ public:
 
 private:
 	void DeleteAnimations();
+	void AddAnimation(UI_Animation* ani);
 
 private:
 	UI_Main* ui_main = nullptr;

@@ -4,20 +4,24 @@
 #include "UI_Panel.h"
 #include "UI_TextInput.h"
 #include "UI_Button.h"
+#include "UIA_Interpolation.h"
+#include "UI_EventSystem.h"
+#include "p2Log.h"
 
 UIU_Console::UIU_Console(UI_Main * ui_main) : UI_Element(ui_main, ui_element_type::uiu_console)
 {
 	margin_size = 10;
 
 	back = new UI_Image(ui_main);
-	back->SetPos(UI_Point(0, 0));
+	back->SetPos(UI_Point(0, -10));
 	back->SetBackgroundColor(UI_Color(30, 30, 30, 200));
+	AddChild(back);
 
 	console_name = new UI_Text(ui_main);
 	console_name->SetPos(UI_Point(margin_size, margin_size));
 	console_name->SetText("Console");
 	console_name->SetFont("default_small");
-	back->AddChild(console_name);
+	AddChild(console_name);
 
 	panel = new UI_Panel(ui_main);
 	panel->SetUseScrolls(true);
@@ -26,15 +30,19 @@ UIU_Console::UIU_Console(UI_Main * ui_main) : UI_Element(ui_main, ui_element_typ
 	panel->GetUpDownButton()->SetIdleColor(UI_Color(50, 50, 50), UI_Color(90, 90, 90));
 	panel->GetUpDownButton()->SetOverColor(UI_Color(70, 70, 70), UI_Color(102, 178, 250));
 	panel->GetUpDownButton()->SetPressedColor(UI_Color(102, 178, 250), UI_Color(102, 178, 250));
-
+	
 	panel->GetLeftRightButton()->SetIdleColor(UI_Color(50, 50, 50), UI_Color(90, 90, 90));
 	panel->GetLeftRightButton()->SetOverColor(UI_Color(70, 70, 70), UI_Color(102, 178, 250));
 	panel->GetLeftRightButton()->SetPressedColor(UI_Color(102, 178, 250), UI_Color(102, 178, 250));
+	AddChild(panel);
 
 	input = new UI_TextInput(ui_main);
 	input->SetBackgroundColor(UI_Color(10, 10, 10, 255));
 	input->SetOutlineColor(UI_Color(5, 5, 5, 0));
 	input->GetText()->SetFont("default_small");
+	AddChild(input);
+
+	SetVisible(false);
 }
 
 void UIU_Console::AddText(const char * text, uia_console_errortype type)
@@ -65,16 +73,30 @@ UI_TextInput * UIU_Console::GetTextInput()
 	return input;
 }
 
+void UIU_Console::Hide()
+{
+	GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseOut, UI_Point(0, -back->GetSize().y), 1.0f);
+	hide = true;
+}
+
+void UIU_Console::Show()
+{
+	SetVisible(true);
+	GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseIn, UI_Point(0, 0), 0.7f);
+	hide = false;
+}
+
 void UIU_Console::Update(float dt)
 {
-	back->SetPos(UI_Point(0, 0));
 	back->SetSize(UI_Point(ui_main->GetWindowSize().x, ui_main->GetWindowSize().y * 0.6));
 
 	panel->SetPos(UI_Point(margin_size, console_name->GetPos().y + console_name->GetSize().y + margin_size));
-	panel->SetSize(UI_Point(ui_main->GetWindowSize().x - (margin_size * 2), back->GetSize().y - 90));
+	panel->SetSize(UI_Point(ui_main->GetWindowSize().x - (margin_size * 2), back->GetSize().y - 100));
 
 	input->SetPos(UI_Point(margin_size, panel->GetPos().y + panel->GetSize().y + margin_size));
 	input->SetSize(UI_Point(ui_main->GetWindowSize().x - (margin_size * 2), input->GetSize().y));
+
+	SetSize(back->GetSize());
 }
 
 void UIU_Console::Draw()
@@ -83,6 +105,11 @@ void UIU_Console::Draw()
 
 void UIU_Console::OnEvent(UI_Event * ev)
 {
+	if (ev->GetSender() == this)
+	{
+		if (hide)
+			SetVisible(false);
+	}
 }
 
 void UIU_Console::CleanUp()
