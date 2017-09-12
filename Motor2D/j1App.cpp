@@ -267,6 +267,11 @@ float j1App::GetFps()
 	return avg_fps;
 }
 
+int j1App::GetFramesFromStart()
+{
+	return frame_count;
+}
+
 void j1App::CapFps(float fps)
 {
 	if(fps > 0)

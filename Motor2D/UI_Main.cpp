@@ -52,6 +52,8 @@ bool UI_Main::Update(float dt)
 {
 	bool ret = true;
 
+	float start = UIGetTimeFromStart();
+
 	// 1 //
 	GetEventSystem()->Update();
 
@@ -64,6 +66,9 @@ bool UI_Main::Update(float dt)
 	// 4 //
 	CheckEvents();
 
+	debug_info.ui_main += UIGetTimeFromStart() - start;
+	debug_info.avg_ui_main = debug_info.ui_main / UIGetFramesFromStart();
+	
 	return ret;
 }
 
@@ -95,6 +100,11 @@ bool UI_Main::CleanUp()
 	UnloadAtlas();
 
 	return ret;
+}
+
+UI_DebugInfo UI_Main::GetUIDebugInfo()
+{
+	return debug_info;
 }
 
 void UI_Main::CheckWindowResize()
@@ -267,6 +277,16 @@ bool UI_Main::UIGetKeyboardInput(const char *& input)
 	return false;
 }
 
+float UI_Main::UIGetTimeFromStart()
+{
+	return SDL_GetTicks();
+}
+
+int UI_Main::UIGetFramesFromStart()
+{
+	return App->GetFramesFromStart();
+}
+
 void UI_Main::UISetViewport(int x, int y, int w, int h)
 {
 	App->render->SetViewPort({ x, y, w, h });
@@ -306,6 +326,8 @@ void UI_Main::UpdateElements(float dt)
 {
 	for (list<UI_Element*>::iterator it = elements.begin(); it != elements.end(); it++)
 	{
+		float start = UIGetTimeFromStart();
+
 		if (GetDebug())
 		{
 			if ((*it)->GetUsesAnchor())
@@ -327,6 +349,8 @@ void UI_Main::UpdateElements(float dt)
 		}
 
 		UIResetViewport();
+
+		AddToDebugInfo((*it)->GetType(), UIGetTimeFromStart() - start);
 	}
 }
 
@@ -450,6 +474,47 @@ void UI_Main::DeleteElements()
 		// Delete
 		delete (*del);
 		del = to_delete.erase(del);
+	}
+}
+
+void UI_Main::AddToDebugInfo(ui_element_type element, float time)
+{
+	switch (element)
+	{
+	case ui_element_null:
+		break;
+	case ui_element_text:
+		debug_info.texts += time;
+		debug_info.avg_texts = debug_info.texts / UIGetFramesFromStart();
+		break;
+	case ui_element_panel:
+		debug_info.panels += time;
+		debug_info.avg_panels = debug_info.panels / UIGetFramesFromStart();
+		break;
+	case ui_element_button:
+		debug_info.buttons += time;
+		debug_info.avg_buttons = debug_info.buttons / UIGetFramesFromStart();
+		break;
+	case ui_element_image:
+		debug_info.images += time;
+		debug_info.avg_images = debug_info.images / UIGetFramesFromStart();
+		break;
+	case ui_element_checkbox:
+		debug_info.check_boxes += time;
+		debug_info.avg_check_boxes = debug_info.check_boxes / UIGetFramesFromStart();
+		break;
+	case ui_element_textinput:
+		debug_info.texts_input += time;
+		debug_info.texts_input = debug_info.texts_input / UIGetFramesFromStart();
+		break;
+	case uiu_message:
+		break;
+	case uiu_console:
+		break;
+	case uiu_debug:
+		break;
+	default:
+		break;
 	}
 }
 

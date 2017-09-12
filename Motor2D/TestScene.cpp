@@ -92,6 +92,13 @@ bool TestScene::Start()
 	debug = new UIU_Debug(App->ui);
 	debug->AddDebug("fps");
 	debug->AddDebug("ui elements");
+	debug->AddDebug("ui time");
+	debug->AddDebug("buttons time");
+	debug->AddDebug("check boxes time");
+	debug->AddDebug("images time");
+	debug->AddDebug("panels time");
+	debug->AddDebug("texts time");
+	debug->AddDebug("texts input time");
 
 	return true;
 }
@@ -113,6 +120,14 @@ bool TestScene::Update(float dt)
 
 	debug->SetDebug("fps", to_string(App->GetFps()).c_str());
 	debug->SetDebug("ui elements", to_string(App->ui->GetElementsCount()).c_str());
+	debug->SetDebug("ui time", to_string(App->ui->GetUIDebugInfo().avg_ui_main).c_str());
+	debug->SetDebug("buttons time", to_string(App->ui->GetUIDebugInfo().avg_buttons).c_str());
+	debug->SetDebug("check boxes time", to_string(App->ui->GetUIDebugInfo().avg_check_boxes).c_str());
+	debug->SetDebug("images time", to_string(App->ui->GetUIDebugInfo().avg_images).c_str());
+	debug->SetDebug("panels time", to_string(App->ui->GetUIDebugInfo().avg_panels).c_str());
+	debug->SetDebug("texts time", to_string(App->ui->GetUIDebugInfo().avg_texts).c_str());
+	debug->SetDebug("texts input time", to_string(App->ui->GetUIDebugInfo().texts_input).c_str());
+
 	 
 	return true;
 }

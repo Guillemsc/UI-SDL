@@ -63,6 +63,7 @@ public:
 	float GetDT() const;
 	list<j1Module*> GetModules();
 	float GetFps();
+	int GetFramesFromStart();
 
 	void CapFps(float fps);
 	void EndSDL();

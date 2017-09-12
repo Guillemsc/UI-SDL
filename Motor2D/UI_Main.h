@@ -29,6 +29,27 @@ enum ui_element_type;
 
 struct Font;
 
+struct UI_DebugInfo
+{
+	float ui_main = 0.0f;
+	float buttons = 0.0f;
+	float check_boxes = 0.0f;
+	float images = 0.0f;
+	float panels = 0.0f;
+	float texts = 0.0f;
+	float texts_input = 0.0f;
+
+	float avg_ui_main = 0.0f;
+	float avg_buttons = 0.0f;
+	float avg_check_boxes = 0.0f;
+	float avg_images = 0.0f;
+	float avg_panels = 0.0f;
+	float avg_texts = 0.0f;
+	float avg_texts_input = 0.0f;
+};
+
+// --------------------------------------------------
+
 class UI_Main : public j1Module
 {
 public:
@@ -53,6 +74,8 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+	UI_DebugInfo GetUIDebugInfo();
 
 	void CheckWindowResize();
 
@@ -90,6 +113,8 @@ public:
 	float UIGetFontSize(Font* font);
 	UI_Point UIGetTextSize(const char* text, Font* font);
 	bool UIGetKeyboardInput(const char*& input);
+	float UIGetTimeFromStart();
+	int UIGetFramesFromStart();
 
 	void UISetViewport(int x, int y, int w, int h);
 	void UIResetViewport();
@@ -103,6 +128,7 @@ private:
 	void UpdateElements(float dt);
 	void CheckEvents();
 	void DeleteElements();
+	void AddToDebugInfo(ui_element_type element, float time);
 
 	void OnEvent(UI_Event* ev);
 
@@ -118,9 +144,9 @@ private:
 	int				  window_width = 0;
 	int				  window_height = 0;
 
+	UI_DebugInfo	  debug_info;
 	bool              debug = false;
 };
-
 
 // --------------------------------------------------
 
