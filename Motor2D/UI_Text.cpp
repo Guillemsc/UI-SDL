@@ -55,16 +55,6 @@ void UI_Text::Draw()
 	SetSize(UI_Point(biggest_width, height));
 }
 
-void UI_Text::InvokeOnTextChanged()
-{
-	UI_Event* e = new UI_Event(ui_event_type::event_text_changed, this);
-
-	if (OnTextChanged)
-		OnTextChanged(e);
-
-	GetEventSystem()->SendEvent(e);
-}
-
 void UI_Text::SetText(const char* _text)
 {
 	text = _text;
@@ -74,7 +64,7 @@ void UI_Text::SetText(const char* _text)
 	string acumulate;
 	for (int i = 0; i < text.length(); i++)
 	{
-		if (text[i] == '\n' && multi_line)
+		if (multi_line && text[i] == '\n')
 		{
 			ui_text_line new_line;
 			new_line.text = acumulate;
@@ -95,8 +85,6 @@ void UI_Text::SetText(const char* _text)
 
 		text_lines.push_back(new_line);
 	}
-
-	InvokeOnTextChanged();
 }
 
 void UI_Text::SetTextColor(UI_Color _color)

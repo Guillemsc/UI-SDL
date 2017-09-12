@@ -53,6 +53,7 @@ enum ui_element_type
 
 	uiu_message,
 	uiu_console,
+	uiu_debug,
 };
 
 // --------------------------------------------------

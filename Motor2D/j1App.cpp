@@ -153,6 +153,8 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
+	FrameCalculations();
+
 	frame_count++;
 	last_sec_frame_count++;
 
@@ -260,6 +262,11 @@ list<j1Module*> j1App::GetModules()
 	return modules;
 }
 
+float j1App::GetFps()
+{
+	return avg_fps;
+}
+
 void j1App::CapFps(float fps)
 {
 	if(fps > 0)
@@ -336,5 +343,26 @@ void j1App::ClearGameplayTimers()
 			RELEASE((*it));
 			it = gameplay_timers.erase(it);
 		}
+	}
+}
+
+void j1App::FrameCalculations()
+{
+	if (last_sec_frame_time.Read() > 1000)
+	{
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+
+	avg_fps = float(frame_count) / startup_time.ReadSec();
+	seconds_since_startup = startup_time.ReadSec();
+	last_frame_ms = frame_time.Read();
+	frames_on_last_update = prev_last_sec_frame_count;
+
+	if (capped_ms > 0 && last_frame_ms < capped_ms)
+	{
+		j1PerfTimer t;
+		SDL_Delay(capped_ms - last_frame_ms);
 	}
 }

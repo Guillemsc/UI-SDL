@@ -97,6 +97,7 @@ public:
 
 	bool GetDebug();
 	void SetDebug(bool set);
+	int GetElementsCount();
 
 private:
 	void UpdateElements(float dt);
@@ -106,9 +107,11 @@ private:
 	void OnEvent(UI_Event* ev);
 
 private:
+	// Elements
 	UI_EventSystem*   ui_event_system = nullptr;
 	list<UI_Element*> elements;
 	list<UI_Element*> to_delete;
+	UI_Element*		  focused_element = nullptr;
 
 	SDL_Texture*      atlas = nullptr;
 
@@ -116,8 +119,6 @@ private:
 	int				  window_height = 0;
 
 	bool              debug = false;
-
-	UI_Element*		  focused_element = nullptr;
 };
 
 

@@ -72,6 +72,9 @@ bool UI_Main::PostUpdate()
 	bool ret = true;
 
 	// 1 //
+	GetEventSystem()->PostUpdate();
+
+	// 2 //
 	DeleteElements();
 
 	return ret;
@@ -287,6 +290,11 @@ bool UI_Main::GetDebug()
 void UI_Main::SetDebug(bool set)
 {
 	debug = set;
+}
+
+int UI_Main::GetElementsCount()
+{
+	return elements.size();
 }
 
 SDL_Texture * UI_Main::GetAtlas()

@@ -42,6 +42,8 @@ UIU_Console::UIU_Console(UI_Main * ui_main) : UI_Element(ui_main, ui_element_typ
 	input->GetText()->SetFont("default_small");
 	AddChild(input);
 
+	Update(0);
+	SetPos(UI_Point(0, -back->GetSize().y));
 	SetVisible(false);
 }
 
@@ -51,6 +53,28 @@ void UIU_Console::AddText(const char * text, uia_console_errortype type)
 	t->SetText(text);
 	t->SetFont("default_verysmall");
 	t->SetPos(UI_Point(0, elements_count* (ui_main->UIGetFontSize(t->GetFont()))));
+
+	switch (type)
+	{
+	case uia_console_default:
+		t->SetTextColor(UI_Color(245, 245, 245));
+		break;
+	case uia_console_succes:
+		t->SetTextColor(UI_Color(120, 200, 120));
+		break;
+	case uia_console_info:
+		t->SetTextColor(UI_Color(100, 182, 255));
+		break;
+	case uia_console_warning:
+		t->SetTextColor(UI_Color(255, 149, 89));
+		break;
+	case uia_console_danger:
+		t->SetTextColor(UI_Color(250, 88, 96));
+		break;
+	default:
+		break;
+	}
+
 	panel->AddChild(t);
 
 	elements_count++;
@@ -75,14 +99,15 @@ UI_TextInput * UIU_Console::GetTextInput()
 
 void UIU_Console::Hide()
 {
-	GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseOut, UI_Point(0, -back->GetSize().y), 1.0f);
+	input->ClearFocus();
+	GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseInOut, UI_Point(0, -back->GetSize().y), 0.6f);
 	hide = true;
 }
 
 void UIU_Console::Show()
 {
 	SetVisible(true);
-	GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseIn, UI_Point(0, 0), 0.7f);
+	GetAnimator()->StartAnimationInterpolation(uia_interpolation_type::uia_interpolation_cubicEaseInOut, UI_Point(0, 0), 0.5f);
 	hide = false;
 }
 
@@ -107,8 +132,43 @@ void UIU_Console::OnEvent(UI_Event * ev)
 {
 	if (ev->GetSender() == this)
 	{
-		if (hide)
-			SetVisible(false);
+		if (ev->GetEventType() == ui_event_type::event_interpolation_anim_finished)
+		{
+			if (hide)
+				SetVisible(false);
+		}
+	}
+
+	if (ev->GetSender() == back)
+	{
+		if (ev->GetEventType() == ui_event_type::event_delete)
+		{
+			back = nullptr;
+		}
+	}
+
+	if (ev->GetSender() == console_name)
+	{
+		if (ev->GetEventType() == ui_event_type::event_delete)
+		{
+			console_name = nullptr;
+		}
+	}
+
+	if (ev->GetSender() == panel)
+	{
+		if (ev->GetEventType() == ui_event_type::event_delete)
+		{
+			panel = nullptr;
+		}
+	}
+
+	if (ev->GetSender() == input)
+	{
+		if (ev->GetEventType() == ui_event_type::event_delete)
+		{
+			input = nullptr;
+		}
 	}
 }
 

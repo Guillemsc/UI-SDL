@@ -2,8 +2,6 @@
 #include "UI_Element.h"
 #include "p2Log.h"
 
-#define MAX_EVENTS_STORED 500
-
 UI_EventSystem::UI_EventSystem(UI_Main* _ui_main)
 {
 	ui_main = _ui_main;
@@ -19,7 +17,12 @@ void UI_EventSystem::Start()
 
 void UI_EventSystem::Update()
 {
-	while(events.size() > MAX_EVENTS_STORED)
+
+}
+
+void UI_EventSystem::PostUpdate()
+{
+	while (!events.empty())
 	{
 		delete *events.begin();
 		events.erase(events.begin());

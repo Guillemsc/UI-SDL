@@ -33,8 +33,6 @@ public:
 	void SetMultiLine(bool set);
 	Font* GetFont();
 
-	std::function<void(UI_Event*)> OnTextChanged;
-
 private:
 	void Update(float dt);
 	void Draw();

@@ -62,6 +62,7 @@ public:
 	const char* GetOrganization() const;
 	float GetDT() const;
 	list<j1Module*> GetModules();
+	float GetFps();
 
 	void CapFps(float fps);
 	void EndSDL();
@@ -74,6 +75,8 @@ public:
 	void ClearGameplayTimers();
 
 private:
+	void FrameCalculations();
+
 	// Load config file
 	pugi::xml_node LoadConfig(pugi::xml_document&) const;
 
@@ -141,6 +144,11 @@ private:
 	uint32				last_sec_frame_count = 0;
 	uint32				prev_last_sec_frame_count = 0;
 	float				dt = 0.0f;
+
+	float avg_fps = 0;
+	float seconds_since_startup = 0;
+	float last_frame_ms = 0;
+	float frames_on_last_update = 0;
 
 protected:
 	list<j1Module*>  	modules;

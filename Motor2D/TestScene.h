@@ -13,6 +13,7 @@ class UI_Panel;
 class UI_TextInput;
 class UIU_Message;
 class UIU_Console;
+class UIU_Debug;
 
 class TestScene : public Scene
 {
@@ -50,6 +51,8 @@ public:
 
 	UIU_Console* console = nullptr;
 	int counter = 0;
+
+	UIU_Debug* debug = nullptr;
 };
 
 void Test1MouseClick(UI_EventMouse* ev);

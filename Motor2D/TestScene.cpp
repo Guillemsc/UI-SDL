@@ -12,6 +12,7 @@
 #include "UI_TextInput.h"
 #include "UIU_Message.h"
 #include "UIU_Console.h"
+#include "UIU_Debug.h"
 
 TestScene::TestScene()
 {
@@ -30,7 +31,7 @@ bool TestScene::Start()
 	//base_panel->SetBackgroundColor(UI_Color(30, 30, 30, 100));
 
 	button = new UI_Button(App->ui);
-	button->SetPos(UI_Point(10,-60));
+	button->SetPos(UI_Point(10, -60));
 	button->SetAnchor(UI_Point(0, 1));
 	button->SetSize(UI_Point(190, 49));
 	button->SetIdleImage(UI_Quad(0, 192, 190, 45));
@@ -84,9 +85,13 @@ bool TestScene::Start()
 
 	//textinput_test = new UI_TextInput(App->ui);
 
-	//message = new UIU_Message(App->ui, uia_message_errortype::uia_message_danger);
+	message = new UIU_Message(App->ui, uia_message_errortype::uia_message_danger);
 	console = new UIU_Console(App->ui);
 	console->AddText("helllooo");
+
+	debug = new UIU_Debug(App->ui);
+	debug->AddDebug("fps");
+	debug->AddDebug("ui elements");
 
 	return true;
 }
@@ -98,6 +103,17 @@ bool TestScene::PreUpdate()
 
 bool TestScene::Update(float dt)
 {
+	if (App->input->GetKey(SDL_SCANCODE_GRAVE) == KEY_DOWN)
+	{
+		if (App->scene->test_scene->console->GetVisible())
+			App->scene->test_scene->console->Hide();
+		else
+			App->scene->test_scene->console->Show();
+	}
+
+	debug->SetDebug("fps", to_string(App->GetFps()).c_str());
+	debug->SetDebug("ui elements", to_string(App->ui->GetElementsCount()).c_str());
+	 
 	return true;
 }
 
@@ -114,13 +130,18 @@ bool TestScene::CleanUp()
 void Test1MouseClick(UI_EventMouse * ev)
 {
 	//string a = to_string(App->scene->test_scene->counter) + "dfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasddfdsdadasdasdfsadfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdfasd";
-	//App->scene->test_scene->console->AddText(a.c_str());
+	//App->scene->test_scene->console->AddText(a.c_str(), uia_console_errortype::uia_console_succes);
 	//App->scene->test_scene->counter++;
 
-	if(!App->scene->test_scene->console->GetVisible())
-		App->scene->test_scene->console->SetVisible(false);
+	if (App->scene->test_scene->message != nullptr)
+	{
+		App->scene->test_scene->message->Delete();
+		App->scene->test_scene->message = nullptr;
+	}
 	else
-		App->scene->test_scene->console->SetVisible(true);
+	{
+		App->scene->test_scene->console->Delete();
+	}
 }
 
 void TextClick(UI_EventMouse * ev)

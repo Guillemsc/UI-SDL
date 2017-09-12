@@ -71,10 +71,10 @@
       <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClCompile>
     <ClCompile Include="UIA_Interpolation.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\4. Animations</Filter>
     </ClCompile>
     <ClCompile Include="UIA_Alpha.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\4. Animations</Filter>
     </ClCompile>
     <ClCompile Include="UI_Image.cpp">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
@@ -95,10 +95,13 @@
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClCompile>
     <ClCompile Include="UIU_Message.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\3. Utilities</Filter>
     </ClCompile>
     <ClCompile Include="UIU_Console.cpp">
-      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\3. Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="UIU_Debug.cpp">
+      <Filter>Engine\1. Modules =========\NewGUI\3. Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,10 +187,10 @@
       <Filter>Engine\1. Modules =========\NewGUI\1. Main</Filter>
     </ClInclude>
     <ClInclude Include="UIA_Interpolation.h">
-      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\4. Animations</Filter>
     </ClInclude>
     <ClInclude Include="UIA_Alpha.h">
-      <Filter>Engine\1. Modules =========\NewGUI\3. Animations</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\4. Animations</Filter>
     </ClInclude>
     <ClInclude Include="UI_Text.h">
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
@@ -208,10 +211,13 @@
       <Filter>Engine\1. Modules =========\NewGUI\2. Elements</Filter>
     </ClInclude>
     <ClInclude Include="UIU_Message.h">
-      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\3. Utilities</Filter>
     </ClInclude>
     <ClInclude Include="UIU_Console.h">
-      <Filter>Engine\1. Modules =========\NewGUI\4. Utilities</Filter>
+      <Filter>Engine\1. Modules =========\NewGUI\3. Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="UIU_Debug.h">
+      <Filter>Engine\1. Modules =========\NewGUI\3. Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,10 +248,10 @@
     <Filter Include="Engine\1. Modules =========\NewGUI\2. Elements">
       <UniqueIdentifier>{eab52a47-9755-42f5-8094-6f8425fc4a89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\1. Modules =========\NewGUI\3. Animations">
+    <Filter Include="Engine\1. Modules =========\NewGUI\4. Animations">
       <UniqueIdentifier>{04819027-0cf3-41b6-9173-84481a58fdf8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\1. Modules =========\NewGUI\4. Utilities">
+    <Filter Include="Engine\1. Modules =========\NewGUI\3. Utilities">
       <UniqueIdentifier>{45937f9c-2661-411b-8e6b-cdd318c21932}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

@@ -16,6 +16,7 @@ public:
 
 	void Start();
 	void Update();
+	void PostUpdate();
 	void CleanUp();
 
 	void SendEvent(UI_Event* ev);
@@ -81,8 +82,6 @@ private:
 enum ui_event_type
 {
 	event_null,
-
-	event_text_changed,
 
 	event_mouse_over,
 	event_mouse_over_enter,

@@ -10,6 +10,7 @@ class UI_TextInput;
 
 enum uia_console_errortype
 {
+	uia_console_default,
 	uia_console_succes,
 	uia_console_info,
 	uia_console_warning,
@@ -20,7 +21,7 @@ class UIU_Console : public UI_Element
 {
 public:
 	UIU_Console(UI_Main* ui_main);
-	void AddText(const char* text, uia_console_errortype type = uia_console_succes);
+	void AddText(const char* text, uia_console_errortype type = uia_console_default);
 	void SetMaxElements(int set);
 	UI_TextInput* GetTextInput();
 	void Hide();
